@@ -1,0 +1,15 @@
+#!/bin/bash
+
+dir=$(pwd)
+scriptdir=$0
+pacstrap $dir base linux linux-firmware vim dhcpcd man sudo 
+echo 'KEYMAP=i386/qwerty/uk' >> $dir/etc/vconsole.conf
+ln -rsf $dir/usr/share/zoneinfo/Europe/London $dir/etc/localtime
+echo $dir/etc/bash.bashrc
+cp "$scriptdir/bashrc" "$dir/etc/bash.bashrc"
+genfstab -U $dir >> $dir/etc/fstab
+echo 'oDesktop-Waylander' >> $dir/etc/hostname
+sed -i 's/#en_US.UTF-8/en_US.UTF-8/g' $dir/etc/locale.gen
+sed -i 's/#en_GB.UTF-8/en_GB.UTF-8/g' $dir/etc/locale.gen
+sed -i 's/# %wheel/%wheel/g' $dir/etc/sudoers
+cp "$scriptdir/postinstall" "$dir"

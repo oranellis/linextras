@@ -1,0 +1,9 @@
+#!/bin/bash
+
+locale-gen
+useradd -m -G wheel oran
+echo 'Enter root passwd'
+passwd root
+echo 'Enter oran passwd'
+passwd oran
+rm -f $(pwd)/postinstall
