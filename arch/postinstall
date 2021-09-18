@@ -1,9 +1,13 @@
 #!/bin/bash
 
 locale-gen
+systemctl enable iwd dhcpcd
 useradd -m -G wheel oran
 echo 'Enter root passwd'
 passwd root
 echo 'Enter oran passwd'
 passwd oran
+pacman -Syy
+git config --global user.email "oran.mcnair@gmail.com"
+git config --gloabl user.name "Oran Ellis"
 rm -f $(pwd)/postinstall

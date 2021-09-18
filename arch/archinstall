@@ -1,8 +1,8 @@
 #!/bin/bash
 
 dir=$(pwd)
-scriptdir=$0
-pacstrap $dir base linux linux-firmware vim dhcpcd man sudo 
+scriptdir=$(dirname $0)
+pacstrap $dir base linux linux-firmware vim dhcpcd man sudo git
 echo 'KEYMAP=i386/qwerty/uk' >> $dir/etc/vconsole.conf
 ln -rsf $dir/usr/share/zoneinfo/Europe/London $dir/etc/localtime
 echo $dir/etc/bash.bashrc
