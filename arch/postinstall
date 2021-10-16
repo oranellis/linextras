@@ -14,5 +14,6 @@ if [ $username = 'oran' ]
 then
 	git config --global user.email "oran.mcnair@gmail.com"
 	git config --global user.name "Oran Ellis"
+	git config --global credential.helper store
 fi
 rm -f $(pwd)/postinstall
