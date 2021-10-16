@@ -2,12 +2,17 @@
 
 locale-gen
 systemctl enable iwd dhcpcd
-useradd -m -G wheel oran
 echo 'Enter root passwd'
 passwd root
-echo 'Enter oran passwd'
-passwd oran
+echo 'Enter Username'
+read username
+echo 'Enter $username passwd'
+useradd -m -G wheel $username
+passwd $username
 pacman -Syy
-git config --global user.email "oran.mcnair@gmail.com"
-git config --gloabl user.name "Oran Ellis"
+if [ $username = 'oran' ]
+then
+	git config --global user.email "oran.mcnair@gmail.com"
+	git config --global user.name "Oran Ellis"
+fi
 rm -f $(pwd)/postinstall
