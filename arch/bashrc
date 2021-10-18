@@ -9,7 +9,7 @@
 
 # Colour setup
 
-PS1='\e[1;36m\u \e[0;97m\W\e[0m\$ '
+PS1='\[\e[1;36m\]\u \[\e[0;97m\]\W\[\e[0m\]\$ '
 
 # no colour PS1
 # PS1='\u@\h \W\$ '
