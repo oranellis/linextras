@@ -36,16 +36,17 @@ alias d=pwd
 
 # NNN Config
 
-export NNN_USE_EDITOR=1
 n () {
 	if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
 		echo "nnn is already running"
 		return
 	fi
 	export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
-	nnn "$@"
+	nnn -Rd "$@"
 	if [ -f "$NNN_TMPFILE" ]; then
 		. "$NNN_TMPFILE"
 		rm -f "$NNN_TMPFILE" > /dev/null
 	fi
 }
+export NNN_USE_EDITOR=1
+export NNN_BMS='h:~;r:/;d:~/Dev;g:~/GRDev;o:~/Downloads'
