@@ -1,9 +1,6 @@
 #!/bin/bash
 
 source pkgs
-source pkgsYay
-source pkgsSnap
-source services
 
 pacman -Syy
 pacman -S --noconfirm $pkgs

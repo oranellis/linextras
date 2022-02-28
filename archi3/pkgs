@@ -1,3 +1,6 @@
 #!/bin/bash
 
-pkgs="base linux linux-firmware base-devel iwd dhcpcd grub vim nnn man man-pages git ttf-hack xorg-server xorg-xinit i3-gaps i3blocks i3status picom dmenu alacritty feh firefox code unzip zip pulseaudio pulseaudio-alsa tlp"
+pkgs="base linux linux-firmware base-devel iwd dhcpcd grub vim nnn man man-pages git ttf-hack xorg-server xorg-xinit i3-gaps i3blocks i3status picom dmenu alacritty feh firefox unzip zip pulseaudio pulseaudio-alsa tlp"
+pkgsyay="yay snapd visual-studio-code-bin"
+pkgssnap="spotify discord slack"
+services="iwd dhcpcd tlp"
