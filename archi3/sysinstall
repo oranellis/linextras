@@ -1,7 +1,16 @@
 #!/bin/bash
 
+source pkgs
+source pkgsYay
+source pkgsSnap
+source services
+
+pacman -Syy
+pacman -S --noconfirm $pkgs
+
 locale-gen
-systemctl enable iwd dhcpcd
+systemctl enable $services
+
 echo 'Enter root passwd'
 passwd root
 echo 'Enter Username'
@@ -9,11 +18,11 @@ read username
 echo 'Enter $username passwd'
 useradd -m -G wheel $username
 passwd $username
-pacman -Syy
 if [ $username = 'oran' ]
 then
 	git config --global user.email "oran.mcnair@gmail.com"
 	git config --global user.name "Oran Ellis"
 	git config --global credential.helper store
 fi
-rm -f $(pwd)/postinstall
+
+cp -rf /dotfiles/.[^.]* $HOME
