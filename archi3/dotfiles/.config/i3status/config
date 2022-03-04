@@ -31,9 +31,9 @@ ethernet _first_ {
         format_down = ""
 }
 
-battery all {
-        format = "%status %percentage"
-}
+# battery all {
+#         format = "%status %percentage"
+# }
 
 disk "/" {
         format = "%avail SSD"

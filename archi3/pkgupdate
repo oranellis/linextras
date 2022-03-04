@@ -1,0 +1,9 @@
+#!/bin/bash
+
+source pkgs
+
+sudo pacman -Sy
+
+sudo pacman -S --needed $pkgs
+yay -S $pkgsyay
+sudo systemctl enable $services

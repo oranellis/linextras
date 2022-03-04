@@ -2,9 +2,6 @@
 
 source pkgs
 
-pacman -Syy
-pacman -S --noconfirm $pkgs
-
 locale-gen
 systemctl enable $services
 
@@ -22,4 +19,24 @@ then
 	git config --global credential.helper store
 fi
 
-cp -rf /dotfiles/.[^.]* $HOME
+pacman -Sy --noconfirm --needed $pkgs
+
+cp -rf ./dotfiles/.[^.]* $HOME
+cp -rf ./scripts/amount /usr/bin
+
+sudo -u oran -H sh -c "cd /home/$username/
+mkdir Dev
+mkdir Downloads
+mkdir Pictures
+cd Pictures
+mkdir Backgrounds
+cd ..
+cd Dev
+git clone http://aur.archlinux.org/yay
+makepkg -sic
+cd .. rm -rf yay
+
+yay --save --answerclean All --answerdiff All
+yay --save --nocleanmenu --nodiffmenu
+
+yay -S $pkgsyay"

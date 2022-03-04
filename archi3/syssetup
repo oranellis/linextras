@@ -8,9 +8,8 @@ ln -rsf $dir/usr/share/zoneinfo/Europe/London $dir/etc/localtime
 echo $dir/etc/bash.bashrc
 cp "$scriptdir/bashrc" "$dir/etc/bash.bashrc"
 genfstab -U $dir >> $dir/etc/fstab
-echo 'oDesktop-Waylander' >> $dir/etc/hostname
+echo 'oDesktop-i3' >> $dir/etc/hostname
 sed -i 's/#en_US.UTF-8/en_US.UTF-8/g' $dir/etc/locale.gen
 sed -i 's/#en_GB.UTF-8/en_GB.UTF-8/g' $dir/etc/locale.gen
 sed -i 's/# %wheel/%wheel/g' $dir/etc/sudoers
-cp "$scriptdir/postinstall" "$dir"
-cp "$scriptdir/dotfiles" "$dir"
+cp "$scriptdir" "$dir"
