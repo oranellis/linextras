@@ -1,0 +1,67 @@
+#!/bin/bash
+
+if [ $# -ne 4 ] ; then
+	echo "Incorrect input parameters, expecting: username password grubconfirm removable"
+	exit 1
+else
+	username=$1
+	password=$2
+	grubconfirm=$3
+	removable=$4
+fi
+
+sourcedir="/linextras"
+source $sourcedir/archi3/pkgs
+
+locale-gen
+
+useradd -m -G wheel $username
+echo "root:$password" | chpasswd
+echo "$username:$password" | chpasswd
+
+pacman -Sy --noconfirm --needed $pkgs &&
+systemctl enable $services
+
+chown -R $username:$username $sourcedir
+cp -f $sourcedir/archi3/dotfiles/.bashrc /root
+cp -rf $sourcedir/archi3/scripts/amount /usr/bin
+
+sudo -u $username -H bash -c "
+mkdir -p /home/$username/Dev /home/$username/Downloads /home/$username/Pictures/Backgrounds
+cp -r $sourcedir/archi3/dotfiles/.[^.]* /home/$username
+cp $sourcedir/assets/bg.jpg /home/$username/Pictures/Backgrounds
+
+if [ $username = 'oran' ]; then
+	/bin/git config --global user.email \"oran.mcnair@gmail.com\"
+	/bin/git config --global user.name \"Oran Ellis\"
+	/bin/git config --global credential.helper store
+fi
+
+cd /home/$username/Dev
+for aurpkg in $pkgsyay ; do 
+	git clone http://aur.archlinux.org/\$aurpkg
+	cd \$aurpkg
+	makepkg -sic --skipinteg --noconfirm --needed
+	cd ..
+	rm -rf \$aurpkg
+done
+"
+
+if [[ $grubconfirm =~ ^[Yy]$ ]]; then
+	rootdev=$(echo $(findmnt --output source --noheadings -T . ) | sed "s/[p]\?[1-9]$//")
+	efidevice=$(lsblk -o PATH,PARTTYPENAME $rootdev | sed -n 's/[ ]*EFI System//p')
+	echo "Installing bootloader to device: $efidevice"
+	mkdir -p /boot/efi
+	mount $efidevice /boot/efi
+	
+	if [[ $removable =~ ^[Yy]$ ]]; then
+		bash -c "grub-install --removable --boot-directory=/boot --efi-directory=/boot/efi --themes=starlight"
+	else	
+		bash -c "grub-install --bootloader-id=\"Archi3\" --boot-directory=/boot --efi-directory=/boot/efi --themes=starlight"
+	fi
+
+	sed -i'' -e'/GRUB_TIMEOUT=.*/d' -e'/GRUB_DISTRIBUTOR=.*/d' -e'/GRUB_CMDLINE_LINUX_DEFAULT=.*/d' -e'/GRUB_TIMEOUT_STYLE=.*/d' /etc/default/grub
+	printf "GRUB_TIMEOUT=0\nGRUB_DISTRIBUTOR=\"Archi3\"\nGRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 nomodeset\"\nGRUB_TIMEOUT_STYLE=hidden" >> /etc/default/grub
+	grub-mkconfig -o /boot/grub/grub.cfg
+fi
+
