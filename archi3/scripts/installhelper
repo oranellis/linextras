@@ -37,6 +37,7 @@ if [ $username = 'oran' ]; then
 	/bin/git config --global user.email \"oran.mcnair@gmail.com\"
 	/bin/git config --global user.name \"Oran Ellis\"
 	/bin/git config --global credential.helper store
+	/bin/git config --global pull.rebase false
 fi
 
 "
