@@ -6,5 +6,13 @@ source $scriptdir/pkgs
 sudo pacman -Sy
 
 sudo pacman -S --needed $pkgs
-yay -S $pkgsyay
 sudo systemctl enable $services
+
+cd /home/$username/Dev
+for aurpkg in $pkgsyay ; do 
+	git clone http://aur.archlinux.org/$aurpkg
+	cd $aurpkg
+	makepkg -sic --skipinteg --noconfirm --needed
+	cd ..
+	rm -rf $aurpkg
+done
