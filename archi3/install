@@ -6,7 +6,11 @@ printf "
 ####################\n\n"
 
 if [ $UID -ne 0 ]; then
-	printf "Script must be run with root privelages\n\n"
+	printf "Script must be run as root\n\n"
+	exit 1
+fi
+if [ -n "$SUDO_COMMAND" ]; then
+	printf "Script must be run as root and not with sudo\n\n"
 	exit 1
 fi
 

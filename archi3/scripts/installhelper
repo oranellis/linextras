@@ -24,8 +24,7 @@ pacman -S --noconfirm --needed $pkgs &&
 systemctl enable $services
 sed -i -e's/# %wheel ALL=(ALL:ALL) NOPASSWD/%wheel ALL=(ALL:ALL) NOPASSWD/g' $dir/etc/sudoers
 
-chown -R $username:$username $sourcedir/archi3
-chown -R $username:$username $sourcedir/assets
+chown -R $username:$username $sourcedir
 cp -f $sourcedir/archi3/dotfiles/.bashrc /root
 cp -rf $sourcedir/archi3/scripts/amount /usr/bin
 
@@ -66,5 +65,7 @@ if [[ $grubconfirm =~ ^[Yy]$ ]]; then
 	sed -i'' -e'/GRUB_TIMEOUT=.*/d' -e'/GRUB_DISTRIBUTOR=.*/d' -e'/GRUB_CMDLINE_LINUX_DEFAULT=.*/d' -e'/GRUB_TIMEOUT_STYLE=.*/d' /etc/default/grub
 	printf "GRUB_TIMEOUT=0\nGRUB_DISTRIBUTOR=\"Archi3\"\nGRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 nomodeset\"\nGRUB_TIMEOUT_STYLE=hidden" >> /etc/default/grub
 	grub-mkconfig -o /boot/grub/grub.cfg
+
+	umount $efidevice
 fi
 
