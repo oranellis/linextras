@@ -14,15 +14,18 @@ sourcedir="/linextras"
 source $sourcedir/archi3/pkgs
 
 locale-gen
+pacman -Sy
 
 useradd -m -G wheel $username
 echo "root:$password" | chpasswd
 echo "$username:$password" | chpasswd
 
-pacman -Sy --noconfirm --needed $pkgs &&
+pacman -S --noconfirm --needed $pkgs &&
 systemctl enable $services
+sed -i -e's/# %wheel ALL=(ALL:ALL) NOPASSWD/%wheel ALL=(ALL:ALL) NOPASSWD/g' $dir/etc/sudoers
 
-chown -R $username:$username $sourcedir
+chown -R $username:$username $sourcedir/archi3
+chown -R $username:$username $sourcedir/assets
 cp -f $sourcedir/archi3/dotfiles/.bashrc /root
 cp -rf $sourcedir/archi3/scripts/amount /usr/bin
 
@@ -37,14 +40,14 @@ if [ $username = 'oran' ]; then
 	/bin/git config --global credential.helper store
 fi
 
-cd /home/$username/Dev
-for aurpkg in $pkgsyay ; do 
-	git clone http://aur.archlinux.org/\$aurpkg
-	cd \$aurpkg
-	makepkg -sic --skipinteg --noconfirm --needed
-	cd ..
-	rm -rf \$aurpkg
-done
+# cd /home/$username/Dev
+# for aurpkg in $pkgsyay ; do 
+# 	git clone http://aur.archlinux.org/\$aurpkg
+# 	cd \$aurpkg
+# 	makepkg -sic --skipinteg --noconfirm --needed
+# 	cd ..
+# 	rm -rf \$aurpkg
+# done
 "
 
 if [[ $grubconfirm =~ ^[Yy]$ ]]; then
