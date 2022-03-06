@@ -29,9 +29,9 @@ cp -f $sourcedir/archi3/dotfiles/.bashrc /root
 cp -rf $sourcedir/archi3/scripts/amount /usr/bin
 
 sudo -u $username -H bash -c "
-mkdir -p /home/$username/Dev /home/$username/Downloads /home/$username/Pictures/Backgrounds
+mkdir -p /home/$username/Dev /home/$username/Downloads /home/$username/Media/Backgrounds
 cp -r $sourcedir/archi3/dotfiles/.[^.]* /home/$username
-cp $sourcedir/assets/bg.jpg /home/$username/Pictures/Backgrounds
+cp $sourcedir/assets/bg.jpg /home/$username/Media/Backgrounds
 
 if [ $username = 'oran' ]; then
 	/bin/git config --global user.email \"oran.mcnair@gmail.com\"

@@ -182,8 +182,8 @@ client.urgent #c0c030 #202020 #ffffff #c0c030 #c0c030
 gaps inner 12
 gaps outer 0
 
-exec feh --randomize --bg-fill $HOME/Pictures/Backgrounds/*
+exec feh --randomize --bg-fill $HOME/Media/Backgrounds/*
 exec $HOME/.config/startup
 
-bindsym $mod+p exec scrot -F "$HOME/Pictures/Screenshots/%Y%m%d-%H%M%S.png"
-bindsym Print exec scrot -F "$HOME/Pictures/Screenshots/%Y%m%d-%H%M%S.png"
+bindsym $mod+p exec scrot -F "$HOME/Media/Screenshots/%Y%m%d-%H%M%S.png"
+bindsym Print exec scrot -F "$HOME/Media/Screenshots/%Y%m%d-%H%M%S.png"

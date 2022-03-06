@@ -1,5 +1,5 @@
 #!/bin/bash
 
-pkgs='base linux linux-firmware base-devel iwd dhcpcd grub efibootmgr vim nnn man man-pages git ttf-hack arch-install-scripts xorg-server xorg-xinit xorg-xset nvidia nvidia-settings i3-gaps i3blocks i3status picom dmenu alacritty feh firefox unzip zip pulseaudio pulseaudio-alsa pavucontrol tlp thunderbird discord udisks2 ntfs-3g baobab scrot gimp freecad gparted testdisk htop'
+pkgs='base linux linux-firmware base-devel iwd dhcpcd grub efibootmgr vim nnn man man-pages git ttf-hack arch-install-scripts xorg-server xorg-xinit xorg-xset nvidia nvidia-settings i3-gaps i3blocks i3status picom dmenu alacritty feh firefox unzip zip pulseaudio pulseaudio-alsa pavucontrol tlp thunderbird discord udisks2 ntfs-3g baobab scrot gimp freecad gparted testdisk htop vlc'
 pkgsyay='visual-studio-code-bin spotify slack-desktop'
 services='iwd dhcpcd tlp'
