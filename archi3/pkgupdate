@@ -14,6 +14,7 @@ cd $HOME/Dev/AUR
 for aurpkg in $pkgsyay ; do 
 	git clone http://aur.archlinux.org/$aurpkg
 	cd $aurpkg
+	git pull
 	makepkg -sic --skipinteg --noconfirm --needed
 	cd ..
 done
