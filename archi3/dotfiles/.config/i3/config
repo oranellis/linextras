@@ -52,7 +52,6 @@ bindsym $mod+q kill
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn 'hack-12' -nf '#E8E8E8' -nb '#404040' -sb '#707070' -sf '#E8E8E8'" 
 # --dmenu="dmenu -i -nf '#E0E0E0' -nb '#404040' -sb '#457364' -sf '#FFFFFF' -fn 'hack-10' -p 'dmenu prompt &gt;'"
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
@@ -185,7 +184,7 @@ default_border pixel 2
 default_floating_border pixel 2
 for_window [class="^.*"] border pixel 2
 
-client.focused          #bac2ca #202020 #FFFFFF #bac2ca   #bac2ca
+client.focused          #93c2b2 #202020 #FFFFFF #93c2b2   #93c2b2
 client.focused_inactive #404040 #202020 #FFFFFF #404040   #404040
 client.unfocused        #404040 #202020 #FFFFFF #404040   #404040
 client.urgent           #FFFFC0 #202020 #FFFFFF #202020   #202020
@@ -196,6 +195,8 @@ gaps outer 0
 
 exec feh --randomize --bg-fill $HOME/Media/Backgrounds/*
 exec $HOME/.config/startup
+
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn 'hack-11' -nf '#E8E8E8' -nb '#404040' -sb '#618075' -sf '#E8E8E8'" 
 
 bindsym $mod+p exec scrot -F "$HOME/Media/Screenshots/%Y%m%d-%H%M%S.png"
 bindsym Print exec scrot -F "$HOME/Media/Screenshots/%Y%m%d-%H%M%S.png"
