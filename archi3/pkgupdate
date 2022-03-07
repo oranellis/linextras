@@ -7,12 +7,13 @@ sudo pacman -Sy
 
 sudo pacman -S --needed $pkgs
 sudo systemctl enable $services
+sudo systemctl enable --user $servicesuser
 
-cd /home/$username/Dev
+mkdir -p $HOME/Dev/AUR
+cd $HOME/Dev/AUR
 for aurpkg in $pkgsyay ; do 
 	git clone http://aur.archlinux.org/$aurpkg
 	cd $aurpkg
 	makepkg -sic --skipinteg --noconfirm --needed
 	cd ..
-	rm -rf $aurpkg
 done

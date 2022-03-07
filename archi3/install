@@ -30,7 +30,6 @@ dir=$(pwd)
 scriptdir=$(dirname $0)
 
 pacstrap $dir base linux linux-firmware
-echo 'KEYMAP=i386/qwerty/uk' >> $dir/etc/vconsole.conf
 ln -sf $dir/usr/share/zoneinfo/Europe/London $dir/etc/localtime
 genfstab -U $dir >> $dir/etc/fstab
 echo 'oDesktop-i3' >> $dir/etc/hostname

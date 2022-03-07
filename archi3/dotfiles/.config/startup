@@ -1,6 +1,5 @@
 #!/bin/bash
 
 picom -b
-pulseaudio -D
 xset r rate 250 40
 pasystray &

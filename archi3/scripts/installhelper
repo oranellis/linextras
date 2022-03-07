@@ -23,6 +23,7 @@ echo "$username:$password" | chpasswd
 pacman -S --noconfirm --needed $pkgs &&
 systemctl enable $services
 sed -i -e's/# %wheel ALL=(ALL:ALL) NOPASSWD/%wheel ALL=(ALL:ALL) NOPASSWD/g' $dir/etc/sudoers
+localctl set-keymap uk
 
 chown -R $username:$username $sourcedir
 cp -f $sourcedir/archi3/dotfiles/.bashrc /root
@@ -39,7 +40,7 @@ if [ $username = 'oran' ]; then
 	/bin/git config --global credential.helper store
 	/bin/git config --global pull.rebase false
 fi
-
+systemctl enable --user $servicesuser
 "
 
 if [[ $grubconfirm =~ ^[Yy]$ ]]; then
