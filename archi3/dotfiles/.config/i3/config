@@ -194,6 +194,7 @@ gaps inner 12
 gaps outer 0
 
 exec feh --randomize --bg-fill $HOME/Media/Backgrounds/*
+bindsym $mod+b exec feh --randomize --bg-fill $HOME/Media/Backgrounds/*
 exec $HOME/.config/startup
 
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn 'hack-11' -nf '#E8E8E8' -nb '#404040' -sb '#618075' -sf '#E8E8E8'" 
