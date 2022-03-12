@@ -3,7 +3,7 @@
 pkgs='base linux linux-firmware base-devel cmake iwd dhcpcd grub efibootmgr 
 vim nnn man man-pages git ttf-hack adobe-source-han-sans-jp-fonts arch-install-scripts xorg-server xorg-xinit xorg-xset nvidia nvidia-settings 
 i3-gaps i3blocks i3status picom dmenu alacritty feh firefox unzip zip pulseaudio pulseaudio-alsa pavucontrol tlp 
-thunderbird discord udisks2 ntfs-3g baobab scrot gimp freecad gparted testdisk htop vlc xdg-utils gnome-keyring libsecret'
-pkgsyay='visual-studio-code-bin spotify slack-desktop xrdp xorgxrdp'
+thunderbird discord udisks2 ntfs-3g baobab scrot gimp freecad gparted testdisk htop vlc xdg-utils gnome-keyring libsecret neofetch'
+pkgsyay='visual-studio-code-bin spotify slack-desktop xrdp xorgxrdp steam'
 services='iwd dhcpcd tlp'
 servicesuser='pulseaudio'
