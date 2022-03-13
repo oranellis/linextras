@@ -2,14 +2,8 @@
 
 pkgs='base linux linux-firmware base-devel cmake iwd dhcpcd grub efibootmgr 
 vim nnn man man-pages git ttf-hack adobe-source-han-sans-jp-fonts arch-install-scripts xorg-server xorg-xinit xorg-xset nvidia nvidia-settings 
-<<<<<<< HEAD
 i3-gaps i3blocks i3status picom dmenu alacritty feh firefox unzip zip pulseaudio pulseaudio-alsa pavucontrol tlp 
-thunderbird discord udisks2 ntfs-3g baobab scrot gimp freecad gparted testdisk htop vlc xdg-utils gnome-keyring libsecret neofetch'
-pkgsyay='visual-studio-code-bin spotify slack-desktop xrdp xorgxrdp steam'
-=======
-i3-gaps i3blocks i3status picom dmenu alacritty feh firefox unzip zip pulseaudio pulseaudio-alsa pavucontrol tlp lm-sensors 
-thunderbird discord udisks2 ntfs-3g baobab scrot gimp freecad gparted testdisk htop vlc xdg-utils gnome-keyring libsecret'
+thunderbird discord udisks2 ntfs-3g baobab scrot gimp freecad gparted testdisk htop vlc xdg-utils gnome-keyring libsecret neofetch steam'
 pkgsyay='visual-studio-code-bin spotify slack-desktop xrdp xorgxrdp'
->>>>>>> bc2c3b082de77147a51f80eb7a9c8068cd2d46c4
 services='iwd dhcpcd tlp'
 servicesuser='pulseaudio'
