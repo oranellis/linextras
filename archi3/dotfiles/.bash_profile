@@ -6,4 +6,7 @@
 
 export EDITOR="vim"
 
-exec startx
+if [ -z "$SSH_CLIENT" ]
+then
+    exec startx
+fi
