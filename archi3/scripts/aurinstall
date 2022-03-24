@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ -n $1 ]
+then
+    mkdir -p $HOME/Dev/AUR
+    cd $HOME/Dev/AUR
+    git clone http://aur.archlinux.org/$1
+	cd $1
+   	git pull
+   	makepkg -sic --skipinteg --noconfirm --needed
+   	cd ..
+fi
