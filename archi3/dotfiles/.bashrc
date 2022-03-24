@@ -8,8 +8,12 @@
 [[ $DISPLAY ]] && shopt -s checkwinsize
 
 # Colour setup
-
-PS1='\[\e[1;36m\]\u \[\e[0;97m\]\w\[\e[0m\]\$ '
+if [ -n "$SSH_CLIENT" ]
+then
+	PS1='\[\e[1;36m\]\u\[\e[0;36m\](\h) \[\e[0;97m\]\w\[\e[0m\]\$ '
+else
+	PS1='\[\e[1;36m\]\u \[\e[0;97m\]\w\[\e[0m\]\$ '
+fi
 
 # no colour PS1
 # PS1='\u@\h \W\$ '
