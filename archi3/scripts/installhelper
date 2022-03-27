@@ -26,10 +26,12 @@ pacman -S --noconfirm --needed $pkgs &&
 systemctl enable $services
 sed -i -e's/# %wheel ALL=(ALL:ALL) NOPASSWD/%wheel ALL=(ALL:ALL) NOPASSWD/g' $dir/etc/sudoers
 localctl set-keymap uk
+timedatectl set-timezone Europe/London
 
 chown -R $username:$username $sourcedir
 cp -f $sourcedir/archi3/dotfiles/.bashrc /root
 cp -rf $sourcedir/archi3/scripts/amount /usr/bin
+cp -rf $sourcedir/archi3/scripts/aurinstall /usr/bin
 
 sudo -u $username -H bash -c "
 mkdir -p /home/$username/Dev /home/$username/Downloads /home/$username/Media/Backgrounds
