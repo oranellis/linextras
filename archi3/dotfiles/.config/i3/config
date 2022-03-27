@@ -87,7 +87,7 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+e layout toggle split
+#bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+space floating toggle
@@ -202,3 +202,4 @@ bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn 'hack
 bindsym $mod+p exec "scrot -F $HOME/Media/Screenshots/%Y%m%d-%H%M%S.png"
 bindsym Print exec "scrot -F $HOME/Media/Screenshots/%Y%m%d-%H%M%S.png"
 bindsym $mod+w exec firefox
+bindsym $mod+e exec thunar
