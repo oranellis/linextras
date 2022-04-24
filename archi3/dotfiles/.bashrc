@@ -53,4 +53,4 @@ n () {
 	fi
 }
 export NNN_USE_EDITOR=1
-export NNN_BMS='h:~/;r:/;d:~/Dev;g:~/GRDev;o:~/Downloads;m:/run/media/oran'
+export NNN_BMS='h:~/;r:/;d:~/Dev;g:~/GRDev;o:~/Downloads;m:/run/media/oran;s:/Storage'
