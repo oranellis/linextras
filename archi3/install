@@ -40,5 +40,5 @@ cp -r "$(dirname $scriptdir)" "$dir"
 
 printf "\n\nChrooting into target device...\n\n"
 arch-chroot $dir /bin/bash <<EOT
-bash -c "/linextras/archi3/scripts/installhelper $username $password $grubconfirm $removable"
+bash -c "/linextras/archi3/installhelper $username $password $grubconfirm $removable"
 EOT
