@@ -3,3 +3,4 @@
 picom -b
 xset r rate 250 40
 pasystray &
+nextcloud &
