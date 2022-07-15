@@ -3,18 +3,28 @@
 #
 
 # If not running interactively, don't do anything
+
 [[ $- != *i* ]] && return
 
+
+
 # History Settings
+
 HISTCONTROL=ignoreboth
 shopt -s histappend # append to the history file, don't overwrite it
 HISTSIZE=1000
 HISTFILESIZE=2000
 
+
+
 # Update window size on command exec
+
 [[ $DISPLAY ]] && shopt -s checkwinsize
 
+
+
 # Colour setup
+
 if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; 
 then
     color_prompt=yes
@@ -34,17 +44,33 @@ else
 fi
 unset color_prompt
 
+
+
 # Colour Aliases
+
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
+
+
 # Autocomplete Settings
+
 [ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
 bind 'set completion-ignore-case on'
+
+
 
 # Convenience Scripts
 
 alias d=pwd
+
+
+
+# FZF Command
+
+#export FZF_DEFAULT_COMMAND=''
+
+
 
 # NNN Config
 
@@ -61,4 +87,14 @@ n () {
 	fi
 }
 export NNN_USE_EDITOR=1
+export EDITOR="/usr/bin/nvim"
 export NNN_BMS='h:~/;r:/;d:~/Dev;o:~/Downloads;m:/run/media/oran;s:/Storage'
+
+
+
+# Run neofetch if this is the first terminal opened
+
+if [[  $(ps aux | grep -ic "$TERM") -lt 3 ]]
+then
+neofetch
+fi
