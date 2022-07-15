@@ -1,12 +1,26 @@
 #!/bin/bash
 
-if [ -n $1 ]
+if [ $# -gt 0 ]
 then
-    mkdir -p $HOME/Dev/AUR
+    for var in $@
+    do
+        mkdir -p $HOME/Dev/AUR
+        cd $HOME/Dev/AUR
+        git clone http://aur.archlinux.org/$var
+        cd $var
+        git pull
+        makepkg -sic --skipinteg --noconfirm --needed
+        cd ..
+    done
+else
     cd $HOME/Dev/AUR
-    git clone http://aur.archlinux.org/$1
-	cd $1
-   	git pull
-   	makepkg -sic --skipinteg --noconfirm --needed
-   	cd ..
+    for var in $(ls)
+    do
+        cd $HOME/Dev/AUR
+        git clone http://aur.archlinux.org/$var
+        cd $var
+        git pull
+        makepkg -sic --skipinteg --noconfirm --needed
+        cd ..
+    done
 fi
