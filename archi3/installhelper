@@ -46,7 +46,6 @@ if [ $username = 'oran' ]; then
 fi
 
 $sourcedir/archi3/scripts/aurinstall $pkgsaur
-
 "
 
 systemctl enable $services
