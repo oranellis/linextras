@@ -5,5 +5,5 @@ neovim fzf nnn man man-pages git ttf-hack adobe-source-han-sans-jp-fonts arch-in
 i3-gaps i3blocks i3status picom dmenu alacritty feh firefox unzip zip pulseaudio pulseaudio-alsa pavucontrol tlp
 thunderbird discord udisks2 ntfs-3g baobab scrot gimp gparted testdisk htop vlc xdg-utils gnome-keyring libsecret neofetch steam darktable handbrake inkscape nextcloud'
 pkgsaur='spotify slack-desktop xrdp xorgxrdp ly minecraft-launcher neofetch opentabletdriver'
-services='iwd dhcpcd tlp ntpd'
+services='iwd dhcpcd tlp ntpd ly'
 servicesuser='pulseaudio opentabletdriver'

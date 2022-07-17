@@ -23,7 +23,6 @@ echo "root:$password" | chpasswd
 echo "$username:$password" | chpasswd
 
 pacman -S --noconfirm --needed $pkgs &&
-systemctl enable $services
 sed -i -e's/# %wheel ALL=(ALL:ALL) NOPASSWD/%wheel ALL=(ALL:ALL) NOPASSWD/g' $dir/etc/sudoers
 localectl set-keymap uk
 timedatectl set-timezone Europe/London
@@ -48,8 +47,10 @@ fi
 
 $sourcedir/archi3/scripts/aurinstall $pkgsaur
 
-systemctl enable --user $servicesuser
 "
+
+systemctl enable $services
+systemctl enable --user $servicesuser
 
 if [[ $grubconfirm =~ ^[Yy]$ ]]; then
 	rootdev=$(echo $(findmnt --output source --noheadings -T . ) | sed "s/[p]\?[1-9]$//")
