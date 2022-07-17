@@ -15,6 +15,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'mcchrish/nnn.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'drewtempelmeyer/palenight.vim'
+Plug 'voldikss/vim-floaterm'
 call plug#end()
 
 " Enable line numbers
@@ -99,4 +100,4 @@ nmap <space>l <c-w>l
 nmap <space>w <c-w>q
 
 " Open terminal
-nmap <space>c :term<enter>A
+nmap <space>c :FloatermNew<enter>
