@@ -67,6 +67,9 @@ set signcolumn=number
 set cmdheight=1
 set shortmess+=c
 
+" Use X11 clipboard
+set clipboard^=unnamed,unnamedplus
+
 " Theme
 colorscheme palenight
 

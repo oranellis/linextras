@@ -14,7 +14,7 @@ sourcedir="/linextras"
 source $sourcedir/archi3/pkgs
 
 locale-gen
-echo "[Multilib]" >> /etc/pacman.conf
+echo "[multilib]" >> /etc/pacman.conf
 echo "Include = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
 pacman -Sy
 
@@ -25,7 +25,7 @@ echo "$username:$password" | chpasswd
 pacman -S --noconfirm --needed $pkgs &&
 systemctl enable $services
 sed -i -e's/# %wheel ALL=(ALL:ALL) NOPASSWD/%wheel ALL=(ALL:ALL) NOPASSWD/g' $dir/etc/sudoers
-localctl set-keymap uk
+localectl set-keymap uk
 timedatectl set-timezone Europe/London
 
 chown -R $username:$username $sourcedir
