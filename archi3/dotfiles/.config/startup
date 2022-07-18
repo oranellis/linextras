@@ -2,7 +2,8 @@
 
 picom -b
 xset r rate 250 40
-pasystray &
+pa-notify &
+pa-applet &
 nextcloud &
 /usr/lib/polkit-kde-authentication-agent-1 &
 alttab &
