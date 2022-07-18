@@ -85,11 +85,12 @@ endif
 
 " NNN picker
 nnoremap <space>n :NnnPicker<enter>
+nnoremap <space>e :NnnExplorer<enter>
 let g:nnn#command = "NNN_TMPFILE=/home/$USER/.config/nnn/.lastd nnn -o"
 
 " FZF picker
 nnoremap <space>f :Files<enter>
-let $FZF_DEFAULT_COMMAND='find . \( -name node_modules -o -name .git \) -prune -o -print'
+let $FZF_DEFAULT_COMMAND='find . \( -name node_modules -o -name .git \) -prune -o ! -type d -a -print'
 
 " Navigate and create splits
 nmap <space>v :split<enter>
