@@ -16,7 +16,7 @@ source $sourcedir/archi3/pkgs
 locale-gen
 echo "[multilib]" >> /etc/pacman.conf
 echo "Include = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
-pacman -Sy
+pacman -Sy archlinux-keyring && pacman -Su
 
 useradd -m -G wheel $username
 echo "root:$password" | chpasswd
@@ -24,7 +24,7 @@ echo "$username:$password" | chpasswd
 
 pacman -S --noconfirm --needed $pkgs &&
 sed -i -e's/# %wheel ALL=(ALL:ALL) NOPASSWD/%wheel ALL=(ALL:ALL) NOPASSWD/g' $dir/etc/sudoers
-localectl set-keymap uk
+localectl set-keymap gb
 timedatectl set-timezone Europe/London
 
 chown -R $username:$username $sourcedir
