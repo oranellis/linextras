@@ -29,6 +29,7 @@ printf "\n\n\n"
 dir=$(pwd)
 scriptdir=$(dirname $0)
 
+pacman -Sy archlinux-keyring
 pacstrap $dir base linux linux-firmware
 ln -sf $dir/usr/share/zoneinfo/Europe/London $dir/etc/localtime
 genfstab -U $dir >> $dir/etc/fstab

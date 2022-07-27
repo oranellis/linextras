@@ -85,18 +85,18 @@ else
 endif
 
 " NNN picker
-nnoremap <space>n :NnnPicker<enter>
-nnoremap <space>e :NnnExplorer<enter>
+nnoremap <space>n :NnnPicker<cr>
+nnoremap <space>e :NnnExplorer<cr>
 let g:nnn#command = "NNN_TMPFILE=/home/$USER/.config/nnn/.lastd nnn -o"
 
 " FZF picker
-nnoremap <space>f :Files<enter>
-nnoremap <space>b :Buffers<enter>
+nnoremap <space>f :Files<cr>
+nnoremap <space>b :Buffers<cr>
 let $FZF_DEFAULT_COMMAND='find . \( -name node_modules -o -name .git -o -name build \) -prune -o ! -type d -a -print'
 
 " Navigate and create splits
-nmap <space>v :split<enter>
-nmap <space>g :vsplit<enter>
+nmap <space>v :split<cr>
+nmap <space>g :vsplit<cr>
 nmap <space>h <c-w>h
 nmap <space>j <c-w>j
 nmap <space>k <c-w>k
@@ -104,7 +104,11 @@ nmap <space>l <c-w>l
 nmap <space>w <c-w>q
 
 " Open terminal
-nmap <space>c :FloatermNew<enter>
+nmap <space>c :FloatermNew<cr>
+
+" Custom close commands
+nnoremap ZZ :w<bar>bd<cr>
+nnoremap ZQ :bd!<cr>
 
 " -------------- COC Config --------------
 

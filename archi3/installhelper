@@ -22,10 +22,12 @@ useradd -m -G wheel $username
 echo "root:$password" | chpasswd
 echo "$username:$password" | chpasswd
 
-pacman -S --noconfirm --needed $pkgs &&
+pacman -S --noconfirm --needed $pkgs
+! test /bin/sudo && break
+
 sed -i -e's/# %wheel ALL=(ALL:ALL) NOPASSWD/%wheel ALL=(ALL:ALL) NOPASSWD/g' $dir/etc/sudoers
-localectl set-keymap gb
-timedatectl set-timezone Europe/London
+localectl set-x11-keymap gb
+timedatectl set-timezone GB
 
 chown -R $username:$username $sourcedir
 cp -f $sourcedir/dotfiles/.bashrc /root
