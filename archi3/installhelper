@@ -22,7 +22,7 @@ useradd -m -G wheel $username
 echo "root:$password" | chpasswd
 echo "$username:$password" | chpasswd
 
-pacman -S --noconfirm --needed $pkgs
+pacman -S --noconfirm --needed $reqpkgs $pkgs
 ! test /bin/sudo && break
 
 sed -i -e's/# %wheel ALL=(ALL:ALL) NOPASSWD/%wheel ALL=(ALL:ALL) NOPASSWD/g' $dir/etc/sudoers
@@ -47,7 +47,7 @@ if [ $username = 'oran' ]; then
 	/bin/git config --global pull.rebase false
 fi
 
-$sourcedir/archi3/scripts/aurinstall $pkgsaur
+$sourcedir/archi3/scripts/aurinstall $reqpkgsaur $pkgsaur
 "
 
 systemctl enable $services
