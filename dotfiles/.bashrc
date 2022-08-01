@@ -88,7 +88,7 @@ n () {
 }
 export NNN_USE_EDITOR=1
 export EDITOR="/usr/bin/nvim"
-export NNN_BMS='h:~/;r:/;d:~/Dev;o:~/Downloads;m:/run/media/oran;s:/Storage'
+export NNN_BMS="h:~/;r:/;d:~/Dev;o:~/Downloads;m:/run/media/$USER;s:/storage"
 
 
 

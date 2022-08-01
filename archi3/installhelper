@@ -30,7 +30,7 @@ localectl set-x11-keymap gb
 timedatectl set-timezone GB
 
 chown -R $username:$username $sourcedir
-cp -f $sourcedir/dotfiles/.bashrc /root
+cp -f $sourcedir/dotfiles/* /root
 cp -rf $sourcedir/scripts/* /usr/local/bin
 cp -rf $sourcedir/archi3/scripts/* /usr/local/bin
 
