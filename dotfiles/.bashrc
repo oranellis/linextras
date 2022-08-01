@@ -80,12 +80,13 @@ n () {
 		return
 	fi
 	export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
-	nnn -Rde "$@"
+	nnn "$@"
 	if [ -f "$NNN_TMPFILE" ]; then
 		. "$NNN_TMPFILE"
 		rm -f "$NNN_TMPFILE" > /dev/null
 	fi
 }
+export NNN_OPTS="Rde"
 export NNN_USE_EDITOR=1
 export EDITOR="/usr/bin/nvim"
 export NNN_BMS="h:~/;r:/;d:~/Dev;o:~/Downloads;m:/run/media/$USER;s:/storage"
