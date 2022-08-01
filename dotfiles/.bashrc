@@ -80,7 +80,7 @@ n () {
 		return
 	fi
 	export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
-	nnn -Rd "$@"
+	nnn -Rde "$@"
 	if [ -f "$NNN_TMPFILE" ]; then
 		. "$NNN_TMPFILE"
 		rm -f "$NNN_TMPFILE" > /dev/null
@@ -89,6 +89,7 @@ n () {
 export NNN_USE_EDITOR=1
 export EDITOR="/usr/bin/nvim"
 export NNN_BMS="h:~/;r:/;d:~/Dev;o:~/Downloads;m:/run/media/$USER;s:/storage"
+# export NNN_OPENER="/path/to/custom/opener" # Default opener template, to replace xdg-open
 
 
 
