@@ -63,6 +63,7 @@ bind 'set completion-ignore-case on'
 # Convenience Scripts
 
 alias d=pwd
+alias v=nvim
 
 
 

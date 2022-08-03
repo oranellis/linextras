@@ -106,6 +106,9 @@ nmap <space>w <c-w>q
 " Open terminal
 nmap <space>c :FloatermNew<cr>
 
+" Custom project building
+nmap <space>m :terminal autobuild<cr>
+
 " Custom close commands
 nnoremap ZZ :w<bar>bd<cr>
 nnoremap ZQ :bd!<cr>
