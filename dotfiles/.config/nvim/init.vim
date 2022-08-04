@@ -17,6 +17,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'voldikss/vim-floaterm'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'KarimElghamry/vim-auto-comment'
 call plug#end()
 
 " Enable line numbers
@@ -91,7 +92,7 @@ let g:nnn#command = "NNN_TMPFILE=/home/$USER/.config/nnn/.lastd nnn -o"
 
 " FZF picker
 nnoremap <space>f :Files<cr>
-nnoremap <space>b :Buffers<cr>
+nnoremap <space><tab> :Buffers<cr>
 let $FZF_DEFAULT_COMMAND='find . \( -name node_modules -o -name .git -o -name build \) -prune -o ! -type d -a -print'
 
 " Navigate and create splits
@@ -107,11 +108,20 @@ nmap <space>w <c-w>q
 nmap <space>c :FloatermNew<cr>
 
 " Custom project building
-nmap <space>m :terminal autobuild<cr>
+nmap <space>m :!autobuild<cr>
+
+" Remap macro key
+
+nnoremap q Q
 
 " Custom close commands
-nnoremap ZZ :w<bar>bd<cr>
-nnoremap ZQ :bd!<cr>
+nnoremap q :w<cr>:bd!<cr>
+nnoremap <space>z :bd!<cr>
+nnoremap <space>q :wa<bar>qa!<cr>
+
+" Git commands
+nnoremap <space>p :!git pull<cr>
+nnoremap <space>s :!git status<cr>
 
 " -------------- COC Config --------------
 
@@ -253,10 +263,10 @@ nnoremap <silent><nowait> <space>o  :<C-u>CocList commands<cr>
 " Find symbol of current document.
 nnoremap <silent><nowait> <space>u  :<C-u>CocList outline<cr>
 " Search workspace symbols.
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent><nowait> <space>,  :<C-u>CocPrev<CR>
+" nnoremap <silent><nowait> <space>,  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>.  :<C-u>CocListResume<CR>

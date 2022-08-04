@@ -32,7 +32,7 @@ do
         make .. -j
         exit 0
     fi
-    scandir=$(dirname scandir)
+    scandir=$(dirname $scandir)
     curdepth=$curdepth+1
 done
 
