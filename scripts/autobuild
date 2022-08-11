@@ -29,7 +29,8 @@ do
         fi
         echo "Make project found, compiling..."
         cd $scandir/build
-        make .. -j
+        cp ../Makefile ./
+        make -j
         exit 0
     fi
     scandir=$(dirname $scandir)
