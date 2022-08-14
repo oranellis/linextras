@@ -15,9 +15,13 @@ Plug 'junegunn/fzf.vim'
 Plug 'mcchrish/nnn.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'drewtempelmeyer/palenight.vim'
+Plug 'morhetz/gruvbox'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-fugitive'
 Plug 'voldikss/vim-floaterm'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'KarimElghamry/vim-auto-comment'
 call plug#end()
 
 " Enable line numbers
@@ -74,7 +78,7 @@ set shortmess+=c
 set clipboard^=unnamed,unnamedplus
 
 " Theme
-colorscheme palenight
+colorscheme gruvbox
 
 " -------------- Keybindings --------------
 
@@ -111,8 +115,7 @@ nmap <space>c :FloatermNew<cr>
 nmap <space>m :!autobuild<cr>
 
 " Remap macro key
-
-nnoremap q Q
+nnoremap Q q
 
 " Custom close commands
 nnoremap q :w<cr>:bd!<cr>
@@ -120,8 +123,12 @@ nnoremap <space>z :bd!<cr>
 nnoremap <space>q :wa<bar>qa!<cr>
 
 " Git commands
-nnoremap <space>p :!git pull<cr>
-nnoremap <space>s :!git status<cr>
+nnoremap <space>ip :Git pull<cr>
+nnoremap <space>is :Git status<cr>
+nnoremap <space>ic :Git commit<cr>
+nnoremap <space>iu :Git push<cr>
+nnoremap <space>ia :Git add -A<cr>
+
 
 " -------------- COC Config --------------
 
