@@ -1,0 +1,142 @@
+#!/bin/bash
+
+
+HOME_DIR=$HOME
+GIT_DIR=$HOME_DIR/.dotfilesgit
+
+mode=r
+noconfirm=false
+optlist=""
+
+for arg in "$@"
+do
+    if [ ${arg:0:1} == "-" ]
+    then
+        optlist+="
+$(echo "${arg:1:10}" | grep -o .)"
+    fi
+done
+for option in $optlist
+do
+    case $option in
+        h)
+            echo "
+Oran's config manager
+
+Copies configs to and from this git repository based on the contents of the cpconf.cfg file.
+
+Options:
+    -r to read config to the git directory
+    -w to write the git config to the home directory
+    -a copy all configs in the cpconf.cfg file
+    -f sets up a fresh environment and performs first time setups"
+            exit 0
+            ;;
+        a)
+            noconfirm=true
+            ;;
+        r)
+            mode=r
+            ;;
+        w)
+            mode=w
+            ;;
+        f)
+            mode=w
+            noconfirm=true
+            for config in $root_configs
+            do
+                sudo ln -s $HOME_DIR/$config /root
+            done
+    esac
+done
+
+echo "=== Config manager ==="
+[ -d $GIT_DIR/.git ] || git clone https://github.com/oranellis/dotfiles $GIT_DIR
+cd $GIT_DIR
+git pull || exit 1 # Checks for internet and most up to date files
+source $GIT_DIR/confmgr.files
+
+case $mode in
+    r)
+        count=${#configs[@]}
+        index=0
+        while [ $index -lt $count ]
+        do
+            config_group=${configs[$index]}
+            if [ $noconfirm == "true" ]
+            then
+                for config in $config_group
+                do
+                    cp -rf $HOME/$config $GIT_DIR/files/$config
+                done
+                echo " Copied!"
+            else
+                read -p "Copy config '$config_group' (y/N)? " -n1 ans
+                if [ $ans == "y" ]
+                then
+                    for config in $config_group
+                    do
+                        cp -rf $HOME/$config $GIT_DIR/files/$config
+                    done
+                    echo " Copied!"
+                else
+                    echo
+                fi
+            fi
+            index=$((index+1))
+        done
+        if [ ! $(git status | grep 'nothing to commit') ]
+        then
+            git add -A
+            git commit -a
+        fi
+        ;;
+    w)
+        count=${#configs[@]}
+        index=0
+        while [ $index -lt $count ]
+        do
+            config_group=${configs[$index]}
+            if [ $noconfirm == "true" ]
+            then
+                for config in $config_group
+                do
+                    cp -rf $GIT_DIR/files/$config $HOME/$config
+                done
+                echo " Copied!"
+            else
+                read -p "Copy config '$config' (y/N)? " -n1 ans
+                if [ $ans == "y" ]
+                then
+                    for config in $config_group
+                    do
+                        cp -rf $GIT_DIR/files/$config $HOME/$config
+                    done
+                    echo " Copied!"
+                else
+                    echo
+                fi
+            fi
+            index=$((index+1))
+        done
+        if [ $noconfirm == "true" ]
+        then
+            for script in $(ls $GIT_DIR/scripts)
+            do
+                sudo cp $GIT_DIR/scripts/$script /usr/local/bin
+            done
+        else
+            for script in $(ls $GIT_DIR/scripts)
+            do
+                read -p "Copy script '$config' (y/N)? " -n1 ans
+                if [ $ans=="y" ]
+                then
+                    sudo cp $GIT_DIR/scripts/$script /usr/local/bin
+                    echo " Copied!"
+                else
+                    echo
+                fi
+            done
+        fi
+esac

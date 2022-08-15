@@ -2,4 +2,3 @@
 
 scriptdir=$(dirname $0)
 cp -rf $scriptdir/../dotfiles/.[^.]* $HOME
-cp -rf $scriptdir/dotfiles/.[^.]* $HOME

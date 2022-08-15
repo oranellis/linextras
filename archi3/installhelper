@@ -30,15 +30,13 @@ localectl set-x11-keymap gb
 timedatectl set-timezone GB
 
 chown -R $username:$username $sourcedir
-cp -f $sourcedir/dotfiles/* /root
+cp -f $sourcedir/configs/* /root
 cp -rf $sourcedir/scripts/* /usr/local/bin
-cp -rf $sourcedir/archi3/scripts/* /usr/local/bin
 
 sudo -u $username -H bash -c "
 mkdir -p /home/$username/Dev /home/$username/Downloads /home/$username/Media/Backgrounds
-cp -r $sourcedir/archi3/dotfiles/.[^.]* /home/$username
-cp -r $sourcedir/dotfiles/.[^.]* /home/$username
-cp $sourcedir/archi3/assets/bg.png /home/$username/Media/Backgrounds
+cp -r $sourcedir/configs/.[^.]* /home/$username
+cp $sourcedir/archi3/assets/bg2.png /home/$username/Media/Backgrounds
 
 if [ $username = 'oran' ]; then
 	/bin/git config --global user.email \"oran.mcnair@gmail.com\"
@@ -47,7 +45,7 @@ if [ $username = 'oran' ]; then
 	/bin/git config --global pull.rebase false
 fi
 
-$sourcedir/archi3/scripts/aurinstall $reqpkgsaur $pkgsaur
+$sourcedir/archi3/scripts/aurinstall $reqpkgsaur
 "
 
 systemctl enable $services

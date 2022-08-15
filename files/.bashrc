@@ -1,4 +1,4 @@
-#
+# thing
 # Oran's bashrc
 #
 
@@ -97,7 +97,7 @@ export NNN_BMS="h:~/;r:/;d:~/Dev;o:~/Downloads;m:/run/media/$USER;s:/storage"
 
 # Run neofetch if this is the first terminal opened
 
-if [[  $(ps aux | grep -ic "$TERM") -lt 3 ]]
-then
-neofetch
-fi
+# if [[  $(ps aux | grep -ic "$TERM") -lt 3 ]]
+# then
+# neofetch
+# fi
