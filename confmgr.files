@@ -7,3 +7,8 @@ configs=(
 ".config/alacritty.yml"
 ".config/nvim/init.vim"
 )
+
+root_configs="
+.bashrc
+.config/nvim/init.vim
+"

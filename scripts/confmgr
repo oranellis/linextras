@@ -70,7 +70,6 @@ case $mode in
                 do
                     cp -rf $HOME/$config $GIT_DIR/files/$config
                 done
-                echo " Copied!"
             else
                 read -p "Copy config '$config_group' (y/N)? " -n1 ans
                 if [ $ans == "y" ]
@@ -88,8 +87,12 @@ case $mode in
         done
         if [ ! $(git status | grep 'nothing to commit') ]
         then
-            git add -A
-            git commit -a
+            read -p "Commit changes to git (y/N)? " -n1 ans
+            if [ $ans == "y" ]
+            then
+                git add -A
+                git commit -a
+            fi
         fi
         ;;
     w)
@@ -102,15 +105,16 @@ case $mode in
             then
                 for config in $config_group
                 do
+                    mkdir -p $HOME/$(dirname $config)
                     cp -rf $GIT_DIR/files/$config $HOME/$config
                 done
-                echo " Copied!"
             else
-                read -p "Copy config '$config' (y/N)? " -n1 ans
+                read -p "Copy config '$config_group' (y/N)? " -n1 ans
                 if [ $ans == "y" ]
                 then
                     for config in $config_group
                     do
+                        mkdir -p $HOME/$(dirname $config)
                         cp -rf $GIT_DIR/files/$config $HOME/$config
                     done
                     echo " Copied!"
@@ -129,7 +133,7 @@ case $mode in
         else
             for script in $(ls $GIT_DIR/scripts)
             do
-                read -p "Copy script '$config' (y/N)? " -n1 ans
+                read -p "Copy script '$script' (y/N)? " -n1 ans
                 if [ $ans=="y" ]
                 then
                     sudo cp $GIT_DIR/scripts/$script /usr/local/bin
@@ -140,3 +144,4 @@ case $mode in
             done
         fi
 esac
+echo
