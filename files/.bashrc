@@ -1,4 +1,4 @@
-# thing
+#
 # Oran's bashrc
 #
 
