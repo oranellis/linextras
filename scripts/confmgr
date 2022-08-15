@@ -6,6 +6,7 @@ GIT_DIR=$HOME_DIR/.dotfilesgit
 
 mode=r
 noconfirm=false
+firsttime=false
 optlist=""
 
 for arg in "$@"
@@ -20,34 +21,40 @@ for option in $optlist
 do
     case $option in
         h)
-            echo "
-Oran's config manager
+            echo "Oran's config manager
 
-Copies configs to and from this git repository based on the contents of the cpconf.cfg file.
+Copies configs to and from my git repository based on the contents of the confmgr.files file.
 
 Options:
     -r to read config to the git directory
     -w to write the git config to the home directory
     -a copy all configs in the cpconf.cfg file
-    -f sets up a fresh environment and performs first time setups"
+    -f performs extra first time setups (links root configs to users')
+    -e opens neovim at the config directory"
             exit 0
             ;;
         a)
             noconfirm=true
+            break
             ;;
         r)
             mode=r
+            break
             ;;
         w)
             mode=w
+            break
             ;;
         f)
             mode=w
-            noconfirm=true
-            for config in $root_configs
-            do
-                sudo ln -s $HOME_DIR/$config /root
-            done
+            firsttime=true
+            break
+            ;;
+        e)
+            cd $GIT_DIR
+            nvim
+            exit 0
+            ;;
     esac
 done
 
@@ -56,6 +63,17 @@ echo "=== Config manager ==="
 cd $GIT_DIR
 git pull || exit 1 # Checks for internet and most up to date files
 source $GIT_DIR/confmgr.files
+
+truth=true
+if [ $firsttime == $truth ]
+then
+    for config in $root_configs
+    do
+        echo "why are you running?"
+        sudo mkdir -p $(dirname /root/$config)
+        sudo ln -s $HOME_DIR/$config /root/$config
+    done
+fi
 
 case $mode in
     r)
