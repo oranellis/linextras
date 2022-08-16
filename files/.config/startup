@@ -7,3 +7,4 @@ pa-applet &
 nextcloud &
 /usr/lib/polkit-kde-authentication-agent-1 &
 alttab &
+nm-applet &
