@@ -4,8 +4,8 @@
 
 # Development Path Env Vars
 
-export DEV_PATH="~/Dev"
-export SDK_PATH="~/Dev/SDKs"
+export DEV_PATH="$HOME/Dev"
+export SDK_PATH="$HOME/Dev/SDKs"
 
 
 

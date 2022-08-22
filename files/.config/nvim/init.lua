@@ -48,9 +48,19 @@ vim.api.nvim_set_keymap('n', 'Q', 'q', { silent = true })
 
 -- semicolon as leader
 vim.g.mapleader = ";"
-
 -- load legacy config
 vim.cmd([[ so ~/.config/nvim/legacy.vim ]])
+
+vim.api.nvim_set_option("updatetime", 100)
+vim.api.nvim_set_option("syntax", "on")
+vim.api.nvim_set_option("hidden", true)
+vim.api.nvim_set_option("autoread", true)
+vim.api.nvim_win_set_option(0, "number", true)
+vim.api.nvim_set_option("ruler", true)
+vim.api.nvim_set_option("visualbell", true)
+vim.api.nvim_win_set_option(0, "wrap", true)
+vim.api.nvim_set_option("encoding", "utf-8")
+vim.api.nvim_set_option("foldlevelstart", 99)
 
 
 -- =================== Language Server Setup ===================
@@ -225,7 +235,7 @@ require("nnn").setup({
 		session = "shared",
 	},
 	replace_netrw = "picker",
-	quitcd = "lcd"
+	-- quitcd = "lcd"
 })
 
 require("symbols-outline").setup {
@@ -236,9 +246,53 @@ require("symbols-outline").setup {
 -- =================== Keybinds ===================
 
 -- custom quit commands
-vim.api.nvim_set_keymap('n', 'q', ':w<cr>:bd!<cr>', { silent = true })
+function check_empty()
+	if vim.fn.expand('%:t') == "" then
+		if vim.api.nvim_buf_line_count(0) and vim.fn.getline(1) == "" then
+			return true
+		end
+	end
+	return false
+end
+
+function custom_quit()
+	-- print(vim.api.nvim_buf_get_option(0, 'buftype'))
+	if vim.fn.expand('%:t') == "" then
+		if vim.api.nvim_buf_line_count(0) and vim.fn.getline(1) == "" then
+			vim.api.nvim_command('q')
+		else
+			print("Enter a name for this buffer or leave blank to delete")
+			local fname = vim.fn.input("File: ")
+			if fname == "" then
+				vim.api.nvim_command('bd!')
+				if check_empty() then
+					vim.api.nvim_command('q')
+				end
+			else
+				vim.api.nvim_command('w ' .. fname)
+				vim.api.nvim_command('bd')
+				if check_empty() then
+					vim.api.nvim_command('q')
+				end
+			end
+		end
+	else
+		if vim.api.nvim_buf_get_option(0, 'readonly') == true then
+			vim.api.nvim_command('bd!')
+			if check_empty() then
+				vim.api.nvim_command('q')
+			end
+		else
+			vim.api.nvim_command('w')
+			vim.api.nvim_command('bd')
+			if check_empty() then
+				vim.api.nvim_command('q')
+			end
+		end
+	end
+end
+vim.api.nvim_set_keymap('n', 'q', "<cmd>lua custom_quit()<cr>", {  })
 vim.api.nvim_set_keymap('n', '<leader>q', ':wa<cr>:qa!<cr>', { silent = true })
-vim.api.nvim_set_keymap('n', '<leader>z', ':bd!<cr>', { silent = true })
 
 -- file and buffer navigation
 vim.api.nvim_set_keymap('n', '<leader>f', ':Files<cr>', {})

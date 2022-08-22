@@ -4,35 +4,24 @@
 " ------ Vim Settings ------
 
 " faster updates!
-set updatetime=100
 
 " no hidden buffers
-set hidden&
 
 " automatically read on change
-set autoread
 
 " no folds, ever
-set foldlevelstart=99
 
 " For cool vim things
-set nocompatible
 
 " Syntax highlighting
-syntax on
 
 " Position in code
-set number
-set ruler
 
 " Don't make noise
-set visualbell
 
 " default file encoding
-set encoding=utf-8
 
 " Line wrap
-set wrap
 
 " Function to set tab width to n spaces
 function! SetTab(n)

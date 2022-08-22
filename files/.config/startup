@@ -8,3 +8,4 @@ nextcloud &
 /usr/lib/polkit-kde-authentication-agent-1 &
 alttab &
 nm-applet &
+blueman-applet &

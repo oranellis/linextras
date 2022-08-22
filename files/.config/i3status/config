@@ -31,9 +31,15 @@ ethernet _first_ {
         format_down = ""
 }
 
-# battery all {
-#         format = "%status %percentage"
-# }
+battery all {
+        format = "%status %percentage"
+		format_down = ""
+        status_chr = "CHR"
+        status_bat = "BAT"
+        status_unk = "UNK"
+        status_full = "FULL"
+        low_threshold = 20
+}
 
 disk "/" {
         format = "%avail SSD"
