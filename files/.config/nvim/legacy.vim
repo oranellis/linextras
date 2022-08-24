@@ -104,5 +104,7 @@ set cino=(0,W4
 " Jump between source and headers
 au BufEnter,BufNew *.cpp nnoremap <silent> ;h :fin %<.hpp<CR>
 au BufEnter,BufNew *.hpp nnoremap <silent> ;h :fin %<.cpp<CR>
+" au BufEnter,BufNew *.cpp nnoremap <silent> ;h :fin %<.h<CR>
 au BufEnter,BufNew *.c nnoremap <silent> ;h :fin %<.h<CR>
 au BufEnter,BufNew *.h nnoremap <silent> ;h :fin %<.c<CR>
+" au BufEnter,BufNew *.h nnoremap <silent> ;h :fin %<.cpp<CR>

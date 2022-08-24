@@ -185,9 +185,9 @@ bar {
 hide_edge_borders none
 default_orientation auto
 workspace_layout default
-default_border pixel 1
+default_border pixel 0
 default_floating_border pixel 1
-for_window [class="^.*"] border pixel 1
+for_window [class="^.*"] border none
 
 client.focused          #F7F7F7 #202020 #FFFFFF #F7F7F7   #F7F7F7  
 client.focused_inactive #404040 #202020 #FFFFFF #404040   #404040
