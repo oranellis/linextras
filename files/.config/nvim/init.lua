@@ -256,23 +256,22 @@ function check_empty()
 end
 
 function custom_quit()
-	-- print(vim.api.nvim_buf_get_option(0, 'buftype'))
 	if vim.fn.expand('%:t') == "" then
 		if vim.api.nvim_buf_line_count(0) and vim.fn.getline(1) == "" then
-			vim.api.nvim_command('q')
+			-- vim.api.nvim_command('q') -- quit on last invocation of 'q'
 		else
 			print("Enter a name for this buffer or leave blank to delete")
 			local fname = vim.fn.input("File: ")
 			if fname == "" then
 				vim.api.nvim_command('bd!')
 				if check_empty() then
-					vim.api.nvim_command('q')
+					-- vim.api.nvim_command('q') -- quit on last invocation of 'q'
 				end
 			else
 				vim.api.nvim_command('w ' .. fname)
 				vim.api.nvim_command('bd')
 				if check_empty() then
-					vim.api.nvim_command('q')
+					-- vim.api.nvim_command('q') -- quit on last invocation of 'q'
 				end
 			end
 		end
@@ -280,19 +279,20 @@ function custom_quit()
 		if vim.api.nvim_buf_get_option(0, 'readonly') == true then
 			vim.api.nvim_command('bd!')
 			if check_empty() then
-				vim.api.nvim_command('q')
+				-- vim.api.nvim_command('q') -- quit on last invocation of 'q'
 			end
 		else
 			vim.api.nvim_command('w')
 			vim.api.nvim_command('bd')
 			if check_empty() then
-				vim.api.nvim_command('q')
+				-- vim.api.nvim_command('q') -- quit on last invocation of 'q'
 			end
 		end
 	end
 end
 vim.api.nvim_set_keymap('n', 'q', "<cmd>lua custom_quit()<cr>", {  })
 vim.api.nvim_set_keymap('n', '<leader>q', ':wa<cr>:qa!<cr>', { silent = true })
+vim.api.nvim_set_keymap('n', '<leader>w', ':wa<cr>', { silent = true })
 
 -- file and buffer navigation
 vim.api.nvim_set_keymap('n', '<leader>f', ':Files<cr>', {})

@@ -64,6 +64,7 @@ bind 'set completion-ignore-case on'
 
 alias d=pwd
 alias v=nvim
+alias ssh-keygen-named="ssh-keygen -C $(whoami)@$(uname -n)-$(date -I)"
 
 
 
