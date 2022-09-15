@@ -1,4 +1,0 @@
-#!/bin/bash
-
-blkdev="/dev/$(echo $1 | sed -e's/\/dev\///')"
-udisksctl mount -b $blkdev

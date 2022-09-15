@@ -1,4 +1,0 @@
-#!/bin/bash
-
-sed -i -e's/wm_start/# wm_start'
-echo "i3" >> /etc/xrdp/startwm.sh   
