@@ -86,9 +86,6 @@ let g:AutoPairsFlyMode = 0
 " C, C++
 " use clang-format formatter
 au FileType cpp set formatprg=clang-format | set equalprg=clang-format
-" switch between source and header files
-au BufEnter,BufNew *.cpp nnoremap <silent> <space>e :e %<.hpp<CR>
-au BufEnter,BufNew *.hpp nnoremap <silent> <space>e :e %<.cpp<CR>
 " colorcolumn 80
 autocmd BufRead,BufNewFile *.c setlocal colorcolumn=80
 autocmd BufRead,BufNewFile *.h setlocal colorcolumn=80
@@ -101,10 +98,3 @@ autocmd BufRead,BufNewFile *.cpp SetTab 4
 autocmd BufRead,BufNewFile *.hpp SetTab 4
 " fix extra indentation on function continuation
 set cino=(0,W4
-" Jump between source and headers
-au BufEnter,BufNew *.cpp nnoremap <silent> ;h :fin %<.hpp<CR>
-au BufEnter,BufNew *.hpp nnoremap <silent> ;h :fin %<.cpp<CR>
-" au BufEnter,BufNew *.cpp nnoremap <silent> ;h :fin %<.h<CR>
-au BufEnter,BufNew *.c nnoremap <silent> ;h :fin %<.h<CR>
-au BufEnter,BufNew *.h nnoremap <silent> ;h :fin %<.c<CR>
-" au BufEnter,BufNew *.h nnoremap <silent> ;h :fin %<.cpp<CR>
