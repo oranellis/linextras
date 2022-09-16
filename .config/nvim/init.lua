@@ -5,7 +5,7 @@ require('packer').startup(function()
     use 'morhetz/gruvbox' -- no keybinds
     use 'rust-lang/rust.vim' -- no keybinds
     use 'tpope/vim-surround' -- adds s nouns
-    use 'tpope/vim-commentary' -- adds keybinds (gcc, gc(visual))
+    use 'terrortylor/nvim-comment' -- adds keybinds (gcc, gc(visual))
     use 'junegunn/fzf' -- no keybinds
     use 'junegunn/fzf.vim' -- no keybinds
 	use 'luukvbaal/nnn.nvim'
@@ -244,6 +244,11 @@ require("symbols-outline").setup {
 	width = 25,
 }
 
+require('nvim_comment').setup {
+	comment_empty = false,
+}
+
+vim.api.nvim_command('autocmd BufEnter *.cpp,*.h :lua vim.api.nvim_buf_set_option(0, "commentstring", "// %s")')
 
 -- =================== Keybinds ===================
 
