@@ -248,7 +248,7 @@ require('nvim_comment').setup {
 	comment_empty = false,
 }
 
-vim.api.nvim_command('autocmd BufEnter *.cpp,*.h :lua vim.api.nvim_buf_set_option(0, "commentstring", "// %s")')
+vim.api.nvim_command('autocmd BufEnter *.cpp,*.hpp,*.c,*.h :lua vim.api.nvim_buf_set_option(0, "commentstring", "// %s")')
 
 -- =================== Keybinds ===================
 
@@ -327,4 +327,4 @@ vim.api.nvim_set_keymap('n', '<leader>s', ':SymbolsOutline<cr>', {})
 
 -- terminals
 vim.api.nvim_set_keymap('n', '<leader>c', ':! ', {})
-vim.api.nvim_set_keymap('n', '<leader>m', ':! autobuild<cr>', {})
+vim.api.nvim_set_keymap('n', '<leader>m', ':w<cr>:! autobuild<cr>', {})
