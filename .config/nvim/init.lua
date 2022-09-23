@@ -327,4 +327,4 @@ vim.api.nvim_set_keymap('n', '<leader>s', ':SymbolsOutline<cr>', {})
 
 -- terminals
 vim.api.nvim_set_keymap('n', '<leader>c', ':! ', {})
-vim.api.nvim_set_keymap('n', '<leader>m', ':w<cr>:! autobuild<cr>', {})
+vim.api.nvim_set_keymap('n', '<leader>m', ':wa<cr>:! autobuild<cr>', {})
