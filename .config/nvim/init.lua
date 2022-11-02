@@ -41,7 +41,6 @@ vim.api.nvim_set_keymap('n', 'gh', '<Nop>', {})
 vim.api.nvim_set_keymap('n', 'gi', '<Nop>', {})
 vim.api.nvim_set_keymap('n', 'gt', '<Nop>', {})
 vim.api.nvim_set_keymap('n', 'gr', '<Nop>', {})
-vim.api.nvim_set_keymap('n', 'Q', 'q', { silent = true })
 
 
 -- =================== Configuration ===================
@@ -297,8 +296,8 @@ function custom_quit()
 		end
 	end
 end
-vim.api.nvim_set_keymap('n', 'q', "<cmd>lua custom_quit()<cr>", {  })
-vim.api.nvim_set_keymap('n', '<leader>q', ':wa<cr>:qa!<cr>', { silent = true })
+vim.api.nvim_set_keymap('n', '<leader>q', "<cmd>lua custom_quit()<cr>", {  })
+-- vim.api.nvim_set_keymap('n', '<leader>q', ':wa<cr>:qa!<cr>', { silent = true })
 vim.api.nvim_set_keymap('n', '<leader>w', ':wa<cr>', { silent = true })
 
 -- file and buffer navigation

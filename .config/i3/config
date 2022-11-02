@@ -204,7 +204,7 @@ exec $HOME/.config/startup
 
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn 'hack-11' -nf '#E8E8E8' -nb '#404040' -sb '#618075' -sf '#E8E8E8'" 
 
-bindsym $mod+p exec "mkdir -p $HOME/Media/Screenshots && scrot -F $HOME/Media/Screenshots/%Y%m%d-%H%M%S.png"
+# bindsym $mod+p exec "mkdir -p $HOME/Media/Screenshots && scrot -s $HOME/Media/Screenshots/%Y%m%d-%H%M%S.png"
 bindsym Print exec "mkdir -p $HOME/Media/Screenshots && scrot -F $HOME/Media/Screenshots/%Y%m%d-%H%M%S.png"
 bindsym $mod+w exec firefox
 bindsym $mod+e exec thunar
