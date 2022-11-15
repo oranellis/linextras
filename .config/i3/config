@@ -108,16 +108,36 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1:一"
-set $ws2 "2:二"
-set $ws3 "3:三"
-set $ws4 "4:四"
-set $ws5 "5:五"
-set $ws6 "6:六"
-set $ws7 "7:七"
-set $ws8 "8:八"
-set $ws9 "9:九"
-set $ws10 "10:十"
+# set $ws1 "1:一"
+# set $ws2 "2:二"
+# set $ws3 "3:三"
+# set $ws4 "4:四"
+# set $ws5 "5:五"
+# set $ws6 "6:六"
+# set $ws7 "7:七"
+# set $ws8 "8:八"
+# set $ws9 "9:九"
+# set $ws10 "10:十"
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+# set $ws1 "一"
+# set $ws2 "二"
+# set $ws3 "三"
+# set $ws4 "四"
+# set $ws5 "五"
+# set $ws6 "六"
+# set $ws7 "七"
+# set $ws8 "八"
+# set $ws9 "九"
+# set $ws10 "十"
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -167,18 +187,20 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        status_command i3status
-        strip_workspace_numbers yes
+# bar {
+#         status_command i3status
+#         strip_workspace_numbers yes
 
-        colors {
-                focused_workspace  #404040 #bababa #000000
-                active_workspace   #404040 #404040 #F7F7F7
-                inactive_workspace #404040 #404040 #F7F7F7
-                urgent_workspace   #FFFFC0 #FFFFC0 #000000
-                binding_mode       #FFFFC0 #FFFFC0 #000000
-        }
-}
+#         colors {
+#                 focused_workspace  #404040 #bababa #000000
+#                 active_workspace   #404040 #404040 #F7F7F7
+#                 inactive_workspace #404040 #404040 #F7F7F7
+#                 urgent_workspace   #FFFFC0 #FFFFC0 #000000
+#                 binding_mode       #FFFFC0 #FFFFC0 #000000
+#         }
+# }
+
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Custom Settings
 
@@ -195,8 +217,8 @@ client.unfocused        #404040 #202020 #FFFFFF #404040   #404040
 client.urgent           #FFFFC0 #202020 #FFFFFF #202020   #202020
 client.placeholder      #404040 #202020 #FFFFFF #000000   #0C0C0C
 
-# gaps inner 0
-# gaps outer 10
+gaps inner 10
+gaps outer 0
 
 exec feh --randomize --bg-fill $HOME/Media/Backgrounds/*
 bindsym $mod+b exec feh --randomize --bg-fill $HOME/Media/Backgrounds/*
