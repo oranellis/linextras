@@ -1,11 +1,43 @@
 #!/bin/bash
 
-git_dir=$(dirname $(readlink -f $0))
-echo $git_dir
+GIT_DIR=$(dirname $(readlink -f $0))
+EXCLUSIONS=".git .Xresources .config README.md link.sh"
+COPIES=".Xresources"
+echo $GIT_DIR
 
 cd $HOME/
-ln -sf $git_dir/.* .
-rm -rf ./.git
-cd $HOME/.config/
-rm $(ls $git_dir/.config/)
-ln -sf $git_dir/.config/* .
+MATCHES=$(ls -A $GIT_DIR)
+
+for MATCH in $MATCHES
+do
+if echo $EXCLUSIONS | grep -w $MATCH > /dev/null; then
+	echo "Skipping $MATCH"
+else
+	rm ./$MATCH
+	ln -sf $GIT_DIR/$MATCH .
+	echo "replaced $MATCH"
+fi
+done
+for COPY in $COPIES
+do
+	if [ ! -f $HOME/$COPY ]
+	then
+		cp $GIT_DIR/$COPY $HOME
+		echo "$COPY missing, copying"
+	fi
+done
+
+
+cd $HOME/.config
+MATCHES=$(ls -A $GIT_DIR/.config)
+
+for MATCH in $MATCHES
+do
+if echo $EXCLUSIONS | grep -w $MATCH > /dev/null; then
+	echo "Skipping .config/$MATCH"
+else
+	rm ./$MATCH
+	ln -sf $GIT_DIR/.config/$MATCH .
+	echo "replaced .config/$MATCH"
+fi
+done
