@@ -3,7 +3,7 @@
 GIT_DIR=$(dirname $(readlink -f $0))
 EXCLUSIONS=".git .Xresources .config README.md link.sh .fehbg"
 COPIES=".Xresources"
-echo $GIT_DIR
+echo "Linking files from $GIT_DIR"
 
 cd $HOME/
 MATCHES=$(ls -A $GIT_DIR)
