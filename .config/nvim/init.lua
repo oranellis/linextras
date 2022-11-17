@@ -3,6 +3,7 @@
 require('packer').startup(function()
     use 'wbthomason/packer.nvim' -- no keybinds
     use 'morhetz/gruvbox' -- no keybinds
+	use 'sainnhe/everforest'
     use 'rust-lang/rust.vim' -- no keybinds
     use 'tpope/vim-surround' -- adds s nouns
     use 'terrortylor/nvim-comment' -- adds keybinds (gcc, gc(visual))
@@ -117,7 +118,7 @@ require('lspconfig').clangd.setup{
   init_option = { fallbackFlags = {  "-std=c++2a"  } }
 }
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 require('lspconfig').zls.setup {
   on_attach = on_attach,
   capabilities = capabilities

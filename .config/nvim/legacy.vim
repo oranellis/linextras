@@ -62,6 +62,12 @@ set clipboard^=unnamed,unnamedplus
 
 " ------ Theming ------
 
+if has('termguicolors')
+	set termguicolors
+endif
+
+" let g:everforest_background = 'hard'
+" let g:everforest_better_performance = 1
 colorscheme gruvbox
 
 
