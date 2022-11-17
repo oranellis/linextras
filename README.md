@@ -1,12 +1,9 @@
 # Dotfiles
 My dotfiles for my arch i3 environment, found at `http://github.com/oranellis/i3env`
 
-To link the local dotfiles to this repo run
+To remove and overwrite your local dotfiles with links to the files in this repo run
 ```
-cd ~/
-ln -sf ~/.config/dotfiles/.*[!config][!git] .
-cd ~/.config/
-rm $(ls ~/.config/dotfiles/.config/)
-ln -sf ~/.config/dotfiles/.config/* .
+./link.sh
+```
 
-```
+Please make a backup of your configs before running this script
