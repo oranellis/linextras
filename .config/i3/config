@@ -224,7 +224,7 @@ exec feh --randomize --bg-fill $HOME/Media/Backgrounds/*
 bindsym $mod+b exec feh --randomize --bg-fill $HOME/Media/Backgrounds/*
 exec $HOME/.config/startup
 
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn 'hack-11' -nf '#ffffff' -nb '#29404e' -sb '#fea4b2' -sf '#000000'"
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn 'hack-16' -nf '#C5C8C6' -nb '#1a1a1a' -sb '#5d9f9b' -sf '#000000'"
 
 # bindsym $mod+p exec "mkdir -p $HOME/Media/Screenshots && scrot -s $HOME/Media/Screenshots/%Y%m%d-%H%M%S.png"
 bindsym Print exec "mkdir -p $HOME/Media/Screenshots && scrot -F $HOME/Media/Screenshots/%Y%m%d-%H%M%S.png"
