@@ -1,7 +1,7 @@
 #!/bin/bash
 
 GIT_DIR=$(dirname $(readlink -f $0))
-EXCLUSIONS=".git .Xresources .config README.md link.sh"
+EXCLUSIONS=".git .Xresources .config README.md link.sh .fehbg"
 COPIES=".Xresources"
 echo $GIT_DIR
 

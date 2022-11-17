@@ -237,7 +237,7 @@ require("nnn").setup({
 		session = "shared",
 	},
 	replace_netrw = "picker",
-	-- quitcd = "lcd"
+	quitcd = "lcd"
 })
 
 require("symbols-outline").setup {
