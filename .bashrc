@@ -90,6 +90,7 @@ n () {
 }
 export NNN_OPTS="Rde"
 export NNN_USE_EDITOR=1
+export NNN_OPENER="nuke"
 export EDITOR="/usr/bin/nvim"
 export NNN_BMS="h:~/;r:/;d:~/Dev;o:~/Downloads;m:/run/media/$USER;s:/storage"
 # export NNN_OPENER="/path/to/custom/opener" # Default opener template, to replace xdg-open
