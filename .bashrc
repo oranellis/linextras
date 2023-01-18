@@ -64,6 +64,7 @@ bind 'set completion-ignore-case on'
 
 alias d=pwd
 alias v=nvim
+alias ab=autobuild
 alias ssh-keygen-named="ssh-keygen -C $(whoami)@$(uname -n)-$(date -I)"
 
 
@@ -93,6 +94,7 @@ export NNN_USE_EDITOR=1
 export NNN_OPENER="nuke"
 export EDITOR="/usr/bin/nvim"
 export NNN_BMS="h:~/;r:/;d:~/Dev;o:~/Downloads;m:/run/media/$USER;s:/storage"
+export NNN_PLUG='v:!nvim .'
 # export NNN_OPENER="/path/to/custom/opener" # Default opener template, to replace xdg-open
 
 
