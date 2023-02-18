@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Hack 10
+font pango:Hack Nerd Font Mono 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -217,7 +217,7 @@ exec feh --randomize --bg-fill $HOME/Media/Backgrounds/*
 bindsym $mod+b exec feh --randomize --bg-fill $HOME/Media/Backgrounds/*
 exec $HOME/.config/startup
 
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn 'hack-12' -nf '#C5C8C6' -nb '#1a1a1a' -sb '#5d9f9b' -sf '#000000'"
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn 'Hack Nerd Font Mono-12' -nf '#C5C8C6' -nb '#1a1a1a' -sb '#5d9f9b' -sf '#000000'"
 
 # bindsym $mod+p exec "mkdir -p $HOME/Media/Screenshots && scrot -s $HOME/Media/Screenshots/%Y%m%d-%H%M%S.png"
 bindsym Print exec "mkdir -p $HOME/Media/Screenshots && scrot -F $HOME/Media/Screenshots/%Y%m%d-%H%M%S.png"

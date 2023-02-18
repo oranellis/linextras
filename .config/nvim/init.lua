@@ -31,6 +31,10 @@ require('packer').startup(function()
     use 'easymotion/vim-easymotion'
     use 'tpope/vim-fugitive' -- no keybinds
 	use 'simrat39/symbols-outline.nvim'
+	use {
+	  'nvim-tree/nvim-tree.lua',
+	  requires = { 'nvim-tree/nvim-web-devicons' },
+	}
 end)
 
 -- =================== Unset Keys ===================
@@ -46,8 +50,14 @@ vim.api.nvim_set_keymap('n', 'gr', '<Nop>', {})
 
 -- =================== Configuration ===================
 
+-- disable netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- semicolon as leader
 vim.g.mapleader = ";"
+vim.opt.termguicolors = true
+
 -- load legacy config
 vim.cmd([[ so ~/.config/nvim/legacy.vim ]])
 
@@ -248,6 +258,25 @@ require('nvim_comment').setup {
 	comment_empty = false,
 }
 
+require("nvim-tree").setup({
+	hijack_cursor = true,
+	view = {
+		width = 30,
+		mappings = {
+			list = {
+				{ key = {"o", "<BS>"}, action = ""},
+				{ key = "l", action = "edit"},
+				{ key = "h", action = "close_node"}
+			}
+		}
+	},
+	actions = {
+		open_file = {
+			quit_on_open = true,
+		},
+	}
+})
+
 vim.api.nvim_command('autocmd BufEnter *.cpp,*.hpp,*.c,*.h :lua vim.api.nvim_buf_set_option(0, "commentstring", "// %s")')
 
 -- =================== Keybinds ===================
@@ -305,6 +334,7 @@ vim.api.nvim_set_keymap('n', '<leader>w', ':wa<cr>', { silent = true })
 vim.api.nvim_set_keymap('n', '<leader>f', ':Files<cr>', {})
 vim.api.nvim_set_keymap('n', '<leader>b', ':Buffers<cr>', {})
 vim.api.nvim_set_keymap('n', '<leader>n', ':NnnPicker<cr>', {})
+vim.api.nvim_set_keymap('n', '<leader>t', ':NvimTreeOpen<cr>', {})
 
 -- git shortcuts
 vim.api.nvim_set_keymap('n', '<leader>gp', ':Git pull<cr>', {})

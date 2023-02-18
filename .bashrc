@@ -89,12 +89,15 @@ n () {
 		rm -f "$NNN_TMPFILE" > /dev/null
 	fi
 }
-export NNN_OPTS="Rde"
+export NNN_OPTS="adRe"
+export NNN_FIFO="/tmp/nnn.fifo"
+export SPLIT="v"
+export TERMINAL="tmux"
 export NNN_USE_EDITOR=1
 export NNN_OPENER="nuke"
 export EDITOR="/usr/bin/nvim"
 export NNN_BMS="h:~/;r:/;d:~/Dev;o:~/Downloads;m:/run/media/$USER;s:/storage"
-export NNN_PLUG='v:!nvim .'
+export NNN_PLUG='v:!nvim $nnn;p:preview-tui'
 # export NNN_OPENER="/path/to/custom/opener" # Default opener template, to replace xdg-open
 
 
