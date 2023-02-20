@@ -72,7 +72,6 @@ vim.api.nvim_win_set_option(0, "wrap", true)
 vim.api.nvim_set_option("encoding", "utf-8")
 vim.api.nvim_set_option("foldlevelstart", 99)
 
-
 -- =================== Language Server Setup ===================
 
 local opts = { noremap=true, silent=true }
@@ -358,3 +357,7 @@ vim.api.nvim_set_keymap('n', '<leader>s', ':SymbolsOutline<cr>', {})
 -- terminals
 vim.api.nvim_set_keymap('n', '<leader>c', ':! ', {})
 vim.api.nvim_set_keymap('n', '<leader>m', ':wa<cr>:! autobuild<cr>', {})
+
+-- =================== Colour Changes ===================
+
+vim.cmd([[highlight Normal guibg=NONE ctermbg=NONE]])

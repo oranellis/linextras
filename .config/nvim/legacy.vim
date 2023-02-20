@@ -59,6 +59,9 @@ set signcolumn=yes
 " Use X11 clipboard
 set clipboard^=unnamed,unnamedplus
 
+" Force dark backround
+set background=dark
+
 
 " ------ Theming ------
 

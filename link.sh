@@ -23,7 +23,7 @@ then
 	echo "Skipping $MATCH"
 else
 	# Remove existing files (or links) and create symbolic links to the files in the git repo
-	rm ./$MATCH
+	rm -r ./$MATCH
 	ln -sf $GIT_DIR/$MATCH .
 	echo "replaced $MATCH"
 fi
@@ -49,7 +49,7 @@ do
 if echo $EXCLUSIONS | grep -w $MATCH > /dev/null; then
 	echo "Skipping .config/$MATCH"
 else
-	rm ./$MATCH
+	rm -r ./$MATCH
 	ln -sf $GIT_DIR/.config/$MATCH .
 	echo "replaced .config/$MATCH"
 fi

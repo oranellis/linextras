@@ -210,8 +210,8 @@ client.placeholder      #404040 #202020 #FFFFFF #000000   #0C0C0C
 
 # gaps inner 5
 # gaps outer 20
-gaps inner 5
-gaps outer 0
+# gaps inner 5
+# gaps outer 0
 
 exec feh --randomize --bg-fill $HOME/Media/Backgrounds/*
 bindsym $mod+b exec feh --randomize --bg-fill $HOME/Media/Backgrounds/*
