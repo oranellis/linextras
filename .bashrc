@@ -32,7 +32,11 @@ fi
 if [ "$color_prompt" = yes ]; then
     if [ -n "$SSH_CLIENT" ]
     then
-	    PS1='\[\e[1;36m\]\u\[\e[0;36m\](\h) \[\e[0;97m\]\w\[\e[0m\]\$ '
+		if [ "$USER" = root ]; then
+			PS1='\[\e[1;36m\]\u\[\e[0;36m\](\h) \[\e[0;97m\]\w\[\e[0m\]\$ '
+		else
+			PS1='\[\e[1;35m\]\u\[\e[0;35m\](\h) \[\e[0;97m\]\w\[\e[0m\]\$ '
+		fi
     else
 	    PS1='\[\e[1;36m\]\u \[\e[0;97m\]\w\[\e[0m\]\$ '
     fi
@@ -82,7 +86,7 @@ n () {
 		rm -f "$NNN_TMPFILE" > /dev/null
 	fi
 }
-export NNN_OPTS="adRe"
+export NNN_OPTS="aARe"
 export NNN_FIFO="/tmp/nnn.fifo"
 export SPLIT="v"
 export TERMINAL="tmux"
