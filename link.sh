@@ -41,6 +41,7 @@ do
 done
 
 # The same as above for the .config folder
+mkdir -p $HOME/.config
 cd $HOME/.config
 MATCHES=$(ls -A $GIT_DIR/.config)
 
