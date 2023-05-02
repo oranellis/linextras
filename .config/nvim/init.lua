@@ -100,34 +100,6 @@ end
 -- Use a loop to conveniently call 'setup' on multiple servers and map buffer local keybindings when the language server attaches
 local servers = { 'clangd', 'zls', 'pyright' }
 for _, lsp in pairs(servers) do
-<<<<<<< HEAD
-  require('lspconfig')[lsp].setup {
-	on_attach = on_attach,
-	flags = {
-	  -- This will be the default in neovim 0.7+
-	  debounce_text_changes = 150,
-	}
-  }
-end
-
-require('lspconfig').clangd.setup{
-  on_attach = on_attach,
-  cmd = {
-	"clangd",
-	"--background-index",
-	"--pch-storage=memory",
-	"--clang-tidy",
-	"--suggest-missing-includes",
-	"--all-scopes-completion",
-	"--pretty",
-	"--header-insertion=never",
-	"-j=4",
-	"--inlay-hints",
-	"--header-insertion-decorators",
-  },
-  filetypes = {"c", "cpp", "objc", "objcpp"},
-  init_option = { fallbackFlags = {  "-std=c++2a"  } }
-=======
     require('lspconfig')[lsp].setup {
 	    on_attach = on_attach,
         flags = {
@@ -154,7 +126,6 @@ require('lspconfig').clangd.setup{
     },
     filetypes = {"c", "cpp", "objc", "objcpp"},
     init_option = { fallbackFlags = {  "-std=c++2a"  } }
->>>>>>> 83f9d92f2168dd205fe24850e76ac9657bf9ccb4
 }
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -333,11 +304,7 @@ require('lualine').setup {
 -- nvim-treesitter
 require('nvim-treesitter.configs').setup {
 	highlight = {
-<<<<<<< HEAD
 		enable = true,
-=======
-	    enable = true,
->>>>>>> 83f9d92f2168dd205fe24850e76ac9657bf9ccb4
 	},
 }
 
