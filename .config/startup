@@ -2,6 +2,5 @@
 
 picom -b
 xset r rate 250 40
-nextcloud &
 /usr/lib/polkit-kde-authentication-agent-1 &
 nm-applet &
