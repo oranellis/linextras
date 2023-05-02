@@ -1,35 +1,35 @@
 -- =================== Plugins ===================
 
 require('packer').startup(function()
-    use 'wbthomason/packer.nvim' -- no keybinds
-    use 'morhetz/gruvbox' -- no keybinds
+	use 'wbthomason/packer.nvim' -- no keybinds
+	use 'morhetz/gruvbox' -- no keybinds
 	use 'sainnhe/everforest'
-    use 'rust-lang/rust.vim' -- no keybinds
-    use 'tpope/vim-surround' -- adds s nouns
-    use 'terrortylor/nvim-comment' -- adds keybinds (gcc, gc(visual))
-    use 'junegunn/fzf' -- no keybinds
-    use 'junegunn/fzf.vim' -- no keybinds
+	use 'rust-lang/rust.vim' -- no keybinds
+	use 'tpope/vim-surround' -- adds s nouns
+	use 'terrortylor/nvim-comment' -- adds keybinds (gcc, gc(visual))
+	use 'junegunn/fzf' -- no keybinds
+	use 'junegunn/fzf.vim' -- no keybinds
 	use 'luukvbaal/nnn.nvim'
-    use 'tpope/vim-dispatch' -- no keybinds
-    use 'neovim/nvim-lspconfig' -- no keybinds
-    use 'ray-x/lsp_signature.nvim' -- no keybinds
-    use 'hrsh7th/cmp-nvim-lsp' -- no keybinds
-    use 'hrsh7th/cmp-buffer' -- no keybinds
-    use 'hrsh7th/cmp-path' -- no keybinds
-    use 'hrsh7th/cmp-cmdline' -- no keybinds
-    use 'hrsh7th/nvim-cmp' -- no keybinds
+	use 'tpope/vim-dispatch' -- no keybinds
+	use 'neovim/nvim-lspconfig' -- no keybinds
+	use 'ray-x/lsp_signature.nvim' -- no keybinds
+	use 'hrsh7th/cmp-nvim-lsp' -- no keybinds
+	use 'hrsh7th/cmp-buffer' -- no keybinds
+	use 'hrsh7th/cmp-path' -- no keybinds
+	use 'hrsh7th/cmp-cmdline' -- no keybinds
+	use 'hrsh7th/nvim-cmp' -- no keybinds
 	use 'hrsh7th/vim-vsnip'
-    use 'nvim-treesitter/nvim-treesitter'
-    use 'sbdchd/neoformat' -- no keybinds
-    use {
-      'nvim-lualine/lualine.nvim',
-      requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-    }
-    use 'ntpeters/vim-better-whitespace'
-    use 'windwp/nvim-autopairs'
-    use 'preservim/vimux' -- no keybinds
-    use 'easymotion/vim-easymotion'
-    use 'tpope/vim-fugitive' -- no keybinds
+	use 'nvim-treesitter/nvim-treesitter'
+	use 'sbdchd/neoformat' -- no keybinds
+	use {
+	  'nvim-lualine/lualine.nvim',
+	  requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+	}
+	use 'ntpeters/vim-better-whitespace'
+	use 'windwp/nvim-autopairs'
+	use 'preservim/vimux' -- no keybinds
+	use 'easymotion/vim-easymotion'
+	use 'tpope/vim-fugitive' -- no keybinds
 	use 'simrat39/symbols-outline.nvim'
 	use {
 	  'nvim-tree/nvim-tree.lua',
@@ -100,28 +100,28 @@ end
 local servers = { 'clangd', 'zls', 'pyright' }
 for _, lsp in pairs(servers) do
   require('lspconfig')[lsp].setup {
-    on_attach = on_attach,
-    flags = {
-      -- This will be the default in neovim 0.7+
-      debounce_text_changes = 150,
-    }
+	on_attach = on_attach,
+	flags = {
+	  -- This will be the default in neovim 0.7+
+	  debounce_text_changes = 150,
+	}
   }
 end
 
 require('lspconfig').clangd.setup{
   on_attach = on_attach,
   cmd = {
-    "clangd",
-    "--background-index",
-    "--pch-storage=memory",
-    "--clang-tidy",
-    "--suggest-missing-includes",
-    "--all-scopes-completion",
-    "--pretty",
-    "--header-insertion=never",
-    "-j=4",
-    "--inlay-hints",
-    "--header-insertion-decorators",
+	"clangd",
+	"--background-index",
+	"--pch-storage=memory",
+	"--clang-tidy",
+	"--suggest-missing-includes",
+	"--all-scopes-completion",
+	"--pretty",
+	"--header-insertion=never",
+	"-j=4",
+	"--inlay-hints",
+	"--header-insertion-decorators",
   },
   filetypes = {"c", "cpp", "objc", "objcpp"},
   init_option = { fallbackFlags = {  "-std=c++2a"  } }
@@ -144,57 +144,57 @@ require('lspconfig').pyright.setup {
 local cmp = require'cmp'
 
 cmp.setup({
-    snippet = {
-      expand = function(args)
-        vim.fn["vsnip#anonymous"](args.body)
-      end,
-    },
-    mapping = {
-      ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-      ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
-      ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
-      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-      ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-      ['<C-e>'] = cmp.mapping({
-          i = cmp.mapping.abort(),
-          c = cmp.mapping.close(),
-        }),
-      ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently elected item. Set `select` to `false` to only confirm explicitly selected items.
-    },
-    sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
-        { name = 'vsnip' }, -- For vsnip users.
-        -- { name = 'luasnip' }, -- For luasnip users.
-        -- { name = 'ultisnips' }, -- For ultisnips users.
-        -- { name = 'snippy' }, -- For snippy users.
-      }, {
-        { name = 'buffer' },
-      })
+	snippet = {
+	  expand = function(args)
+		vim.fn["vsnip#anonymous"](args.body)
+	  end,
+	},
+	mapping = {
+	  ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+	  ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+	  ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
+	  ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
+	  ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+	  ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+	  ['<C-e>'] = cmp.mapping({
+		  i = cmp.mapping.abort(),
+		  c = cmp.mapping.close(),
+		}),
+	  ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently elected item. Set `select` to `false` to only confirm explicitly selected items.
+	},
+	sources = cmp.config.sources({
+		{ name = 'nvim_lsp' },
+		{ name = 'vsnip' }, -- For vsnip users.
+		-- { name = 'luasnip' }, -- For luasnip users.
+		-- { name = 'ultisnips' }, -- For ultisnips users.
+		-- { name = 'snippy' }, -- For snippy users.
+	  }, {
+		{ name = 'buffer' },
+	  })
   })
 
 -- Set configuration for specific filetype.
 cmp.setup.filetype('gitcommit', {
-    sources = cmp.config.sources({
-        { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-      }, {
-        { name = 'buffer' },
-      })
+	sources = cmp.config.sources({
+		{ name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+	  }, {
+		{ name = 'buffer' },
+	  })
   })
 
 cmp.setup.cmdline('/', {
-    sources = {
-      { name = 'buffer' }
-    }
+	sources = {
+	  { name = 'buffer' }
+	}
   })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
-    sources = cmp.config.sources({
-        { name = 'path' }
-      }, {
-        { name = 'cmdline' }
-      })
+	sources = cmp.config.sources({
+		{ name = 'path' }
+	  }, {
+		{ name = 'cmdline' }
+	  })
   })
 
 -- Setup lspconfig.
@@ -203,13 +203,84 @@ cmp.setup.cmdline(':', {
 --   capabilities = capabilities
 -- }
 
+-- =================== Nvim Tree Setup ===================
+
+local function on_attach(bufnr)
+	local api = require('nvim-tree.api')
+
+	local function opts(desc)
+	return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true, hijack_cursor = true }
+	end
+
+	vim.keymap.set('n', '<C-]>', api.tree.change_root_to_node,		  opts('CD'))
+	vim.keymap.set('n', '<C-e>', api.node.open.replace_tree_buffer,	 opts('Open: In Place'))
+	vim.keymap.set('n', '<C-k>', api.node.show_info_popup,			  opts('Info'))
+	vim.keymap.set('n', '<C-r>', api.fs.rename_sub,					 opts('Rename: Omit Filename'))
+	vim.keymap.set('n', '<C-t>', api.node.open.tab,					 opts('Open: New Tab'))
+	vim.keymap.set('n', '<C-v>', api.node.open.vertical,				opts('Open: Vertical Split'))
+	vim.keymap.set('n', '<C-x>', api.node.open.horizontal,			  opts('Open: Horizontal Split'))
+	vim.keymap.set('n', '<BS>',  api.node.navigate.parent_close,		opts('Close Directory'))
+	vim.keymap.set('n', '<CR>',  api.node.open.edit,					opts('Open'))
+	vim.keymap.set('n', '<Tab>', api.node.open.preview,				 opts('Open Preview'))
+	vim.keymap.set('n', '>',	 api.node.navigate.sibling.next,		opts('Next Sibling'))
+	vim.keymap.set('n', '<',	 api.node.navigate.sibling.prev,		opts('Previous Sibling'))
+	vim.keymap.set('n', '.',	 api.node.run.cmd,					  opts('Run Command'))
+	vim.keymap.set('n', '-',	 api.tree.change_root_to_parent,		opts('Up'))
+	vim.keymap.set('n', 'a',	 api.fs.create,						 opts('Create'))
+	vim.keymap.set('n', 'bmv',   api.marks.bulk.move,				   opts('Move Bookmarked'))
+	vim.keymap.set('n', 'B',	 api.tree.toggle_no_buffer_filter,	  opts('Toggle No Buffer'))
+	vim.keymap.set('n', 'c',	 api.fs.copy.node,					  opts('Copy'))
+	vim.keymap.set('n', 'C',	 api.tree.toggle_git_clean_filter,	  opts('Toggle Git Clean'))
+	vim.keymap.set('n', '[c',	api.node.navigate.git.prev,			opts('Prev Git'))
+	vim.keymap.set('n', ']c',	api.node.navigate.git.next,			opts('Next Git'))
+	vim.keymap.set('n', 'd',	 api.fs.remove,						 opts('Delete'))
+	vim.keymap.set('n', 'D',	 api.fs.trash,						  opts('Trash'))
+	vim.keymap.set('n', 'E',	 api.tree.expand_all,				   opts('Expand All'))
+	vim.keymap.set('n', 'e',	 api.fs.rename_basename,				opts('Rename: Basename'))
+	vim.keymap.set('n', ']e',	api.node.navigate.diagnostics.next,	opts('Next Diagnostic'))
+	vim.keymap.set('n', '[e',	api.node.navigate.diagnostics.prev,	opts('Prev Diagnostic'))
+	vim.keymap.set('n', 'F',	 api.live_filter.clear,				 opts('Clean Filter'))
+	vim.keymap.set('n', 'f',	 api.live_filter.start,				 opts('Filter'))
+	vim.keymap.set('n', 'g?',	api.tree.toggle_help,				  opts('Help'))
+	vim.keymap.set('n', 'gy',	api.fs.copy.absolute_path,			 opts('Copy Absolute Path'))
+	vim.keymap.set('n', 'h',  api.node.navigate.parent_close,		opts('Close Directory'))
+	vim.keymap.set('n', 'H',	 api.tree.toggle_hidden_filter,		 opts('Toggle Dotfiles'))
+	vim.keymap.set('n', 'I',	 api.tree.toggle_gitignore_filter,	  opts('Toggle Git Ignore'))
+	vim.keymap.set('n', 'J',	 api.node.navigate.sibling.last,		opts('Last Sibling'))
+	vim.keymap.set('n', 'K',	 api.node.navigate.sibling.first,	   opts('First Sibling'))
+	vim.keymap.set('n', 'l',	 api.node.open.edit,					opts('Open'))
+	vim.keymap.set('n', 'm',	 api.marks.toggle,					  opts('Toggle Bookmark'))
+	vim.keymap.set('n', 'o',	 api.node.open.edit,					opts('Open'))
+	vim.keymap.set('n', 'O',	 api.node.open.no_window_picker,		opts('Open: No Window Picker'))
+	vim.keymap.set('n', 'p',	 api.fs.paste,						  opts('Paste'))
+	vim.keymap.set('n', 'P',	 api.node.navigate.parent,			  opts('Parent Directory'))
+	vim.keymap.set('n', 'q',	 api.tree.close,						opts('Close'))
+	vim.keymap.set('n', 'r',	 api.fs.rename,						 opts('Rename'))
+	vim.keymap.set('n', 'R',	 api.tree.reload,					   opts('Refresh'))
+	vim.keymap.set('n', 's',	 api.node.run.system,				   opts('Run System'))
+	vim.keymap.set('n', 'S',	 api.tree.search_node,				  opts('Search'))
+	vim.keymap.set('n', 'U',	 api.tree.toggle_custom_filter,		 opts('Toggle Hidden'))
+	vim.keymap.set('n', 'W',	 api.tree.collapse_all,				 opts('Collapse'))
+	vim.keymap.set('n', 'x',	 api.fs.cut,							opts('Cut'))
+	vim.keymap.set('n', 'y',	 api.fs.copy.filename,				  opts('Copy Name'))
+	vim.keymap.set('n', 'Y',	 api.fs.copy.relative_path,			 opts('Copy Relative Path'))
+	vim.keymap.set('n', '<2-LeftMouse>',  api.node.open.edit,		   opts('Open'))
+	vim.keymap.set('n', '<2-RightMouse>', api.tree.change_root_to_node, opts('CD'))
+	vim.keymap.set('n', 'o', '', { buffer = bufnr })
+	vim.keymap.del('n', 'o', { buffer = bufnr })
+	vim.keymap.set('n', '<BS>', '', { buffer = bufnr })
+	vim.keymap.del('n', '<BS>', { buffer = bufnr })
+	vim.keymap.set('n', 'l', api.node.open.edit, opts('Open'))
+	vim.keymap.set('n', 'h', api.node.navigate.parent_close, opts('Close Directory'))
+
+end
 
 -- =================== Plugin Setup ===================
 
 -- lsp_signature.nvim
 require "lsp_signature".setup {
-    hint_prefix = "",
-    floating_window = false
+	hint_prefix = "",
+	floating_window = false
 }
 
 -- lualine
@@ -231,9 +302,9 @@ require('lualine').setup {
 
 -- nvim-treesitter
 require('nvim-treesitter.configs').setup {
-    highlight = {
-        enable = true,
-    },
+	highlight = {
+		enable = true,
+	},
 }
 
 require('nvim-autopairs').setup {}
@@ -257,24 +328,7 @@ require('nvim_comment').setup {
 	comment_empty = false,
 }
 
-require("nvim-tree").setup({
-	hijack_cursor = true,
-	view = {
-		width = 30,
-		mappings = {
-			list = {
-				{ key = {"o", "<BS>"}, action = ""},
-				{ key = "l", action = "edit"},
-				{ key = "h", action = "close_node"}
-			}
-		}
-	},
-	actions = {
-		open_file = {
-			quit_on_open = true,
-		},
-	}
-})
+require("nvim-tree").setup({ })
 
 vim.api.nvim_command('autocmd BufEnter *.cpp,*.hpp,*.c,*.h :lua vim.api.nvim_buf_set_option(0, "commentstring", "// %s")')
 
