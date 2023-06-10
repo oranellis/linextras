@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Files to exclude from the linking step
-EXCLUSIONS=".git .Xresources .config README.md link.sh .fehbg .gitignore"
+EXCLUSIONS=".git .Xresources .gitconfig .config README.md link.sh .fehbg .gitignore"
 # Files to copy to the home directory rather than link, must also be excluded above
-COPIES=".Xresources"
+COPIES=".Xresources .gitconfig"
 
 # Set variables for dotfiles direcory
 GIT_DIR=$(dirname $(readlink -f $0))
@@ -36,7 +36,7 @@ do
 	then
 		# if the file doesn't already exist in the home directory then copy the file to the home folder
 		cp $GIT_DIR/$COPY $HOME
-		echo -e "\033[33mMissing \033[0m$COPY, copying"
+		echo -e "\033[33mCopying  \033[0m$COPY"
 	fi
 done
 
