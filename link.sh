@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # Files to exclude from the linking step
-EXCLUSIONS=".git .Xresources .config README.md link.sh .fehbg"
+EXCLUSIONS=".git .Xresources .config README.md link.sh .fehbg .gitignore"
 # Files to copy to the home directory rather than link, must also be excluded above
 COPIES=".Xresources"
 
 # Set variables for dotfiles direcory
 GIT_DIR=$(dirname $(readlink -f $0))
 
-echo "Linking files from $GIT_DIR"
+echo -e "Linking files from \033[35m$GIT_DIR\033[0m"
 
 # Scan all files in the git direcotry
 cd $HOME/
@@ -25,7 +25,7 @@ else
 	# Remove existing files (or links) and create symbolic links to the files in the git repo
 	rm -r ./$MATCH
 	ln -sf $GIT_DIR/$MATCH .
-	echo "replaced $MATCH"
+	echo -e "\033[32mReplaced \033[0m$MATCH"
 fi
 done
 
@@ -36,7 +36,7 @@ do
 	then
 		# if the file doesn't already exist in the home directory then copy the file to the home folder
 		cp $GIT_DIR/$COPY $HOME
-		echo "$COPY missing, copying"
+		echo -e "\033[33mMissing \033[0m$COPY, copying"
 	fi
 done
 
@@ -51,6 +51,6 @@ if echo $EXCLUSIONS | grep -w $MATCH > /dev/null; then
 else
 	rm -r ./$MATCH
 	ln -sf $GIT_DIR/.config/$MATCH .
-	echo "replaced .config/$MATCH"
+	echo -e "\033[32mReplaced \033[0m.config/$MATCH"
 fi
 done
