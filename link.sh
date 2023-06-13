@@ -6,7 +6,7 @@ EXCLUSIONS=".git .Xresources .gitconfig .config README.md link.sh .fehbg .gitign
 COPIES=".Xresources .gitconfig"
 
 # Set variables for dotfiles direcory
-GIT_DIR=$(dirname $(readlink -f $0))
+GIT_DIR=$(dirname "$(readlink -f $0)")
 
 echo -e "Linking files from \033[35m$GIT_DIR\033[0m"
 

@@ -62,7 +62,7 @@ vim.opt.termguicolors = true
 vim.cmd([[ so ~/.config/nvim/legacy.vim ]])
 
 vim.api.nvim_set_option("updatetime", 100)
-vim.api.nvim_set_option("so", 100)
+vim.api.nvim_set_option("so", 10)
 vim.api.nvim_set_option("syntax", "on")
 vim.api.nvim_set_option("hidden", true)
 vim.api.nvim_set_option("autoread", true)
