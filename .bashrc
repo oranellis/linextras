@@ -6,7 +6,6 @@
 
 [[ $- != *i* ]] && return
 
-
 # History Settings
 
 HISTCONTROL=ignoreboth
@@ -14,11 +13,9 @@ shopt -s histappend # append to the history file, don't overwrite it
 HISTSIZE=1000
 HISTFILESIZE=2000
 
-
 # Update window size on command exec
 
 [[ $DISPLAY ]] && shopt -s checkwinsize
-
 
 # Colour setup
 
@@ -45,18 +42,15 @@ else
 fi
 unset color_prompt
 
-
 # Colour Aliases
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
-
 # Autocomplete Settings
 
 [ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
 bind 'set completion-ignore-case on'
-
 
 # Convenience Scripts
 
@@ -65,12 +59,9 @@ alias v=nvim
 alias ab=autobuild
 alias ssh-keygen-named="ssh-keygen -C $(whoami)@$(uname -n)-$(date -I)"
 
-
-
 # FZF Command
 
 #export FZF_DEFAULT_COMMAND=''
-
 
 # NNN Config
 
@@ -86,6 +77,7 @@ n () {
 		rm -f "$NNN_TMPFILE" > /dev/null
 	fi
 }
+
 export NNN_OPTS="aARe"
 export NNN_FIFO="/tmp/nnn.fifo"
 export SPLIT="v"
@@ -96,7 +88,6 @@ export EDITOR="nvim"
 export NNN_BMS="h:~/;r:/;d:~/Dev;o:~/Downloads;m:/run/media/$USER;s:/storage"
 export NNN_PLUG='v:!nvim $nnn;p:preview-tui'
 # export NNN_OPENER="/path/to/custom/opener" # Default opener template, to replace xdg-open
-
 
 # Display colours
 
@@ -128,13 +119,11 @@ awk 'BEGIN{
 }'
 }
 
-
 # Tmux on startup
 
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] && [[ -z $(ps -A | grep "tmux: client") ]] ; then
 	exec tmux new -s "PID$$"
 fi
-
 
 # Run neofetch if this is the first terminal opened
 
