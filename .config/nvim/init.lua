@@ -426,6 +426,6 @@ vim.cmd([[highlight Normal guibg=NONE ctermbg=NONE]])
 -- =================== Plugin Settings ===================
 
 -- Markdown Viewer
-vim.g.mkdp_auto_start = 1
+vim.g.mkdp_auto_start = 0
 vim.g.mkdp_auto_close = 1
 vim.g.mkdp_theme = 'light'
