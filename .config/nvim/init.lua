@@ -35,6 +35,11 @@ require('packer').startup(function()
 	  'nvim-tree/nvim-tree.lua',
 	  requires = { 'nvim-tree/nvim-web-devicons' },
 	}
+	use({
+		"iamcco/markdown-preview.nvim",
+		run = function() vim.fn["mkdp#util#install"]() end,
+	})
+	use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
 end)
 
 -- =================== Unset Keys ===================
@@ -417,3 +422,10 @@ vim.api.nvim_set_keymap('n', '<leader>m', ':wa<cr>:! autobuild<cr>', {})
 -- =================== Colour Changes ===================
 
 vim.cmd([[highlight Normal guibg=NONE ctermbg=NONE]])
+
+-- =================== Plugin Settings ===================
+
+-- Markdown Viewer
+vim.g.mkdp_auto_start = 0
+vim.g.mkdp_auto_close = 1
+vim.g.mkdp_theme = 'light'
