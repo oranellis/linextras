@@ -24,50 +24,11 @@
 " Line wrap
 
 " Function to set tab width to n spaces
-function! SetTab(n)
-  let &tabstop=a:n
-  let &shiftwidth=a:n
-  let &softtabstop=a:n
-  set expandtab
-  set autoindent
-  set smartindent
-endfunction
-
-command! -nargs=1 SetTab call SetTab(<f-args>)
-
-SetTab 4
-
-set noexpandtab
-set autoindent
-set smartindent
-
-" Highlight search results
-set hlsearch
-set incsearch
-
-" Mouse support
-set mouse=a
-
-" disable backup files
-set nobackup
-set nowritebackup
-
-set shortmess+=c
-
-set signcolumn=yes
-
-" Use X11 clipboard
-set clipboard^=unnamed,unnamedplus
-
-" Force dark backround
-set background=dark
-
-
 " ------ Theming ------
 
 " let g:everforest_background = 'hard'
 " let g:everforest_better_performance = 1
-colorscheme gruvbox
+" colorscheme gruvbox
 
 
 " ------ Plugin Options ------
@@ -97,9 +58,9 @@ autocmd BufRead,BufNewFile *.h setlocal colorcolumn=80
 autocmd BufRead,BufNewFile *.cpp setlocal colorcolumn=80
 autocmd BufRead,BufNewFile *.hpp setlocal colorcolumn=80
 " settab
-autocmd BufRead,BufNewFile *.c SetTab 4
-autocmd BufRead,BufNewFile *.h SetTab 4
-autocmd BufRead,BufNewFile *.cpp SetTab 4
-autocmd BufRead,BufNewFile *.hpp SetTab 4
+" autocmd BufRead,BufNewFile *.c SetTab 4
+" autocmd BufRead,BufNewFile *.h SetTab 4
+" autocmd BufRead,BufNewFile *.cpp SetTab 4
+" autocmd BufRead,BufNewFile *.hpp SetTab 4
 " fix extra indentation on function continuation
 set cino=(0,W4

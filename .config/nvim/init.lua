@@ -22,8 +22,8 @@ require('packer').startup(function()
 	use 'nvim-treesitter/nvim-treesitter'
 	use 'sbdchd/neoformat' -- no keybinds
 	use {
-	  'nvim-lualine/lualine.nvim',
-	  requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+		'nvim-lualine/lualine.nvim',
+		requires = { 'kyazdani42/nvim-web-devicons', opt = true }
 	}
 	use 'ntpeters/vim-better-whitespace'
 	use 'windwp/nvim-autopairs'
@@ -32,13 +32,20 @@ require('packer').startup(function()
 	use 'tpope/vim-fugitive' -- no keybinds
 	use 'simrat39/symbols-outline.nvim'
 	use {
-	  'nvim-tree/nvim-tree.lua',
-	  requires = { 'nvim-tree/nvim-web-devicons' },
+		'nvim-tree/nvim-tree.lua',
+		requires = { 'nvim-tree/nvim-web-devicons' },
 	}
 	use({
-		"iamcco/markdown-preview.nvim",
+		'iamcco/markdown-preview.nvim',
 		run = function() vim.fn["mkdp#util#install"]() end,
 	})
+	use 'nvim-lua/plenary.nvim'
+	use {
+		'tanvirtin/vgit.nvim',
+		requires = {
+			'nvim-lua/plenary.nvim'
+		}
+}
 end)
 
 -- =================== Unset Keys ===================
@@ -62,20 +69,56 @@ vim.g.loaded_netrwPlugin = 1
 vim.g.mapleader = ";"
 vim.opt.termguicolors = true
 
+-- search highlighting
+vim.o.hlsearch = true
+vim.o.incsearch = true
+
+-- no backups
+vim.o.backup = false
+vim.o.writebackup = false
+
+-- persistent signcolumn
+vim.o.signcolumn = 'yes'
+
+-- mouse support
+vim.o.mouse = 'a'
+
+-- short message
+vim.o.shortmess = 'cfilnxtToOF'
+
+-- use x11 clipboard
+vim.opt.clipboard:prepend {"unnamed","unnamedplus"}
+
+-- dark background
+vim.o.background='dark'
+
+-- set colourscheme
+local colorschemeok, _ = pcall(vim.cmd, 'colorscheme gruvbox')
+if not colorschemeok then
+	vim.cmd('colorscheme default')
+end
+
 -- load legacy config
 vim.cmd([[ so ~/.config/nvim/legacy.vim ]])
 
-vim.api.nvim_set_option("updatetime", 100)
-vim.api.nvim_set_option("so", 10)
-vim.api.nvim_set_option("syntax", "on")
-vim.api.nvim_set_option("hidden", true)
-vim.api.nvim_set_option("autoread", true)
-vim.api.nvim_win_set_option(0, "number", true)
-vim.api.nvim_set_option("ruler", true)
-vim.api.nvim_set_option("visualbell", true)
+vim.o.updatetime = 100
+vim.o.so = 10
+vim.o.syntax = "on"
+vim.o.hidden = true
+vim.o.autoread = true
+vim.o.ruler = true
+vim.o.visualbell = true
+vim.o.encoding = "utf-8"
+vim.o.foldlevelstart = 99
 vim.api.nvim_win_set_option(0, "wrap", true)
-vim.api.nvim_set_option("encoding", "utf-8")
-vim.api.nvim_set_option("foldlevelstart", 99)
+vim.api.nvim_win_set_option(0, "number", true)
+
+-- tabstop options
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.softtabstop = 4
+vim.o.autoindent = true
+vim.o.smartindent = true
 
 -- =================== Language Server Setup ===================
 
@@ -105,43 +148,43 @@ end
 -- Use a loop to conveniently call 'setup' on multiple servers and map buffer local keybindings when the language server attaches
 local servers = { 'clangd', 'zls', 'pyright' }
 for _, lsp in pairs(servers) do
-    require('lspconfig')[lsp].setup {
-	    on_attach = on_attach,
-        flags = {
-            -- This will be the default in neovim 0.7+
-            debounce_text_changes = 150,
-        }
-    }
+	require('lspconfig')[lsp].setup {
+		on_attach = on_attach,
+		flags = {
+			-- This will be the default in neovim 0.7+
+			debounce_text_changes = 150,
+		}
+	}
 end
 
 require('lspconfig').clangd.setup{
-    on_attach = on_attach,
-    cmd = {
-        "clangd",
-        "--background-index",
-        "--pch-storage=memory",
-        "--clang-tidy",
-        "--suggest-missing-includes",
-        "--all-scopes-completion",
-        "--pretty",
-        "--header-insertion=never",
-        "-j=4",
-        "--inlay-hints",
-        "--header-insertion-decorators",
-    },
-    filetypes = {"c", "cpp", "objc", "objcpp"},
-    init_option = { fallbackFlags = {  "-std=c++2a"  } }
+	on_attach = on_attach,
+	cmd = {
+		"clangd",
+		"--background-index",
+		"--pch-storage=memory",
+		"--clang-tidy",
+		"--suggest-missing-includes",
+		"--all-scopes-completion",
+		"--pretty",
+		"--header-insertion=never",
+		"-j=4",
+		"--inlay-hints",
+		"--header-insertion-decorators",
+	},
+	filetypes = {"c", "cpp", "objc", "objcpp"},
+	init_option = { fallbackFlags = {  "-std=c++2a"  } }
 }
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 require('lspconfig').zls.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
+	on_attach = on_attach,
+	capabilities = capabilities
 }
 
 require('lspconfig').pyright.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
+	on_attach = on_attach,
+	capabilities = capabilities
 }
 
 
@@ -206,7 +249,7 @@ cmp.setup.cmdline(':', {
 -- Setup lspconfig.
 -- local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 -- require('lspconfig')['clangd'].setup {
---   capabilities = capabilities
+-- 	capabilities = capabilities
 -- }
 
 -- =================== Nvim Tree Setup ===================
@@ -366,7 +409,7 @@ function custom_quit()
 				vim.api.nvim_command('w ' .. fname)
 				vim.api.nvim_command('bd')
 				if check_empty() then
-				    vim.api.nvim_command('q') -- quit on last invocation of 'q'
+					vim.api.nvim_command('q') -- quit on last invocation of 'q'
 				end
 			end
 		end
@@ -386,7 +429,6 @@ function custom_quit()
 	end
 end
 vim.api.nvim_set_keymap('n', '<leader>q', "<cmd>lua custom_quit()<cr>", {  })
--- vim.api.nvim_set_keymap('n', '<leader>q', ':wa<cr>:qa!<cr>', { silent = true })
 vim.api.nvim_set_keymap('n', '<leader>w', ':wa<cr>', { silent = true })
 
 -- file and buffer navigation
