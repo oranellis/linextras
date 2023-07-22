@@ -1,0 +1,56 @@
+-- =================== Language Server Setup ===================
+
+local opts = { noremap=true, silent=true }
+vim.api.nvim_set_keymap('n', ',e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+-- vim.api.nvim_set_keymap('n', 'ge', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+-- vim.api.nvim_set_keymap('n', 'gE', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+-- vim.api.nvim_set_keymap('n', ',q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+
+local on_attach = function(client, bufnr)
+	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+	vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+	vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+	vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+	vim.api.nvim_buf_set_keymap(bufnr, 'n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+	vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+	vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+	vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+	vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+	vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+	vim.api.nvim_set_keymap('n', '<leader>h', ':ClangdSwitchSourceHeader<cr>', {})
+	-- vim.api.nvim_buf_set_keymap(bufnr, 'n', ',f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+end
+
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+require('lspconfig').clangd.setup{
+	on_attach = on_attach,
+	cmd = {
+		"clangd",
+		"--background-index",
+		"--pch-storage=memory",
+		"--all-scopes-completion",
+		"--pretty",
+		"--header-insertion=never",
+		"-j=4",
+		"--inlay-hints",
+		"--header-insertion-decorators",
+		"--function-arg-placeholders",
+		"--completion-style=detailed"
+	},
+	filetypes = {"c", "cpp", "objc", "objcpp"},
+	root_dir = require('lspconfig').util.root_pattern("src"),
+	init_option = { fallbackFlags = {	"-std=c++2a"	} },
+	capabilities = capabilities
+}
+
+require('lspconfig').zls.setup {
+	on_attach = on_attach,
+	capabilities = capabilities
+}
+
+require('lspconfig').pyright.setup {
+	on_attach = on_attach,
+	capabilities = capabilities
+}
+
