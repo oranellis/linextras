@@ -51,5 +51,6 @@ vim.api.nvim_command("imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-ju
 vim.api.nvim_command("smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'")
 
 vim.g.fzf_history_dir = '~/.local/share/fzf-history'
-vim.api.nvim_command("let $FZF_DEFAULT_COMMAND='find . ( -name node_modules -o -name .git -o -name build -o -name .cache ) -prune -o ! -type d -a -print'")
+-- vim.env.FZF_DEFAULT_COMMAND = "find . ( -name node_modules -o -name .git -o -name build -o -name .cache ) -prune -o ! -type d -a -print"
 -- let $FZF_DEFAULT_COMMAND='find . \( -name node_modules -o -name .git -o -name build -o -name .cache \) -prune -o ! -type d -a -print'
+vim.cmd([[ so ~/.config/nvim/lua/fzf.vim ]])
