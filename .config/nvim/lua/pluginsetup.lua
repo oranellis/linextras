@@ -43,7 +43,7 @@ require('nvim_comment').setup {
 	comment_empty = false,
 }
 
-vim.api.nvim_command('autocmd BufEnter *.cpp,*.hpp,*.c,*.h :lua vim.api.nvim_buf_set_option(0, "commentstring", "// %s")')
+vim.api.nvim_command('autocmd BufEnter *.cpp,*.hpp,*.c,*.h,*.cc :lua vim.api.nvim_buf_set_option(0, "commentstring", "// %s")')
 
 vim.api.nvim_command("imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'")
 vim.api.nvim_command("smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'")

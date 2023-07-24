@@ -46,6 +46,7 @@ require("packer").startup(function(use)
 	use 'ntpeters/vim-better-whitespace'
 	use 'tpope/vim-fugitive'
 	use 'simrat39/symbols-outline.nvim'
+	use 'simrat39/rust-tools.nvim'
 end)
 
 if packer_bootstrap then
