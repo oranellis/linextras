@@ -223,3 +223,4 @@ bindsym $mod+w exec firefox
 bindsym $mod+e exec thunar
 
 exec feh --randomize --bg-fill $HOME/Media/Backgrounds/*
+exec $HOME/.config/startup
