@@ -43,6 +43,8 @@ require('nvim_comment').setup {
 	comment_empty = false,
 }
 
+require('gitsigns').setup {}
+
 vim.api.nvim_command('autocmd BufEnter *.cpp,*.hpp,*.c,*.h,*.cc :lua vim.api.nvim_buf_set_option(0, "commentstring", "// %s")')
 
 vim.api.nvim_command("imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'")

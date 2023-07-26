@@ -47,6 +47,7 @@ require("packer").startup(function(use)
 	use 'tpope/vim-fugitive'
 	use 'simrat39/symbols-outline.nvim'
 	use 'simrat39/rust-tools.nvim'
+	use 'lewis6991/gitsigns.nvim'
 end)
 
 if packer_bootstrap then
@@ -84,7 +85,7 @@ vim.o.backup = false
 vim.o.writebackup = false
 
 -- persistent signcolumn
-vim.wo.signcolumn = 'number'
+vim.wo.signcolumn = 'yes:1'
 
 -- mouse support
 vim.o.mouse = 'a'
