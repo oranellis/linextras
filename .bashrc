@@ -58,7 +58,7 @@ alias d=pwd
 alias v=nvim
 alias ab=autobuild
 alias ssh-keygen-named="ssh-keygen -C $(whoami)@$(uname -n)-$(date -I)"
-alias ds="du -hs * 2>/dev/null | sort -hr"
+alias ds="du -hs * 2>/dev/null | sort -h"
 
 # FZF Command
 
