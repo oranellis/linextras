@@ -14,14 +14,15 @@ local on_attach = function(client, bufnr)
 	vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
 	vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
 	vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-	vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>h', ':ClangdSwitchSourceHeader<cr>', opts)
-	-- vim.api.nvim_buf_set_keymap(bufnr, 'n', ',f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 require('lspconfig').clangd.setup{
-	on_attach = on_attach,
+	on_attach = function(client, bufnr)
+		on_attach(client, bufnr)
+		vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>h', ':ClangdSwitchSourceHeader<cr>', opts)
+	end,
 	cmd = {
 		"clangd",
 		"--background-index",
