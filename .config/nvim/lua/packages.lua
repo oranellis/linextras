@@ -24,6 +24,7 @@ return require('packer').startup(function(use)
 	-- Text Manipulation
 	use { 'windwp/nvim-autopairs' }
 	use { 'terrortylor/nvim-comment' }
+	use { 'ntpeters/vim-better-whitespace' }
 
 	-- Cosmetic
 	use { 'nvim-treesitter/nvim-treesitter' }

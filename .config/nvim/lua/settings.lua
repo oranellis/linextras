@@ -55,6 +55,3 @@ vim.opt.visualbell = true
 
 -- Remap leader
 vim.g.mapleader = ';'
-
--- Background colours
-vim.o.background='dark'
