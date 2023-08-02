@@ -34,6 +34,11 @@ local function custom_quit()
 			if check_empty() then
 				vim.api.nvim_command('q') -- quit on last invocation of 'q'
 			end
+		elseif vim.api.nvim_buf_get_option(0, 'buftype') ~= '' then
+			vim.api.nvim_command('bd!')
+			if check_empty() then
+				vim.api.nvim_command('q') -- quit on last invocation of 'q'
+			end
 		else
 			vim.api.nvim_command('w')
 			vim.api.nvim_command('bd')
@@ -44,5 +49,7 @@ local function custom_quit()
 	end
 end
 
-vim.keymap.set('n', '<leader>q', custom_quit)
+vim.keymap.set({'n', 't'}, '<leader>q', custom_quit)
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
+vim.keymap.set('n', '<leader>t', vim.cmd.terminal)
 vim.keymap.set('n', '<leader>w', vim.cmd.wa)

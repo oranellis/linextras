@@ -11,7 +11,7 @@ require("nnn").setup({
 })
 
 -- Keymaps
-vim.keymap.set('n', '<leader>n', vim.cmd.NnnPicker)
+vim.keymap.set({'n', 't'}, '<leader>n', vim.cmd.NnnPicker)
 
 -- Colours
 vim.api.nvim_set_hl(0, "NnnNormal", { link = 'GruvboxFg1' } )
