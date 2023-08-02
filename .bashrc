@@ -89,6 +89,7 @@ export EDITOR="nvim"
 export NNN_BMS="h:~/;r:/;d:~/Dev;o:~/Downloads;m:/run/media/$USER;s:/storage"
 export NNN_PLUG='v:!nvim $nnn;p:preview-tui'
 # export NNN_OPENER="/path/to/custom/opener" # Default opener template, to replace xdg-open
+export LFS=/mnt/lfs
 
 # Display colours
 
