@@ -27,12 +27,14 @@ return require('packer').startup(function(use)
 	use { 'ntpeters/vim-better-whitespace' }
 
 	-- Cosmetic
-	use { 'nvim-treesitter/nvim-treesitter' }
+	use { 'nvim-treesitter/nvim-treesitter'}
 	use { 'ellisonleao/gruvbox.nvim' }
 	use { 'lewis6991/gitsigns.nvim' }
 	use { 'nvim-lualine/lualine.nvim',
 		requires = 'kyazdani42/nvim-web-devicons'
 	}
+	-- use { 'ntpeters/vim-better-whitespace' }
+
 	-- Completion Engine
 	use { 'hrsh7th/nvim-cmp' }
 	use { 'hrsh7th/cmp-nvim-lsp' }
