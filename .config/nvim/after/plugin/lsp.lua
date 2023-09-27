@@ -77,6 +77,16 @@ require('lspconfig').lua_ls.setup {
 	capabilities = capabilities
 }
 
+require('lspconfig').tsserver.setup{
+	on_attach = on_attach,
+	capabilities = capabilities,
+	settings = {
+		completions = {
+			completeFunctionCalls = true
+		}
+	}
+}
+
 local rt = require("rust-tools")
 rt.setup({
 	server = {
