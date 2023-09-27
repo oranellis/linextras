@@ -5,7 +5,13 @@ vim.g.loaded_netrwPlugin = 1
 -- Enable colours
 vim.opt.termguicolors = true
 
--- Search highlighting
+-- Disable builtin highlighting
+vim.cmd.syntax 'manual'
+
+-- No Text Wrap
+vim.wo.wrap = false
+
+-- Search highlight
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
