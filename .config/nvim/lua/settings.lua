@@ -41,13 +41,14 @@ vim.opt.updatetime = 100
 -- Gutter
 vim.opt.number = true
 
--- Indent
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = false
--- vim.opt.autoindent = true
--- vim.opt.smartindent = true
+-- Indent and indent function
+local function TabStopGlobal(spaces)
+	vim.opt.tabstop = spaces
+	vim.opt.softtabstop = spaces
+	vim.opt.shiftwidth = spaces
+	vim.opt.expandtab = false
+end
+TabStopGlobal(4)
 
 -- Scrolloff
 vim.opt.scrolloff = 8
