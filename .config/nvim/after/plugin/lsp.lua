@@ -92,6 +92,11 @@ require('lspconfig').yamlls.setup {
 	capabilities = capabilities,
 }
 
+require('lspconfig').cssls.setup {
+	on_attach = on_attach,
+	capabilities = capabilities,
+}
+
 local rt = require("rust-tools")
 rt.setup({
 	server = {
