@@ -27,7 +27,6 @@ return require('packer').startup(function(use)
 	use { 'ntpeters/vim-better-whitespace' }
 
 	-- Cosmetic
-	use { 'nvim-treesitter/nvim-treesitter'}
 	use { 'ellisonleao/gruvbox.nvim' }
 	use { 'lewis6991/gitsigns.nvim' }
 	use { 'nvim-lualine/lualine.nvim',
@@ -36,6 +35,7 @@ return require('packer').startup(function(use)
 	-- use { 'ntpeters/vim-better-whitespace' }
 
 	-- Completion Engine
+	use { 'nvim-treesitter/nvim-treesitter' }
 	use { 'hrsh7th/nvim-cmp' }
 	use { 'hrsh7th/cmp-nvim-lsp' }
 	use { 'hrsh7th/cmp-buffer' }
@@ -43,6 +43,7 @@ return require('packer').startup(function(use)
 	use { 'hrsh7th/cmp-cmdline' }
 	use { 'hrsh7th/cmp-vsnip' }
 	use { 'hrsh7th/vim-vsnip' }
+	use { 'windwp/nvim-ts-autotag' }
 
 	-- Language Servers
 	use { 'neovim/nvim-lspconfig' }
