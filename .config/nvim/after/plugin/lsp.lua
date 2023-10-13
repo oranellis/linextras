@@ -97,6 +97,11 @@ require('lspconfig').cssls.setup {
 	capabilities = capabilities,
 }
 
+require('lspconfig').dockerls.setup {
+	on_attach = on_attach,
+	capabilities = capabilities,
+}
+
 local rt = require("rust-tools")
 rt.setup({
 	server = {
