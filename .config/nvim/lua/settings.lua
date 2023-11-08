@@ -1,3 +1,6 @@
+-- Remap leader
+vim.g.mapleader = ';'
+
 -- Disable netrw
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -59,6 +62,3 @@ vim.opt.autoread = true
 
 -- Visual bell
 vim.opt.visualbell = true
-
--- Remap leader
-vim.g.mapleader = ';'
