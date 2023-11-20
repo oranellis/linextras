@@ -16,7 +16,8 @@ return require('packer').startup(function(use)
 
 	-- Navigation
 	use { 'nvim-telescope/telescope.nvim',
-		requires = 'nvim-lua/plenary.nvim'
+		requires = 'nvim-lua/plenary.nvim',
+		tag = "*"
 	}
 	use { 'luukvbaal/nnn.nvim' }
 	use { 'tpope/vim-fugitive' }
