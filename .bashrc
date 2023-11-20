@@ -19,7 +19,7 @@ HISTFILESIZE=2000
 
 # Colour setup
 
-if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; 
+if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null;
 then
 	color_prompt=yes
 else
