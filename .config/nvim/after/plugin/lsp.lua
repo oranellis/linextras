@@ -1,11 +1,13 @@
 local opts = { noremap=true, silent=true }
-vim.api.nvim_set_keymap('n', ',e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 -- vim.api.nvim_set_keymap('n', 'ge', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 -- vim.api.nvim_set_keymap('n', 'gE', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
 -- vim.api.nvim_set_keymap('n', ',q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 
 local on_attach = function(client, bufnr)
 	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+	vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ge', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+	vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gn', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+	vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gE', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
 	vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
 	vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
 	vim.api.nvim_buf_set_keymap(bufnr, 'n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
@@ -97,15 +99,14 @@ require('lspconfig').cssls.setup {
 	capabilities = capabilities,
 }
 
+require('lspconfig').dockerls.setup {
+	on_attach = on_attach,
+	capabilities = capabilities,
+}
+
 local rt = require("rust-tools")
 rt.setup({
 	server = {
-		-- on_attach = function(_, bufnr)
-		-- 	-- Hover actions
-		-- 	vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-		-- 	-- Code action groups
-		-- 	vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
-		-- end,
 		on_attach = on_attach,
 	},
 })

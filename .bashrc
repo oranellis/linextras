@@ -21,26 +21,55 @@ HISTFILESIZE=2000
 
 if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; 
 then
-    color_prompt=yes
+	color_prompt=yes
 else
-    color_prompt=
+	color_prompt=
 fi
 
-if [ "$color_prompt" = yes ]; then
-    if [ -n "$SSH_CLIENT" ]
-    then
-		if [ "$USER" = root ]; then
-			PS1='\[\e[1;36m\]\u\[\e[0;36m\](\h) \[\e[0;97m\]\w\[\e[0m\]\$ '
+git_ps1_addition=""
+
+if command -v git &>/dev/null
+then
+	source /usr/share/git/completion/git-prompt.sh
+	export GIT_PS1_SHOWDIRTYSTATE=1
+
+	if [ "$color_prompt" = yes ]; then
+		if [ -n "$SSH_CLIENT" ]
+		then
+			if [ "$USER" = root ]; then
+				export PS1='\[\e[1;36m\]\u\[\e[0;36m\](\h) \[\e[0;97m\]\w\[\e[1;33m\]$(__git_ps1 " (%s)")\[\e[0m\]\$ '
+			else
+				export PS1='\[\e[1;35m\]\u\[\e[0;35m\](\h) \[\e[0;97m\]\w\[\e[1;33m\]$(__git_ps1 " (%s)")\[\e[0m\]\$ '
+			fi
 		else
-			PS1='\[\e[1;35m\]\u\[\e[0;35m\](\h) \[\e[0;97m\]\w\[\e[0m\]\$ '
+			export PS1='\[\e[1;36m\]\u \[\e[0;97m\]\w\[\e[1;33m\]$(__git_ps1 " (%s)")\[\e[0m\]\$ '
 		fi
-    else
-	    PS1='\[\e[1;36m\]\u \[\e[0;97m\]\w\[\e[0m\]\$ '
-    fi
+	else
+		export PS1='\u@\h \W$(__git_ps1 " (%s)")\$ '
+	fi
+	unset color_prompt
 else
-    PS1='\u@\h \W\$ '
+	if [ "$color_prompt" = yes ]; then
+		if [ -n "$SSH_CLIENT" ]
+		then
+			if [ "$USER" = root ]; then
+				export PS1='\[\e[1;36m\]\u\[\e[0;36m\](\h) \[\e[0;97m\]\w\[\e[0m\]$\$ '
+			else
+				export PS1='\[\e[1;35m\]\u\[\e[0;35m\](\h) \[\e[0;97m\]\w\[\e[0m\]$\$ '
+			fi
+		else
+			export PS1='\[\e[1;36m\]\u \[\e[0;97m\]\w\[\e[0m\]\$ '
+		fi
+	else
+		export PS1='\u@\h \W\$ '
+	fi
+	unset color_prompt
 fi
-unset color_prompt
+
+
+# source /usr/share/git/completion/git-prompt.sh
+# export GIT_PS1_SHOWDIRTYSTATE=1
+# export PS1='\[\e[1;35m\]\u\[\e[0;35m\](\h) \[\e[0;97m\]\w\[\e[0m\]$(__git_ps1 " (%s)")\$ '
 
 # Colour Aliases
 
@@ -97,29 +126,29 @@ export LFS=/mnt/lfs
 
 display-colours() {
 for x in {0..8}; do
-    for i in {30..37}; do
-        for a in {40..47}; do
-            echo -ne "\e[$x;$i;$a""m\\\e[$x;$i;$a""m\e[0;37;40m "
-        done
-        echo
-    done
+	for i in {30..37}; do
+		for a in {40..47}; do
+			echo -ne "\e[$x;$i;$a""m\\\e[$x;$i;$a""m\e[0;37;40m "
+		done
+		echo
+	done
 done
 echo ""
 }
 
 colour-gradient() {
 awk 'BEGIN{
-    s="/\\/\\/\\/\\/\\"; s=s s s s s s s s s s s s s s s s s s s s s s s;
-    for (colnum = 0; colnum<256; colnum++) {
-        r = 255-(colnum*255/255);
-        g = (colnum*510/255);
-        b = (colnum*255/255);
-        if (g>255) g = 510-g;
-        printf "\033[48;2;%d;%d;%dm", r,g,b;
-        printf "\033[38;2;%d;%d;%dm", 255-r,255-g,255-b;
-        printf "%s\033[0m", substr(s,colnum+1,1);
-    }
-    printf "\n";
+s="/\\/\\/\\/\\/\\"; s=s s s s s s s s s s s s s s s s s s s s s s s;
+for (colnum = 0; colnum<256; colnum++) {
+	r = 255-(colnum*255/255);
+	g = (colnum*510/255);
+	b = (colnum*255/255);
+	if (g>255) g = 510-g;
+		printf "\033[48;2;%d;%d;%dm", r,g,b;
+		printf "\033[38;2;%d;%d;%dm", 255-r,255-g,255-b;
+		printf "%s\033[0m", substr(s,colnum+1,1);
+	}
+	printf "\n";
 }'
 }
 

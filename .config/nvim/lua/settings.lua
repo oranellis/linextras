@@ -1,3 +1,6 @@
+-- Remap leader
+vim.g.mapleader = ';'
+
 -- Disable netrw
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -60,5 +63,7 @@ vim.opt.autoread = true
 -- Visual bell
 vim.opt.visualbell = true
 
--- Remap leader
-vim.g.mapleader = ';'
+-- For whitespace highlighting
+vim.g.better_whitespace_operator=''
+vim.g.strip_whitespace_on_save=1
+vim.g.strip_whitespace_confirm=0
