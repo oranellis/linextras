@@ -49,6 +49,13 @@ return require('packer').startup(function(use)
 	use { 'neovim/nvim-lspconfig' }
 	use { 'simrat39/rust-tools.nvim' }
 
+	-- Debugging
+	use { 'rcarriga/nvim-dap-ui',
+		requires = 'mfussenegger/nvim-dap'
+	}
+
+	use { 'theHamsta/nvim-dap-virtual-text' }
+
 	if packer_bootstrap then
 		require('packer').sync()
 	end
