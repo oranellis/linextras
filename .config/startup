@@ -2,6 +2,6 @@
 
 sleep 1
 picom -b
-xset r rate 250 30
+# xset r rate 250 30
 /usr/lib/polkit-kde-authentication-agent-1 &
 nm-applet &

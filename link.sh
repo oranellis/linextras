@@ -54,3 +54,7 @@ else
 	echo -e "\033[32mReplaced \033[0m.config/$MATCH"
 fi
 done
+
+# Change the key repeat, a bit of a cop-out but never mind
+echo -e "To update key repeat add the following to /etc/X11/xorg.conf.d/00-keyboard.conf
+Option \"AutoRepeat\" \"250 33\""
