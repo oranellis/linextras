@@ -26,23 +26,25 @@ else
 	color_prompt=
 fi
 
-git_ps1_addition=""
-
 if command -v git &>/dev/null
 then
 	source /usr/share/git/completion/git-prompt.sh
 	export GIT_PS1_SHOWDIRTYSTATE=1
+	export GIT_PS1_SHOWCOLORHINTS=1
+	export GIT_PS1_SHOWSTASHSTATE=1
+	export GIT_PS1_SHOWUNTRACKEDFILES=1
+	export GIT_PS1_SHOWUPSTREAM="auto"
 
 	if [ "$color_prompt" = yes ]; then
 		if [ -n "$SSH_CLIENT" ]
 		then
 			if [ "$USER" = root ]; then
-				export PS1='\[\e[1;36m\]\u\[\e[0;36m\](\h) \[\e[0;97m\]\w\[\e[1;33m\]$(__git_ps1 " (%s)")\[\e[0m\]\$ '
+				export PS1='\[\e[1;36m\]\u\[\e[0;36m\](\h) \[\e[0;97m\]\w\[\e[0m\]$(__git_ps1 " \[\e[1;33m\](%s\[\e[1;33m\])")\[\e[0m\]\$ '
 			else
-				export PS1='\[\e[1;35m\]\u\[\e[0;35m\](\h) \[\e[0;97m\]\w\[\e[1;33m\]$(__git_ps1 " (%s)")\[\e[0m\]\$ '
+				export PS1='\[\e[1;35m\]\u\[\e[0;35m\](\h) \[\e[0;97m\]\w$(__git_ps1 " \[\e[1;33m\](%s\[\e[1;33m\])")\[\e[0m\]\$ '
 			fi
 		else
-			export PS1='\[\e[1;36m\]\u \[\e[0;97m\]\w\[\e[1;33m\]$(__git_ps1 " (%s)")\[\e[0m\]\$ '
+			export PS1='\[\e[1;36m\]\u \[\e[0;97m\]\w\[\e[0m\]$(__git_ps1 " \[\e[1;33m\](%s\[\e[1;33m\])")\[\e[0m\]\$ '
 		fi
 	else
 		export PS1='\u@\h \W$(__git_ps1 " (%s)")\$ '
