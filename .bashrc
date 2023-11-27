@@ -34,6 +34,7 @@ then
 	export GIT_PS1_SHOWSTASHSTATE=1
 	export GIT_PS1_SHOWUNTRACKEDFILES=1
 	export GIT_PS1_SHOWUPSTREAM="auto"
+	export GIT_PS1_DESCRIBE_STYLE="branch"
 
 	if [ "$color_prompt" = yes ]; then
 		if [ -n "$SSH_CLIENT" ]
