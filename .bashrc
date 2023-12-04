@@ -26,7 +26,7 @@ else
 	color_prompt=
 fi
 
-if command -v git &>/dev/null
+if command -v __git_ps1 &>/dev/null
 then
 	source /usr/share/git/completion/git-prompt.sh
 	export GIT_PS1_SHOWDIRTYSTATE=1
