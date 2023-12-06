@@ -6,6 +6,12 @@
 
 [[ $- != *i* ]] && return
 
+# Env vars
+
+NPM_PACKAGES="${HOME}/.npm-packages"
+export PATH="$PATH:$NPM_PACKAGES/bin"
+export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
+
 # History Settings
 
 HISTCONTROL=ignoreboth
