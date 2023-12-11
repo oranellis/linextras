@@ -6,6 +6,12 @@
 
 [[ $- != *i* ]] && return
 
+# Env vars
+
+NPM_PACKAGES="${HOME}/.npm-packages"
+export PATH="$PATH:$NPM_PACKAGES/bin"
+export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
+
 # History Settings
 
 HISTCONTROL=ignoreboth
@@ -26,9 +32,9 @@ else
 	color_prompt=
 fi
 
-if command -v git &>/dev/null
+if command -v __git_ps1 &>/dev/null
 then
-	source /usr/share/git/completion/git-prompt.sh
+	source /usr/lib/git-core/git-sh-prompt
 	export GIT_PS1_SHOWDIRTYSTATE=1
 	export GIT_PS1_SHOWCOLORHINTS=1
 	export GIT_PS1_SHOWSTASHSTATE=1
@@ -81,7 +87,7 @@ alias grep='grep --color=auto'
 
 # Autocomplete Settings
 
-[ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
+[ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 bind 'set completion-ignore-case on'
 
 # Convenience Scripts
