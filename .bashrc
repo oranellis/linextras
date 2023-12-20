@@ -11,6 +11,7 @@
 NPM_PACKAGES="${HOME}/.npm-packages"
 export PATH="$PATH:$NPM_PACKAGES/bin"
 export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
+export DOCKER_BUILDKIT=1
 
 # History Settings
 
@@ -96,7 +97,7 @@ alias d=pwd
 alias v=nvim
 alias ab=autobuild
 alias ssh-keygen-named="ssh-keygen -C $(whoami)@$(uname -n)-$(date -I)"
-alias ds="du -hs * 2>/dev/null | sort -h"
+alias ds="du -hd 1 2>/dev/null | sort -h"
 alias nd=mkdir
 alias nf=touch
 

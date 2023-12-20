@@ -25,3 +25,7 @@
 	layout = LOCAL,MERGED,REMOTE
 [alias]
 	graph= log --oneline --graph --decorate --branches
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
