@@ -164,9 +164,9 @@ for (colnum = 0; colnum<256; colnum++) {
 
 # Tmux on startup
 
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] && [[ -z $(ps -A | grep "tmux: client") ]] ; then
-	exec tmux new -s "PID$$"
-fi
+# if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] && [[ -z $(ps -A | grep "tmux: client") ]] ; then
+# 	exec tmux new -s "PID$$"
+# fi
 
 # Run neofetch if this is the first terminal opened
 
