@@ -13,6 +13,10 @@ export PATH="$PATH:$NPM_PACKAGES/bin"
 export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 export DOCKER_BUILDKIT=1
 
+# Source Cargo Env
+
+. "$HOME/.cargo/env"
+
 # History Settings
 
 HISTCONTROL=ignoreboth
@@ -174,4 +178,3 @@ for (colnum = 0; colnum<256; colnum++) {
 # then
 # 	neofetch
 # fi
-

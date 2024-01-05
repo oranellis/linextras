@@ -108,7 +108,6 @@ bindsym $mod+a focus parent
 # set $ws7 "7:七"
 # set $ws8 "8:八"
 # set $ws9 "9:九"
-# set $ws10 "10:十"
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -118,7 +117,6 @@ set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
-set $ws10 "10"
 # set $ws1 "一"
 # set $ws2 "二"
 # set $ws3 "三"
@@ -128,7 +126,6 @@ set $ws10 "10"
 # set $ws7 "七"
 # set $ws8 "八"
 # set $ws9 "九"
-# set $ws10 "十"
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -140,7 +137,6 @@ bindsym $mod+6 workspace number $ws6
 bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
@@ -152,7 +148,6 @@ bindsym $mod+Shift+6 move container to workspace number $ws6
 bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -191,7 +186,7 @@ bindsym $mod+r mode "resize"
 #         }
 # }
 
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh --shades
 
 # Custom Settings
 
@@ -200,7 +195,7 @@ default_orientation auto
 workspace_layout default
 default_border pixel 0
 default_floating_border pixel 1
-for_window [class="^.*"] border none
+# for_window [class="^.*"] border none
 
 client.focused          #F7F7F7 #202020 #FFFFFF #F7F7F7   #F7F7F7
 client.focused_inactive #404040 #202020 #FFFFFF #404040   #404040
@@ -208,10 +203,8 @@ client.unfocused        #404040 #202020 #FFFFFF #404040   #404040
 client.urgent           #FFFFC0 #202020 #FFFFFF #202020   #202020
 client.placeholder      #404040 #202020 #FFFFFF #000000   #0C0C0C
 
-# gaps inner 5
-# gaps outer 20
-# gaps inner 5
-# gaps outer 0
+gaps inner 0
+gaps outer 0
 
 bindsym $mod+b exec feh --randomize --bg-fill $HOME/Media/Backgrounds/*
 
