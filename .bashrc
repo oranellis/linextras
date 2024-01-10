@@ -8,14 +8,14 @@
 
 # Env vars
 
-NPM_PACKAGES="${HOME}/.npm-packages"
+export NPM_PACKAGES="${HOME}/.npm-packages"
 export PATH="$PATH:$NPM_PACKAGES/bin"
 export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 export DOCKER_BUILDKIT=1
 
 # Source Cargo Env
 
-. "$HOME/.cargo/env"
+. "$HOME/.cargo/env" 2>/dev/null
 
 # History Settings
 

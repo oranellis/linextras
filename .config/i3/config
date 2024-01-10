@@ -203,10 +203,10 @@ client.unfocused        #404040 #202020 #FFFFFF #404040   #404040
 client.urgent           #FFFFC0 #202020 #FFFFFF #202020   #202020
 client.placeholder      #404040 #202020 #FFFFFF #000000   #0C0C0C
 
-gaps inner 0
+gaps inner 10
 gaps outer 0
 
-bindsym $mod+b exec feh --randomize --bg-fill $HOME/Media/Backgrounds/*
+bindsym $mod+b exec --no-startup-id feh --randomize --bg-fill $HOME/Media/Backgrounds/*
 
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn 'Hack Nerd Font Mono-12' -nf '#C5C8C6' -nb '#1a1a1a' -sb '#5d9f9b' -sf '#000000'"
 
@@ -215,5 +215,5 @@ bindsym Print exec "mkdir -p $HOME/Media/Screenshots && scrot -F $HOME/Media/Scr
 bindsym $mod+w exec firefox
 bindsym $mod+e exec thunar
 
-exec feh --randomize --bg-fill $HOME/Media/Backgrounds/*
+exec --no-startup-id feh --randomize --bg-fill $HOME/Media/Backgrounds/*
 exec $HOME/.config/startup
