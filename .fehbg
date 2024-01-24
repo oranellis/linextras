@@ -1,2 +1,2 @@
 #!/bin/sh
-feh --no-fehbg --bg-fill '/home/oran/Media/Backgrounds/Return_5760x2880.png'
+feh --no-fehbg --bg-fill '/home/oran/Media/Backgrounds/background_spiral.png' 

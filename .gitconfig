@@ -16,7 +16,8 @@
     prompt = true
 [merge]
     tool = nvimdiff
-    conflictstyle = diff3
+	conflictstyle = diff3
+	ff = no
 [mergetool]
     keepBackup = false
     trustExitCode = false
@@ -24,7 +25,8 @@
 [mergetool "nvimdiff"]
 	layout = LOCAL,MERGED,REMOTE
 [alias]
-	graph= log --oneline --graph --decorate --branches
+	graph = log --oneline --graph --decorate --branches
+	update = !git add -A && git commit
 [gpg]
 	format = ssh
 [commit]
