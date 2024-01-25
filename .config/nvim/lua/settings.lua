@@ -36,7 +36,7 @@ vim.opt.mouse = 'a'
 vim.opt.shortmess = 'cfilnxtToOF'
 
 -- Use x11 clipboard
--- vim.opt.clipboard:prepend {"unnamed","unnamedplus"}
+vim.opt.clipboard:prepend {"unnamed","unnamedplus"}
 
 -- Fast updates
 vim.opt.updatetime = 100
