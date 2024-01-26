@@ -54,8 +54,11 @@ return require('packer').startup(function(use)
 	use { 'rcarriga/nvim-dap-ui',
 		requires = 'mfussenegger/nvim-dap'
 	}
-
+	use { 'ThePrimeagen/refactoring.nvim' }
 	use { 'theHamsta/nvim-dap-virtual-text' }
+
+	-- Clipboard
+	use { 'EtiamNullam/deferred-clipboard.nvim' }
 
 	if packer_bootstrap then
 		require('packer').sync()

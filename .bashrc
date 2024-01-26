@@ -5,12 +5,16 @@
 # If not running interactively, don't do anything
 
 [[ $- != *i* ]] && return
-
 # Env vars
 
-NPM_PACKAGES="${HOME}/.npm-packages"
+export NPM_PACKAGES="${HOME}/.npm-packages"
 export PATH="$PATH:$NPM_PACKAGES/bin"
 export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
+export DOCKER_BUILDKIT=1
+
+# Source Cargo Env
+
+. "$HOME/.cargo/env" 2>/dev/null
 
 # History Settings
 
@@ -96,7 +100,7 @@ alias d=pwd
 alias v=nvim
 alias ab=autobuild
 alias ssh-keygen-named="ssh-keygen -C $(whoami)@$(uname -n)-$(date -I)"
-alias ds="du -hs * 2>/dev/null | sort -h"
+alias ds="du -hd 1 2>/dev/null | sort -h"
 alias nd=mkdir
 alias nf=touch
 
@@ -162,8 +166,8 @@ for (colnum = 0; colnum<256; colnum++) {
 }
 
 # Tmux on startup
-
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] && [[ -z $(ps -A | grep "tmux: client") ]] ; then
+# add && [[ -z $(ps -A | grep "tmux: client") ]] to the following for only 1 tmux teminal
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] ; then
 	exec tmux new -s "PID$$"
 fi
 
@@ -173,4 +177,3 @@ fi
 # then
 # 	neofetch
 # fi
-
