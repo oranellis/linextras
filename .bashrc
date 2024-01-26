@@ -5,7 +5,6 @@
 # If not running interactively, don't do anything
 
 [[ $- != *i* ]] && return
-
 # Env vars
 
 export NPM_PACKAGES="${HOME}/.npm-packages"
@@ -168,7 +167,7 @@ for (colnum = 0; colnum<256; colnum++) {
 
 # Tmux on startup
 # add && [[ -z $(ps -A | grep "tmux: client") ]] to the following for only 1 tmux teminal
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] ; then 
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] ; then
 	exec tmux new -s "PID$$"
 fi
 

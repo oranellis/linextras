@@ -26,7 +26,7 @@
 	layout = LOCAL,MERGED,REMOTE
 [alias]
 	graph = log --oneline --graph --decorate --branches
-	update = !git add -A && git commit
+	update = !git add -A && git commit && git push
 [gpg]
 	format = ssh
 [commit]

@@ -19,7 +19,7 @@ white = "#d0d0d0"
 yellow = "#d0d030"
 
 [colors.primary]
-background = "#1a1a1a"
+background = "#141414"
 bright_foreground = "#ffffff"
 dim_foreground = "#a1a1a1"
 foreground = "#c1c1c1"
@@ -50,5 +50,4 @@ style = "Regular"
 history = 10000
 
 [window]
-decorations = "none"
-opacity = 0
+opacity = 0.8
