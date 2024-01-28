@@ -1,10 +1,17 @@
-#
-# Oran's bashrc
-#
+#          ____
+#         / __ \_______ ____  ___
+#        / /_/ / __/ _ `/ _ \(_-<
+#        \____/_/  \_,_/_//_/___/
+#     ____             __    ____  ______
+#    / __ )____ ______/ /_  / __ \/ ____/
+#   / __  / __ `/ ___/ __ \/ /_/ / /
+#  / /_/ / /_/ (__  ) / / / _, _/ /___
+# /_____/\__,_/____/_/ /_/_/ |_|\____/
 
 # If not running interactively, don't do anything
 
 [[ $- != *i* ]] && return
+
 # Env vars
 
 export NPM_PACKAGES="${HOME}/.npm-packages"
@@ -66,9 +73,9 @@ else
 		if [ -n "$SSH_CLIENT" ]
 		then
 			if [ "$USER" = root ]; then
-				export PS1='\[\e[1;36m\]\u\[\e[0;36m\](\h) \[\e[0;97m\]\w\[\e[0m\]$\$ '
+				export PS1='\[\e[1;36m\]\u\[\e[0;36m\](\h) \[\e[0;97m\]\w\[\e[0m\]\$ '
 			else
-				export PS1='\[\e[1;35m\]\u\[\e[0;35m\](\h) \[\e[0;97m\]\w\[\e[0m\]$\$ '
+				export PS1='\[\e[1;35m\]\u\[\e[0;35m\](\h) \[\e[0;97m\]\w\[\e[0m\]\$ '
 			fi
 		else
 			export PS1='\[\e[1;36m\]\u \[\e[0;97m\]\w\[\e[0m\]\$ '
@@ -132,7 +139,6 @@ export NNN_OPENER="nuke"
 export EDITOR="nvim"
 export NNN_BMS="h:~/;r:/;d:~/Dev;o:~/Downloads;m:/run/media/$USER;s:/storage"
 export NNN_PLUG='v:!nvim $nnn;p:preview-tui'
-# export NNN_OPENER="/path/to/custom/opener" # Default opener template, to replace xdg-open
 export LFS=/mnt/lfs
 
 # Display colours
@@ -166,14 +172,14 @@ for (colnum = 0; colnum<256; colnum++) {
 }
 
 # Tmux on startup
+
 # add && [[ -z $(ps -A | grep "tmux: client") ]] to the following for only 1 tmux teminal
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] ; then
-	exec tmux new -s "PID$$"
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ "screen" ]] && [[ ! "$TERM" =~ "tmux" ]] && [ -z "$TMUX" ]
+then
+	if [ -n "$SSH_CLIENT" ]
+	then
+		exec tmux -f "$HOME/.tmux.ssh.conf" new -s "PID$$"
+	else
+		exec tmux new -s "PID$$"
+	fi
 fi
-
-# Run neofetch if this is the first terminal opened
-
-# if [[  $(ps aux | grep -ic "$TERM") -lt 3 ]]
-# then
-# 	neofetch
-# fi

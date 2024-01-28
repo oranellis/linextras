@@ -17,6 +17,6 @@ To set the X11 key repeat to a sensibly fast value, add the following to ```/etc
 Section "InputClass"
     Identifier "system-keyboard"
     MatchIsKeyboard "on"
-    Option "AutoRepeat" "250 33"
+    Option "AutoRepeat" "250 30"
 EndSection
 ```
