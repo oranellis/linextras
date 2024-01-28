@@ -1,7 +1,7 @@
-#          ____
-#         / __ \_______ ____  ___
-#        / /_/ / __/ _ `/ _ \(_-<
-#        \____/_/  \_,_/_//_/___/
+#         ____
+#        / __ \_______ ____  ___
+#       / /_/ / __/ _ `/ _ \(_-<
+#       \____/_/  \_,_/_//_/___/
 #     ____             __    ____  ______
 #    / __ )____ ______/ /_  / __ \/ ____/
 #   / __  / __ `/ ___/ __ \/ /_/ / /
@@ -12,96 +12,114 @@
 
 [[ $- != *i* ]] && return
 
-# Env vars
+
+
+# ================
+# === Env vars ===
+# ================
 
 export NPM_PACKAGES="${HOME}/.npm-packages"
 export PATH="$PATH:$NPM_PACKAGES/bin"
 export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 export DOCKER_BUILDKIT=1
+export SPLIT="v"
+export LFS="/mnt/lfs"
 
-# Source Cargo Env
+
+
+# ========================
+# === Source Cargo Env ===
+# ========================
 
 . "$HOME/.cargo/env" 2>/dev/null
 
-# History Settings
+
+
+# ========================
+# === History Settings ===
+# ========================
 
 HISTCONTROL=ignoreboth
 shopt -s histappend # append to the history file, don't overwrite it
 HISTSIZE=1000
 HISTFILESIZE=2000
 
-# Update window size on command exec
+
+
+# ==========================================
+# === Update window size on command exec ===
+# ==========================================
 
 [[ $DISPLAY ]] && shopt -s checkwinsize
 
-# Colour setup
 
-if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null;
-then
-	color_prompt=yes
-else
-	color_prompt=
-fi
 
-if command -v __git_ps1 &>/dev/null
-then
-	source /usr/lib/git-core/git-sh-prompt
+# =================
+# === PS1 setup ===
+# =================
+
+[ -e "/usr/share/git/git-prompt.sh" ] && . "/usr/share/git/git-prompt.sh"
+[ -e "/usr/lib/git-core/git-sh-prompt" ] && . "/usr/lib/git-core/git-sh-prompt"
+command -v __git_ps1 >/dev/null 2>&1 && {
+	git_prompt_support="y"
 	export GIT_PS1_SHOWDIRTYSTATE=1
 	export GIT_PS1_SHOWCOLORHINTS=1
 	export GIT_PS1_SHOWSTASHSTATE=1
 	export GIT_PS1_SHOWUNTRACKEDFILES=1
 	export GIT_PS1_SHOWUPSTREAM="auto"
 	export GIT_PS1_DESCRIBE_STYLE="branch"
+}
+[ -x /usr/bin/tput ] && tput setaf 1 >/dev/null 2>&1 && colour_support="y"
 
-	if [ "$color_prompt" = yes ]; then
-		if [ -n "$SSH_CLIENT" ]
-		then
-			if [ "$USER" = root ]; then
-				export PS1='\[\e[1;36m\]\u\[\e[0;36m\](\h) \[\e[0;97m\]\w\[\e[0m\]$(__git_ps1 " \[\e[1;33m\](%s\[\e[1;33m\])")\[\e[0m\]\$ '
-			else
-				export PS1='\[\e[1;35m\]\u\[\e[0;35m\](\h) \[\e[0;97m\]\w$(__git_ps1 " \[\e[1;33m\](%s\[\e[1;33m\])")\[\e[0m\]\$ '
-			fi
-		else
-			export PS1='\[\e[1;36m\]\u \[\e[0;97m\]\w\[\e[0m\]$(__git_ps1 " \[\e[1;33m\](%s\[\e[1;33m\])")\[\e[0m\]\$ '
-		fi
-	else
-		export PS1='\u@\h \W$(__git_ps1 " (%s)")\$ '
-	fi
-	unset color_prompt
-else
-	if [ "$color_prompt" = yes ]; then
-		if [ -n "$SSH_CLIENT" ]
-		then
-			if [ "$USER" = root ]; then
-				export PS1='\[\e[1;36m\]\u\[\e[0;36m\](\h) \[\e[0;97m\]\w\[\e[0m\]\$ '
-			else
-				export PS1='\[\e[1;35m\]\u\[\e[0;35m\](\h) \[\e[0;97m\]\w\[\e[0m\]\$ '
-			fi
-		else
-			export PS1='\[\e[1;36m\]\u \[\e[0;97m\]\w\[\e[0m\]\$ '
-		fi
-	else
-		export PS1='\u@\h \W\$ '
-	fi
-	unset color_prompt
-fi
+[ -n "$colour_support" ] && colour_cyan_b="\[\033[1;36m\]" || colour_cyan_b=""
+[ -n "$colour_support" ] && colour_cyan="\[\033[0;36m\]" || colour_cyan=""
+[ -n "$colour_support" ] && colour_purple_b="\[\033[1;35m\]" || colour_purple_b=""
+[ -n "$colour_support" ] && colour_purple="\[\033[0;35m\]" || colour_purple=""
+[ -n "$colour_support" ] && colour_yellow_b="\[\033[1;33m\]" || colour_yellow_b=""
+[ -n "$colour_support" ] && colour_white="\[\033[0;97m\]" || colour_white=""
+[ -n "$colour_support" ] && colour_normal="\[\033[0m\]" || colour_normal=""
+
+update_ps1() {
+	ps1_construction=""
+	[ -n "$SSH_CLIENT" ] && \
+		ps1_construction="$ps1_construction$colour_purple_b" || \
+		ps1_construction="$ps1_construction$colour_cyan_b"
+	ps1_construction="$ps1_construction\u"
+	[ -n "$SSH_CLIENT" ] && \
+		ps1_construction="$ps1_construction$colour_purple(\h)"
+	ps1_construction="$ps1_construction$colour_white \w"
+	[ -n "$git_prompt_support" ] && \
+		ps1_construction="$ps1_construction$(__git_ps1 " $colour_yellow_b(%s$colour_yellow_b)")"
+	ps1_construction="$ps1_construction$colour_normal\\$ "
+
+	export PS1="$ps1_construction"
+}
+
+PROMPT_COMMAND="update_ps1"
 
 
-# source /usr/share/git/completion/git-prompt.sh
-# export GIT_PS1_SHOWDIRTYSTATE=1
-# export PS1='\[\e[1;35m\]\u\[\e[0;35m\](\h) \[\e[0;97m\]\w\[\e[0m\]$(__git_ps1 " (%s)")\$ '
 
-# Colour Aliases
+# ======================
+# === Colour Aliases ===
+# ======================
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
-# Autocomplete Settings
+
+
+# =============================
+# === Autocomplete Settings ===
+# =============================
 
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 bind 'set completion-ignore-case on'
 
-# Convenience Scripts
+
+
+# ===========================
+# === Convenience Aliases ===
+# ===========================
 
 alias ab=autobuild
 alias ssh-keygen-named="ssh-keygen -C $(whoami)@$(uname -n)-$(date -I)"
@@ -109,11 +127,11 @@ alias ds="du -hd 1 2>/dev/null | sort -h"
 alias nd=mkdir
 alias nf=touch
 
-# FZF Command
 
-#export FZF_DEFAULT_COMMAND=''
 
-# NNN Config
+# ==================
+# === NNN Config ===
+# ==================
 
 n () {
 	if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
@@ -130,16 +148,18 @@ n () {
 
 export NNN_OPTS="aARe"
 export NNN_FIFO="/tmp/nnn.fifo"
-export SPLIT="v"
 export TERMINAL="tmux"
 export NNN_USE_EDITOR=1
 export NNN_OPENER="nuke"
 export EDITOR="nvim"
 export NNN_BMS="h:~/;r:/;d:~/Dev;o:~/Downloads;m:/run/media/$USER;s:/storage"
 export NNN_PLUG='v:!nvim $nnn;p:preview-tui'
-export LFS=/mnt/lfs
 
-# Display colours
+
+
+# =======================
+# === Display colours ===
+# =======================
 
 display-colours() {
 for x in {0..8}; do
@@ -169,10 +189,13 @@ for (colnum = 0; colnum<256; colnum++) {
 }'
 }
 
-# Tmux on startup
 
-# add && [[ -z $(ps -A | grep "tmux: client") ]] to the following for only 1 tmux teminal
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ "screen" ]] && [[ ! "$TERM" =~ "tmux" ]] && [ -z "$TMUX" ]
+
+# =======================
+# === Tmux on startup ===
+# =======================
+
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ "screen" ]] && [[ ! "$TERM" =~ "tmux" ]] && [ -z "$TMUX" ] && [[ -z $(ps -A | grep "tmux: client") ]]
 then
 	if [ -n "$SSH_CLIENT" ]
 	then
