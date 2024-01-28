@@ -103,8 +103,6 @@ bind 'set completion-ignore-case on'
 
 # Convenience Scripts
 
-alias d=pwd
-alias v=nvim
 alias ab=autobuild
 alias ssh-keygen-named="ssh-keygen -C $(whoami)@$(uname -n)-$(date -I)"
 alias ds="du -hd 1 2>/dev/null | sort -h"

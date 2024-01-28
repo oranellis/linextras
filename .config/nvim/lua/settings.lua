@@ -8,8 +8,8 @@ vim.g.loaded_netrwPlugin = 1
 -- Enable colours
 vim.opt.termguicolors = true
 
--- Disable builtin highlighting
-vim.cmd.syntax 'manual'
+-- Keep builtin highlighting on
+vim.cmd.syntax 'enable'
 
 -- No Text Wrap
 vim.wo.wrap = false
