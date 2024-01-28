@@ -1,12 +1,10 @@
-[user]
-	email = oran.mcnair@gmail.com
-	name = Oran Ellis
 [core]
 	editor = nvim
 [init]
 	defaultBranch = main
 [pull]
 	rebase = false
+	ff = true
 [http]
 	sslVerify = true
 [diff]
@@ -17,7 +15,7 @@
 [merge]
     tool = nvimdiff
 	conflictstyle = diff3
-	ff = no
+	ff = false
 [mergetool]
     keepBackup = false
     trustExitCode = false

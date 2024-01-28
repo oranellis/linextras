@@ -11,10 +11,6 @@ export SDK_PATH="$HOME/Dev/SDKs"
 
 export PATH="$PATH:~/.local/bin"
 
-# Set Neofetch var
-
-export FIRST_TERMINAL_OPENED=""
-
 # Run bashrc
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
