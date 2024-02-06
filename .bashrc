@@ -161,7 +161,7 @@ export NNN_PLUG='v:!nvim $nnn;p:preview-tui'
 # === Display colours ===
 # =======================
 
-display-colours() {
+colour-table() {
 for x in {0..8}; do
 	for i in {30..37}; do
 		for a in {40..47}; do
