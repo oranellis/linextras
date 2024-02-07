@@ -49,9 +49,9 @@ local function custom_quit()
 	end
 end
 
-vim.keymap.set({'n', 't'}, '<leader>q', custom_quit)
+-- vim.keymap.set({'n', 't'}, '<leader>q', custom_quit)
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
 vim.keymap.set('n', '<leader>t', vim.cmd.terminal)
-vim.keymap.set('n', '<leader>w', vim.cmd.wa)
+-- vim.keymap.set('n', '<leader>w', vim.cmd.wa)
 vim.keymap.set('n', '<tab>', vim.cmd.bn)
 vim.keymap.set('n', '<S-tab>', vim.cmd.bp)
