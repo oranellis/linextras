@@ -79,23 +79,37 @@ command -v __git_ps1 >/dev/null 2>&1 && {
 [ -n "$colour_support" ] && colour_white="\[\033[0;97m\]" || colour_white=""
 [ -n "$colour_support" ] && colour_normal="\[\033[0m\]" || colour_normal=""
 
-update_ps1() {
-	ps1_construction=""
-	[ -n "$SSH_CLIENT" ] && \
-		ps1_construction="$ps1_construction$colour_purple_b" || \
-		ps1_construction="$ps1_construction$colour_cyan_b"
-	ps1_construction="$ps1_construction\u"
-	[ -n "$SSH_CLIENT" ] && \
-		ps1_construction="$ps1_construction$colour_purple(\h)"
-	ps1_construction="$ps1_construction$colour_white \w"
-	[ -n "$git_prompt_support" ] && \
-		ps1_construction="$ps1_construction$(__git_ps1 " $colour_yellow_b(%s$colour_yellow_b)")"
-	ps1_construction="$ps1_construction$colour_normal\\$ "
-
-	export PS1="$ps1_construction"
+shorten_path() {
+    local path="${PWD/#$HOME/\~}"
+    if [ "${#path}" -le 30 ]; then
+        echo "$path"
+        return
+    fi
+    local IFS='/'
+    read -ra ADDR <<< "$path"
+    local short_path=""
+    for ((i=0; i<${#ADDR[@]}-1; i++)); do
+        if [[ ${ADDR[i]} ]]; then
+            [[ "${ADDR[i]}" == "" ]] && short_path+="/" || short_path+="${ADDR[i]:0:3}/"
+        fi
+    done
+    short_path+="${ADDR[-1]}"
+    echo "$short_path"
 }
 
-PROMPT_COMMAND="update_ps1"
+PS1=""
+[ -n "$SSH_CLIENT" ] && \
+	PS1="$PS1$colour_purple_b" || \
+	PS1="$PS1$colour_cyan_b"
+PS1="$PS1\u"
+[ -n "$SSH_CLIENT" ] && \
+	PS1="$PS1$colour_purple(\h)"
+PS1="$PS1$colour_white \$(shorten_path)"
+[ -n "$git_prompt_support" ] && \
+	PS1="$PS1\$( __git_ps1 \" $colour_yellow_b(%s$colour_yellow_b)\")"
+PS1="$PS1$colour_normal\\$ "
+
+export PS1
 
 
 
@@ -161,7 +175,7 @@ export NNN_PLUG='v:!nvim $nnn;p:preview-tui'
 # === Display colours ===
 # =======================
 
-display-colours() {
+colour-table() {
 for x in {0..8}; do
 	for i in {30..37}; do
 		for a in {40..47}; do

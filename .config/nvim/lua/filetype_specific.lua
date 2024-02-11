@@ -12,3 +12,10 @@ vim.api.nvim_create_autocmd({"BufRead"}, {
 		TabStop(2)
 	end
 })
+
+vim.api.nvim_create_autocmd({"BufRead"}, {
+	pattern = {'*.md'},
+	callback = function(_)
+		vim.opt_local.wrap = true
+	end
+})
