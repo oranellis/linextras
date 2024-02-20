@@ -43,8 +43,9 @@ fi
 backup_if_exists() {
 	local file_path=$1
 	local backup_dir=$2
+	local mode=$3
 
-	if [ -e "$file_path" ] && [ ! -L "$file_path" ]; then
+	if [ -e "$file_path" ] && [ ! -L "$file_path" ] && [ "$MODE" == "link" ]; then
 		mkdir -p "$backup_dir"
 		mv "$file_path" "$backup_dir/$(basename "$file_path").old" && echo -e "\033[33mSaved   \033[0m$(basename "$file_path")"
 	fi
@@ -58,7 +59,9 @@ link_or_copy() {
         if [ -L "$destination" ]; then
             rm "$destination" && echo -e "\033[31mRemoved \033[0m$(basename "$destination") link"
         fi
-        cp -r "$file" "$destination" && echo -e "\033[33mCopied  \033[0m$(basename "$file")"
+		if [ ! -e "$destination" ]; then
+			cp -r "$file" "$destination" && echo -e "\033[33mCopied  \033[0m$(basename "$file")"
+		fi
     else
         mkdir -p "$(dirname "$destination")"
         ln -sfn "$file" "$destination" && echo -e "\033[32mLinked  \033[0m$(basename "$file")"
@@ -75,7 +78,7 @@ MATCHES=$(ls -A $GIT_DIR)
 for MATCH in $MATCHES; do
 	if ! echo "$EXCLUSIONS $COPIES .config" | grep -w $MATCH > /dev/null; then
 		# Backup existing files and then link or copy
-		backup_if_exists "./$MATCH" "$GIT_DIR/backup"
+		backup_if_exists "./$MATCH" "$GIT_DIR/backup" "$MODE"
 		link_or_copy "$GIT_DIR/$MATCH" "./$MATCH"
 	fi
 done
@@ -95,7 +98,7 @@ MATCHES=$(ls -A $GIT_DIR/.config)
 for MATCH in $MATCHES; do
 	if ! echo "$EXCLUSIONS $COPIES" | grep -w $MATCH > /dev/null; then
 		# Backup existing files and then link or copy
-		backup_if_exists "./$MATCH" "$GIT_DIR/backup/.config"
+		backup_if_exists "./$MATCH" "$GIT_DIR/backup/.config" "$MODE"
 		link_or_copy "$GIT_DIR/.config/$MATCH" "./$MATCH"
 	fi
 done
