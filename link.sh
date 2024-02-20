@@ -92,6 +92,7 @@ for COPY in $COPIES; do
 done
 
 # Handle .config directory separately
+mkdir -p $HOME/.config
 cd $HOME/.config
 MATCHES=$(ls -A $GIT_DIR/.config)
 
