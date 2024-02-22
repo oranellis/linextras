@@ -5,61 +5,101 @@ EXCLUSIONS=".git README.md link.sh .gitignore backup"
 # Files to copy to the home directory rather than link, must also be excluded above
 COPIES=".Xresources .gitconfig"
 
-# Set variables for dotfiles direcory
+# Set variables for dotfiles directory
 GIT_DIR=$(dirname "$(readlink -f $0)")
 
-echo -e "Linking files from \033[35m$GIT_DIR\033[0m"
+# Function to display help
+show_help() {
+	echo "Usage: $0 [mode]"
+	echo "Modes:"
+	echo "  link  - Creates symbolic links for files (default mode if no arguments are passed)"
+	echo "  copy  - Copies files instead of linking"
+	echo "  help  - Displays this help message"
+	exit 0
+}
+
+# Read in mode as first arg, default to link if no arguments, show help if unknown argument
+if [ $# -eq 0 ]; then
+	MODE="link"
+else
+	case $1 in
+		link)
+			MODE="link"
+			;;
+		copy)
+			MODE="copy"
+			;;
+		help)
+			show_help
+			;;
+		*)
+			echo "Unknown argument: $1"
+			show_help
+			;;
+	esac
+fi
+
+# Function to backup existing files
+backup_if_exists() {
+	local file_path=$1
+	local backup_dir=$2
+	local mode=$3
+
+	if [ -e "$file_path" ] && [ ! -L "$file_path" ] && [ "$MODE" == "link" ]; then
+		mkdir -p "$backup_dir"
+		mv "$file_path" "$backup_dir/$(basename "$file_path").old" && echo -e "\033[33mSaved   \033[0m$(basename "$file_path")"
+	fi
+}
+
+link_or_copy() {
+    local file=$1
+    local destination=$2
+    if [ "$MODE" = "copy" ]; then
+        # Check if destination is a symbolic link and remove it if it is
+        if [ -L "$destination" ]; then
+            rm "$destination" && echo -e "\033[31mRemoved \033[0m$(basename "$destination") link"
+        fi
+		if [ ! -e "$destination" ]; then
+			cp -r "$file" "$destination" && echo -e "\033[33mCopied  \033[0m$(basename "$file")"
+		fi
+    else
+        mkdir -p "$(dirname "$destination")"
+        ln -sfn "$file" "$destination" && echo -e "\033[32mLinked  \033[0m$(basename "$file")"
+    fi
+}
+
+echo -e "Processing files from \033[35m$GIT_DIR\033[0m"
 
 # Scan all files in the git directory
 cd $HOME/
 MATCHES=$(ls -A $GIT_DIR)
 
 # Iterate through the matches
-for MATCH in $MATCHES
-do
-	if echo "$EXCLUSIONS $COPIES .config" | grep -w $MATCH > /dev/null
-	then
-		echo "Skipping     $MATCH"
-	else
-		# Backup existing files and create symbolic links to the files in the git repo
-		if [ -e "./$MATCH" ] && [ ! -L "./$MATCH" ]
-		then
-			mkdir -p "$GIT_DIR/backup"
-			mv "./$MATCH" "$GIT_DIR/backup/$MATCH.old" && echo -e "\033[33mBacked up    \033[0m$MATCH"
-		fi
-		ln -sf "$GIT_DIR/$MATCH" . && echo -e "\033[32mLinked       \033[0m$MATCH"
+for MATCH in $MATCHES; do
+	if ! echo "$EXCLUSIONS $COPIES .config" | grep -w $MATCH > /dev/null; then
+		# Backup existing files and then link or copy
+		backup_if_exists "./$MATCH" "$GIT_DIR/backup" "$MODE"
+		link_or_copy "$GIT_DIR/$MATCH" "./$MATCH"
 	fi
 done
 
-# Itterate through the copies variable
-for COPY in $COPIES
-do
-	if [ ! -f "$HOME/$COPY" ]
-	then
-		# if the file doesn't already exist in the home directory then copy the file to the home folder
-		cp "$GIT_DIR/$COPY" "$HOME" && echo -e "\033[33mCopied       \033[0m$COPY"
-	else
-		echo -e "\033[31mNot copying  \033[0m$COPY"
+# Iterate through the copies variable specifically for copying
+for COPY in $COPIES; do
+	if [ ! -f "$HOME/$COPY" ]; then
+		# Copy the file to the home folder
+		cp "$GIT_DIR/$COPY" "$HOME" && echo -e "\033[33mCopied  \033[0m$COPY"
 	fi
-	done
+done
 
-# The same as above for the .config folder
+# Handle .config directory separately
 mkdir -p $HOME/.config
 cd $HOME/.config
 MATCHES=$(ls -A $GIT_DIR/.config)
 
-for MATCH in $MATCHES
-do
-	if echo "$EXCLUSIONS $COPIES" | grep -w $MATCH > /dev/null
-	then
-		echo "Skipping     .config/$MATCH"
-	else
-		# Backup existing files and create symbolic links to the files in the git repo
-		if [ -e "./$MATCH" ] && [ ! -L "./$MATCH" ]
-		then
-			mkdir -p "$GIT_DIR/backup/.config"
-			mv "./$MATCH" "$GIT_DIR/backup/.config/$MATCH.old" && echo -e "\033[33mBacked up    \033[0m$MATCH"
-		fi
-		ln -sf $GIT_DIR/.config/$MATCH . && echo -e "\033[32mLinked       \033[0m.config/$MATCH"
+for MATCH in $MATCHES; do
+	if ! echo "$EXCLUSIONS $COPIES" | grep -w $MATCH > /dev/null; then
+		# Backup existing files and then link or copy
+		backup_if_exists "./$MATCH" "$GIT_DIR/backup/.config" "$MODE"
+		link_or_copy "$GIT_DIR/.config/$MATCH" "./$MATCH"
 	fi
 done

@@ -1,13 +1,18 @@
 # Dotfiles
 
-My dotfiles for my arch i3 environment, found at `http://github.com/oranellis/i3env`
+My dotfiles for my archlinux i3 environment, found at `http://github.com/oranellis/i3env`
 
 To remove and overwrite your local dotfiles with links to the files in this repo run
 ```
 ./link.sh
 ```
+This will back up existing configurations to a `backup/` directory in this git repo (WARNING backups may be overwritten if the script is run several times).
 
-Please make a backup of your configs before running this script
+To copy the files from this git repo to your local config, run the following instead
+```
+./link.sh copy
+```
+Existing files will not be overwritten in copy mode.
 
 ## Key Repeat
 
