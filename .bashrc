@@ -28,10 +28,11 @@ export LFS="/mnt/lfs"
 
 
 # ========================
-# === Source Cargo Env ===
+# === Source Env Files ===
 # ========================
 
 . "$HOME/.cargo/env" 2>/dev/null
+. "$HOME/.keys" 2>/dev/null
 
 
 
