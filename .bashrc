@@ -169,6 +169,10 @@ export EDITOR="nvim"
 export NNN_BMS="h:~/;r:/;d:~/Dev;o:~/Downloads;m:/run/media/$USER;s:/storage"
 export NNN_PLUG='v:!nvim $nnn;p:preview-tui'
 
+nn() {
+	cd && cd $(find . -type d 2>/dev/null | fzf) && n
+}
+
 
 
 # =======================
