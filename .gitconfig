@@ -22,10 +22,10 @@
     prompt = true
 [mergetool "nvimdiff"]
 	layout = LOCAL,MERGED,REMOTE
-[alias]
-	graph = log --oneline --graph --decorate --branches
-	update = !git add -A && git commit && git push
 [gpg]
 	format = ssh
 [commit]
 	gpgsign = true
+[alias]
+	graph = log --oneline --graph --decorate --branches
+	update = !sh -c 'git add -A && git commit -m \"Update $(date \"+%y%m%d %H%M\")\"' && git push
