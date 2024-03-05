@@ -28,4 +28,4 @@
 	gpgsign = true
 [alias]
 	graph = log --oneline --graph --decorate --branches
-	update = !sh -c 'git reset && git pull && git add -A && git commit -m \"Update $(date \"+%y%m%d %H%M\")\"' && git push
+	update = !$HOME/.config/git-update.sh
