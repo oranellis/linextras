@@ -28,10 +28,11 @@ export LFS="/mnt/lfs"
 
 
 # ========================
-# === Source Cargo Env ===
+# === Source Env Files ===
 # ========================
 
 . "$HOME/.cargo/env" 2>/dev/null
+. "$HOME/.keys" 2>/dev/null
 
 
 
@@ -168,6 +169,10 @@ export NNN_OPENER="nuke"
 export EDITOR="nvim"
 export NNN_BMS="h:~/;r:/;d:~/Dev;o:~/Downloads;m:/run/media/$USER;s:/storage"
 export NNN_PLUG='v:!nvim $nnn;p:preview-tui'
+
+nn() {
+	cd && cd $(find . -type d 2>/dev/null | fzf) && n
+}
 
 
 
