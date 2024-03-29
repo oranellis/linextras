@@ -20,7 +20,8 @@
 
 export NPM_PACKAGES="${HOME}/.npm-packages"
 export PATH="$PATH:$NPM_PACKAGES/bin"
-export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
+command -v manpath >/dev/null && \
+	export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 export DOCKER_BUILDKIT=1
 export SPLIT="v"
 export LFS="/mnt/lfs"
@@ -98,13 +99,18 @@ shorten_path() {
     echo "$short_path"
 }
 
+if [ -e "/.dockerenv" ] || [ -n "$SSH_CLIENT" ]
+then
+	show_hostname="yes"
+fi
+
 PS1=""
 [ -n "$SSH_CLIENT" ] && \
 	PS1="$PS1$colour_purple_b" || \
 	PS1="$PS1$colour_cyan_b"
 PS1="$PS1\u"
-[ -n "$SSH_CLIENT" ] && \
-	PS1="$PS1$colour_purple(\h)"
+[ -n "$show_hostname" ] && \
+	PS1="$PS1(\h)"
 PS1="$PS1$colour_white \$(shorten_path)"
 [ -n "$git_prompt_support" ] && \
 	PS1="$PS1\$( __git_ps1 \" $colour_yellow_b(%s$colour_yellow_b)\")"
