@@ -44,7 +44,6 @@ return require('packer').startup(function(use)
 	use { 'hrsh7th/cmp-cmdline' }
 	use { 'hrsh7th/cmp-vsnip' }
 	use { 'hrsh7th/vim-vsnip' }
-	use { 'windwp/nvim-ts-autotag' }
 
 	-- Language Servers
 	use { 'neovim/nvim-lspconfig' }
@@ -52,7 +51,10 @@ return require('packer').startup(function(use)
 
 	-- Debugging
 	use { 'rcarriga/nvim-dap-ui',
-		requires = 'mfussenegger/nvim-dap'
+		requires = {
+			'mfussenegger/nvim-dap',
+			'nvim-neotest/nvim-nio'
+		}
 	}
 	use { 'ThePrimeagen/refactoring.nvim' }
 	use { 'theHamsta/nvim-dap-virtual-text' }
