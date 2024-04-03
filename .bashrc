@@ -143,7 +143,7 @@ bind 'set completion-ignore-case on'
 # ===========================
 
 alias ab=autobuild
-alias ssh-keygen-named="ssh-keygen -C $(whoami)@$(uname -n)-$(date -I)"
+alias ssh-keygen-named="ssh-keygen -t ed25519 -a 100 -C $(whoami)@$(uname -n)-$(date -I)"
 alias ds="du -hd 1 2>/dev/null | sort -h"
 alias nd=mkdir
 alias nf=touch
@@ -171,7 +171,6 @@ export NNN_OPTS="aARe"
 export NNN_FIFO="/tmp/nnn.fifo"
 export TERMINAL="tmux"
 export NNN_USE_EDITOR=1
-export NNN_OPENER="nuke"
 export EDITOR="nvim"
 export NNN_BMS="h:~/;r:/;d:~/Dev;o:~/Downloads;m:/run/media/$USER;s:/storage"
 export NNN_PLUG='v:!nvim $nnn;p:preview-tui'
