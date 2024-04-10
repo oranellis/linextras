@@ -56,6 +56,36 @@ HISTFILESIZE=2000
 
 
 
+# =====================================
+# === Add SSH password to ssh-agent ===
+# =====================================
+
+start-ssh-agent() {
+	mkdir -p "$HOME/.config" &>/dev/null
+	ssh_pid_file="$HOME/.config/ssh-agent.pid"
+	SSH_AUTH_SOCK="$HOME/.config/ssh-agent.sock"
+	if [ -z "$SSH_AGENT_PID" ]
+	then
+		SSH_AGENT_PID=$(cat "$ssh_pid_file")
+	fi
+
+	if ! kill -0 $SSH_AGENT_PID &> /dev/null
+	then
+		rm "$SSH_AUTH_SOCK" &> /dev/null
+		eval "$(ssh-agent -s -a "$SSH_AUTH_SOCK")"
+		echo "$SSH_AGENT_PID" > "$ssh_pid_file"
+		ssh-add 2>/dev/null
+	fi
+	export SSH_AGENT_PID
+	export SSH_AUTH_SOCK
+}
+
+command -v ssh-agent >/dev/null && \
+	command -v ssh-add >/dev/null && \
+	start-ssh-agent
+
+
+
 # =================
 # === PS1 setup ===
 # =================
