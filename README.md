@@ -14,6 +14,12 @@ To copy the files from this git repo to your local config, run the following ins
 ```
 Existing files will not be overwritten in copy mode.
 
+## Versions
+
+Requires:
+- bash - 4.0+
+- nvim - 0.9.0+
+
 ## Key Repeat
 
 To set the X11 key repeat to a sensibly fast value, add the following to ```/etc/X11/xorg.conf.d/00-keyboard.conf```

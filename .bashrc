@@ -56,6 +56,36 @@ HISTFILESIZE=2000
 
 
 
+# =====================================
+# === Add SSH password to ssh-agent ===
+# =====================================
+
+start-ssh-agent() {
+	mkdir -p "$HOME/.config" &>/dev/null
+	ssh_pid_file="$HOME/.config/ssh-agent.pid"
+	SSH_AUTH_SOCK="$HOME/.config/ssh-agent.sock"
+	if [ -z "$SSH_AGENT_PID" ]
+	then
+		SSH_AGENT_PID=$(cat "$ssh_pid_file")
+	fi
+
+	if ! kill -0 $SSH_AGENT_PID &> /dev/null
+	then
+		rm "$SSH_AUTH_SOCK" &> /dev/null
+		eval "$(ssh-agent -s -a "$SSH_AUTH_SOCK")"
+		echo "$SSH_AGENT_PID" > "$ssh_pid_file"
+		ssh-add 2>/dev/null
+	fi
+	export SSH_AGENT_PID
+	export SSH_AUTH_SOCK
+}
+
+command -v ssh-agent >/dev/null && \
+	command -v ssh-add >/dev/null && \
+	start-ssh-agent
+
+
+
 # =================
 # === PS1 setup ===
 # =================
@@ -143,7 +173,7 @@ bind 'set completion-ignore-case on'
 # ===========================
 
 alias ab=autobuild
-alias ssh-keygen-named="ssh-keygen -C $(whoami)@$(uname -n)-$(date -I)"
+alias ssh-keygen-named="ssh-keygen -t ed25519 -a 100 -C $(whoami)@$(uname -n)-$(date -I)"
 alias ds="du -hd 1 2>/dev/null | sort -h"
 alias nd=mkdir
 alias nf=touch
@@ -171,7 +201,6 @@ export NNN_OPTS="aARe"
 export NNN_FIFO="/tmp/nnn.fifo"
 export TERMINAL="tmux"
 export NNN_USE_EDITOR=1
-export NNN_OPENER="nuke"
 export EDITOR="nvim"
 export NNN_BMS="h:~/;r:/;d:~/Dev;o:~/Downloads;m:/run/media/$USER;s:/storage"
 export NNN_PLUG='v:!nvim $nnn;p:preview-tui'
