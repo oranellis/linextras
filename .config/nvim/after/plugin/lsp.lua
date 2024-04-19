@@ -95,6 +95,7 @@ require('lspconfig').yamlls.setup {
 }
 
 require('lspconfig').cssls.setup {
+	cmd = { 'css-languageserver', '--stdio' },
 	on_attach = on_attach,
 	capabilities = capabilities,
 }
