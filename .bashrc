@@ -18,8 +18,6 @@
 # === Env vars ===
 # ================
 
-export NPM_PACKAGES="${HOME}/.npm-packages"
-export PATH="$PATH:$NPM_PACKAGES/bin"
 command -v manpath >/dev/null && \
 	export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 export DOCKER_BUILDKIT=1
