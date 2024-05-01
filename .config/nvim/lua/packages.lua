@@ -19,8 +19,8 @@ return require('packer').startup(function(use)
 		requires = 'nvim-lua/plenary.nvim',
 		tag = "*"
 	}
-	use { 'luukvbaal/nnn.nvim' }
 	use { 'tpope/vim-fugitive' }
+	use { 'nvim-tree/nvim-tree.lua' }
 
 	-- Text Manipulation
 	use { 'windwp/nvim-autopairs' }
