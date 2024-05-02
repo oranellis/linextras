@@ -5,12 +5,22 @@ local function on_attach(bufnr)
 		return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
 	end
 
+	local function edit_or_enter()
+		local node = api.tree.get_node_under_cursor()
+		if node.type == "directory" and not node.open then
+			api.node.open.edit()
+			vim.cmd.normal('j')
+		else
+			api.node.open.edit()
+		end
+	end
+
 	-- default mappings
 	api.config.mappings.default_on_attach(bufnr)
 
 	-- custom mappings
-	vim.keymap.set("n", "h", api.tree.close, opts("Close"))
-	vim.keymap.set('n', 'l', api.node.open.edit, opts('Open'))
+	vim.keymap.set('n', 'h', api.node.navigate.parent_close, opts('Parent Directory'))
+	vim.keymap.set('n', 'l', edit_or_enter, opts('Open'))
 end
 
 require("nvim-tree").setup({
