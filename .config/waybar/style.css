@@ -1,0 +1,49 @@
+* {
+    border: none;
+    font-family: Hack-Nerd;
+    font-size: 13px;
+    min-height: 0;
+    color: #d3c6aa;
+}
+
+window#waybar {
+    background: rgba(0, 0, 0, 0);
+    color: white;
+}
+
+tooltip {
+  background: rgba(43, 48, 59, 0.5);
+  border: 1px solid rgba(100, 114, 125, 0.5);
+}
+tooltip label {
+  color: white;
+}
+
+#clock, #battery {
+    padding: 0 10px;
+}
+
+#clock {
+	font-size: 48px;
+}
+
+#battery.charging {
+    color: lime;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: black;
+    }
+}
+
+#battery.warning:not(.charging) {
+    background: #f53c3c;
+    color: white;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}

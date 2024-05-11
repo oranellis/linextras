@@ -1,0 +1,14 @@
+{
+	"name": "desktop-bar",
+	"exclusive": false,
+	"layer": "bottom",
+	"position": "right",
+
+	"modules-right": ["battery", "clock"],
+	"margin": 10,
+
+	"battery": {
+		"format": "{capacity}% {icon} ",
+		"format-icons": ["", "", "", "", ""]
+	},
+}
