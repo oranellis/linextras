@@ -5,7 +5,7 @@
 	"position": "right",
 
 	"modules-right": ["battery", "clock"],
-	"margin": 10,
+	"margin": 14,
 
 	"battery": {
 		"format": "{capacity}% {icon} ",
