@@ -4,7 +4,7 @@
 	"layer": "bottom",
 	"position": "right",
 
-	"modules-right": ["battery", "clock"],
+	"modules-right": ["tray", "battery", "clock"],
 	"margin": 14,
 
 	"battery": {
