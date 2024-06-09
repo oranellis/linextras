@@ -188,14 +188,17 @@ pacman-autoremove() {
 # === Dev Container Aliases ===
 # =============================
 
-command -v devcontainer >/dev/null && {
-	dc() {
+dc() {
+	if command -v devcontainer &>/dev/null
+	then
 		if ! devcontainer exec --workspace-folder . "/usr/bin/true"
 		then
 			devcontainer up --workspace-folder .
 		fi
 		devcontainer exec --workspace-folder . "/bin/bash"
-	}
+	else
+		echo "devcontainer cli tool not installed, install with\nnpm install -g @devcontainers/cli"
+	fi
 }
 
 
