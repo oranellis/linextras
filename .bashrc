@@ -106,6 +106,7 @@ command -v __git_ps1 >/dev/null 2>&1 && {
 [ -n "$colour_support" ] && colour_purple_b="\[\033[1;35m\]" || colour_purple_b=""
 [ -n "$colour_support" ] && colour_purple="\[\033[0;35m\]" || colour_purple=""
 [ -n "$colour_support" ] && colour_yellow_b="\[\033[1;33m\]" || colour_yellow_b=""
+[ -n "$colour_support" ] && colour_green_b="\[\033[1;32m\]" || colour_yellow_b=""
 [ -n "$colour_support" ] && colour_white="\[\033[0;97m\]" || colour_white=""
 [ -n "$colour_support" ] && colour_normal="\[\033[0m\]" || colour_normal=""
 
@@ -127,9 +128,12 @@ shorten_path() {
     echo "$short_path"
 }
 
-if [ -e "/.dockerenv" ] || [ -n "$SSH_CLIENT" ]
+if [ -n "$SSH_CLIENT" ]
 then
-	show_hostname="yes"
+	ssh_hostname="yes"
+elif [ -e "/.dockerenv" ]
+then
+	docker_hostname="yes"
 fi
 
 PS1=""
@@ -137,8 +141,10 @@ PS1=""
 	PS1="$PS1$colour_purple_b" || \
 	PS1="$PS1$colour_cyan_b"
 PS1="$PS1\u"
-[ -n "$show_hostname" ] && \
+[ -n "$ssh_hostname" ] && \
 	PS1="$PS1(\h)"
+[ -n "$docker_hostname" ] && \
+	PS1="$PS1$colour_green_b[\h]"
 PS1="$PS1$colour_white \$(shorten_path)"
 [ -n "$git_prompt_support" ] && \
 	PS1="$PS1\$( __git_ps1 \" $colour_yellow_b(%s$colour_yellow_b)\")"
@@ -175,6 +181,9 @@ alias ssh-keygen-named="ssh-keygen -t ed25519 -a 100 -C $(whoami)@$(uname -n)-$(
 alias ds="du -hd 1 2>/dev/null | sort -h"
 alias nd=mkdir
 alias nf=touch
+dotfiles() {
+	cd $(dirname $(readlink -f ~/.bashrc))
+}
 pacman-autoremove() {
 	sudo pacman -Rsu "$(pacman -Qdtq)"
 }
@@ -185,14 +194,17 @@ pacman-autoremove() {
 # === Dev Container Aliases ===
 # =============================
 
-command -v devcontainer >/dev/null && {
-	dc() {
+dc() {
+	if command -v devcontainer &>/dev/null
+	then
 		if ! devcontainer exec --workspace-folder . "/usr/bin/true"
 		then
 			devcontainer up --workspace-folder .
 		fi
 		devcontainer exec --workspace-folder . "/bin/bash"
-	}
+	else
+		echo -e "devcontainer cli tool not installed, install with\nnpm install -g @devcontainers/cli"
+	fi
 }
 
 
