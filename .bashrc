@@ -175,6 +175,9 @@ alias ssh-keygen-named="ssh-keygen -t ed25519 -a 100 -C $(whoami)@$(uname -n)-$(
 alias ds="du -hd 1 2>/dev/null | sort -h"
 alias nd=mkdir
 alias nf=touch
+dotfiles() {
+	cd $(dirname $(readlink -f ~/.bashrc))
+}
 pacman-autoremove() {
 	sudo pacman -Rsu "$(pacman -Qdtq)"
 }
