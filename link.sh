@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Files to exclude from the linking step
-EXCLUSIONS=".git README.md link.sh .gitignore backup"
+EXCLUSIONS=".git README.md link.sh .gitignore .gitattributes backup"
 # Files to copy to the home directory rather than link, must also be excluded above
-COPIES=".Xresources .gitconfig"
+COPIES=".gitconfig"
 
 # Set variables for dotfiles directory
 GIT_DIR=$(dirname "$(readlink -f $0)")

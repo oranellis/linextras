@@ -18,8 +18,6 @@
 # === Env vars ===
 # ================
 
-export NPM_PACKAGES="${HOME}/.npm-packages"
-export PATH="$PATH:$NPM_PACKAGES/bin"
 command -v manpath >/dev/null && \
 	export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 export DOCKER_BUILDKIT=1
@@ -177,6 +175,25 @@ alias ssh-keygen-named="ssh-keygen -t ed25519 -a 100 -C $(whoami)@$(uname -n)-$(
 alias ds="du -hd 1 2>/dev/null | sort -h"
 alias nd=mkdir
 alias nf=touch
+pacman-autoremove() {
+	sudo pacman -Rsu "$(pacman -Qdtq)"
+}
+
+
+
+# =============================
+# === Dev Container Aliases ===
+# =============================
+
+command -v devcontainer >/dev/null && {
+	dc() {
+		if ! devcontainer exec --workspace-folder . "/usr/bin/true"
+		then
+			devcontainer up --workspace-folder .
+		fi
+		devcontainer exec --workspace-folder . "/bin/bash"
+	}
+}
 
 
 

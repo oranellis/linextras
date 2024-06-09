@@ -1,6 +1,8 @@
 # Dotfiles
 
-My dotfiles for my archlinux i3 environment, found at `http://github.com/oranellis/i3env`
+My dotfiles for my Arch Linux Hyprland environment, found at `http://github.com/oranellis/dotfiles`
+
+To set up the hyprland environment 
 
 To remove and overwrite your local dotfiles with links to the files in this repo run
 ```
@@ -18,17 +20,11 @@ Existing files will not be overwritten in copy mode.
 
 Requires:
 - bash - 4.0+
+
+Optional:
 - nvim - 0.9.0+
-
-## Key Repeat
-
-To set the X11 key repeat to a sensibly fast value, add the following to ```/etc/X11/xorg.conf.d/00-keyboard.conf```
-
-```
-Section "InputClass"
-    Identifier "system-keyboard"
-    MatchIsKeyboard "on"
-    Option "XkbLayout" "gb"
-    Option "AutoRepeat" "250 30"
-EndSection
-```
+- hyprland - 0.40.0+
+- tmux - 3.4+
+- waybar - 0.10.0+
+- wofi - 1.4.0+
+- alacritty - 0.12.0+

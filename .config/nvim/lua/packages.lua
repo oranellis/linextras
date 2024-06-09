@@ -63,6 +63,9 @@ return require('packer').startup(function(use)
 	-- Clipboard
 	use { 'EtiamNullam/deferred-clipboard.nvim' }
 
+	-- Dev Containers
+	use { 'esensar/nvim-dev-container' }
+
 	if packer_bootstrap then
 		require('packer').sync()
 	end
