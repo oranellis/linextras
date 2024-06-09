@@ -197,11 +197,23 @@ pacman-autoremove() {
 dc() {
 	if command -v devcontainer &>/dev/null
 	then
-		if ! devcontainer exec --workspace-folder . "/usr/bin/true"
+		if ! devcontainer exec --workspace-folder . "/usr/bin/true" &>/dev/null
 		then
-			devcontainer up --workspace-folder .
+			if devcontainer exec --workspace-folder . "/usr/bin/true" 2>&1 | grep -q "Dev container config (.*) not found."
+			then
+				echo -e "Dev container config not found"
+				return 1
+			fi
+
+			echo -en "Building and starting dev container... "
+			if devcontainer up --workspace-folder . &>/tmp/devcontainerbuild.log
+			then
+				echo -e "$(tput setaf 10 2>/dev/null)Done$(tput sgr0 2>/dev/null)"
+			else
+				echo -e "$(tput setaf 1 2>/dev/null)Failed$(tput sgr0 2>/dev/null)\nLog available at /tmp/devcontainerbuild.log"
+			fi
 		fi
-		devcontainer exec --workspace-folder . "/bin/bash"
+		devcontainer exec --workspace-folder . "/bin/bash" 2>/dev/null
 	else
 		echo -e "devcontainer cli tool not installed, install with\nnpm install -g @devcontainers/cli"
 	fi
