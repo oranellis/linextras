@@ -178,9 +178,20 @@ bind 'set completion-ignore-case on'
 
 alias ab=autobuild
 alias ssh-keygen-named="ssh-keygen -t ed25519 -a 100 -C $(whoami)@$(uname -n)-$(date -I)"
-alias ds="du -hd 1 2>/dev/null | sort -h"
 alias nd=mkdir
 alias nf=touch
+ds() {
+	returndir=$(pwd)
+	if [ "$#" -gt "0" ]
+	then
+		if ! cd $@ &>/dev/null
+		then
+			echo "Bad directory argument" 1>&2
+		fi
+	fi
+	du -hd 1 2>/dev/null | sort -h
+	cd "$returndir"
+}
 dotfiles() {
 	cd $(dirname $(readlink -f ~/.bashrc))
 }
