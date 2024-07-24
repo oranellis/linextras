@@ -232,34 +232,20 @@ dc() {
 
 
 
-# ==================
-# === NNN Config ===
-# ==================
+# ===================
+# === Yazi Config ===
+# ===================
 
-n () {
-	if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
-		echo "nnn is already running"
-		return
+n() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd"
 	fi
-	export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
-	nnn "$@"
-	if [ -f "$NNN_TMPFILE" ]; then
-		. "$NNN_TMPFILE"
-		rm -f "$NNN_TMPFILE" > /dev/null
-	fi
+	rm -f -- "$tmp"
 }
 
-export NNN_OPTS="aARe"
-export NNN_FIFO="/tmp/nnn.fifo"
-export TERMINAL="tmux"
-export NNN_USE_EDITOR=1
 export EDITOR="nvim"
-export NNN_BMS="h:~/;r:/;d:~/Dev;o:~/Downloads;m:/run/media/$USER;s:/storage"
-export NNN_PLUG='v:!nvim $nnn;p:preview-tui'
-
-nn() {
-	cd && cd $(find . -type d 2>/dev/null | fzf) && n
-}
 
 
 
