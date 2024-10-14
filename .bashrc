@@ -166,7 +166,7 @@ dotfiles() {
 	cd $(dirname $(readlink -f ~/.bashrc))
 }
 pacman-autoremove() {
-	sudo pacman -Rsu "$(pacman -Qdtq)"
+	sudo pacman -Rsu $(pacman -Qdtq)
 }
 
 
