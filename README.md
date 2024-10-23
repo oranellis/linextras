@@ -28,3 +28,5 @@ Optional:
 - waybar - 0.10.0+
 - wofi - 1.4.0+
 - alacritty - 0.12.0+
+- swaync - 0.10.1+
+- polkit-kde-agent - 6.1.5+
