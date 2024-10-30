@@ -30,3 +30,4 @@ Optional:
 - alacritty - 0.12.0+
 - swaync - 0.10.1+
 - polkit-kde-agent - 6.1.5+
+- pamixer - 1.6+
