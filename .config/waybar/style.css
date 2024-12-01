@@ -1,14 +1,15 @@
 * {
-    border: none;
-    font-family: Hack-Nerd;
-    font-size: 13px;
-    min-height: 0;
-    color: #d3c6aa;
+  border: none;
+  font-family: Hack-Nerd;
+  font-size: 13px;
+  min-height: 0;
+  color: #d3c6aa;
+  opacity: 0.85;
 }
 
 window#waybar {
-    background: rgba(0, 0, 0, 0);
-    color: white;
+  background: rgba(0, 0, 0, 0);
+  color: white;
 }
 
 tooltip {
@@ -20,30 +21,30 @@ tooltip label {
 }
 
 #clock, #battery {
-    padding: 0 10px;
+  padding: 0 10px;
 }
 
 #clock {
-	font-size: 48px;
+  font-size: 48px;
 }
 
 #battery.charging {
-    color: lime;
+  color: lime;
 }
 
 @keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: black;
-    }
+to {
+  background-color: #ffffff;
+  color: black;
+}
 }
 
 #battery.warning:not(.charging) {
-    background: #f53c3c;
-    color: white;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: steps(12);
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+  background: #f53c3c;
+  color: white;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: steps(12);
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
