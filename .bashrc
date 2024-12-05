@@ -178,6 +178,12 @@ sudo pacman -Rsu $(pacman -Qdtq)
 dc() {
   if command -v devcontainer &>/dev/null
   then
+    if test "$1" = "rebuild"
+    then
+      devcontainer build --workspace-folder .
+      return $?
+    fi
+
     if ! devcontainer exec --workspace-folder . "/usr/bin/true" &>/dev/null
     then
       if devcontainer exec --workspace-folder . "/usr/bin/true" 2>&1 | grep -q "Dev container config (.*) not found."
@@ -207,6 +213,13 @@ dc() {
 # ===================
 
 n() {
+  if ! command -v yazi &>/dev/null
+  then
+    wget -O/tmp/yazi.zip https://github.com/sxyazi/yazi/releases/download/v0.3.3/yazi-x86_64-unknown-linux-gnu.zip && \
+      unzip -o /tmp/yazi.zip -d /tmp/yazi/ && \
+      mkdir -p ~/.local/bin && \
+      cp /tmp/yazi/*/yazi ~/.local/bin
+  fi
   local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
   yazi "$@" --cwd-file="$tmp"
   if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
