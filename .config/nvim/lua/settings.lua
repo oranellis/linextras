@@ -46,12 +46,12 @@ vim.opt.number = true
 
 -- Indent and indent function
 local function TabStopGlobal(spaces)
-	vim.opt.tabstop = spaces
-	vim.opt.softtabstop = spaces
-	vim.opt.shiftwidth = spaces
-	vim.opt.expandtab = false
+  vim.opt.tabstop = spaces
+  vim.opt.softtabstop = spaces
+  vim.opt.shiftwidth = spaces
+  vim.opt.expandtab = true
 end
-TabStopGlobal(4)
+TabStopGlobal(2)
 
 -- Scrolloff
 vim.opt.scrolloff = 8
@@ -65,5 +65,5 @@ vim.opt.visualbell = true
 
 -- For whitespace highlighting
 vim.g.better_whitespace_operator=''
-vim.g.strip_whitespace_on_save=1
+vim.g.strip_whitespace_on_save=0
 vim.g.strip_whitespace_confirm=0
