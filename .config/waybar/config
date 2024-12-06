@@ -1,7 +1,7 @@
 {
 	"name": "desktop-bar",
 	"exclusive": false,
-	"layer": "top",
+	"layer": "bottom",
 	"position": "right",
 
 	"modules-right": ["tray", "battery", "clock"],
