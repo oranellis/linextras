@@ -42,7 +42,13 @@ require("nvim-tree").setup({
     },
   },
   renderer = {
+    group_empty = true,
     highlight_opened_files = "all",
+  },
+  filters = {
+    custom = {
+      '.git',
+    }
   },
 })
 

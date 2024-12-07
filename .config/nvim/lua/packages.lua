@@ -19,6 +19,7 @@ require('packer').startup(function(use)
     tag = "*"
   }
   use { 'nvim-tree/nvim-tree.lua' }
+  use { 'famiu/bufdelete.nvim' }
 
   -- Text Manipulation
   use { 'windwp/nvim-autopairs' }
