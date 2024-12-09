@@ -13,7 +13,6 @@
 [[ $- != *i* ]] && return
 
 
-
 # ================
 # === Env vars ===
 # ================
@@ -108,19 +107,19 @@ fi
 
 PS1=""
 [ -n "$SSH_CLIENT" ] && \
-	PS1="$PS1$colour_purple_b" || \
-	PS1="$PS1$colour_cyan_b"
-PS1="$PS1\u"
-[ -n "$ssh_hostname" ] && \
-	PS1="$PS1(\h)"
-[ -n "$docker_hostname" ] && \
-	PS1="$PS1$colour_green_b[\h]"
-PS1="$PS1$colour_white \$(shorten_path)"
-[ -n "$git_prompt_support" ] && \
-	PS1="$PS1\$( __git_ps1 \" $colour_yellow_b(%s$colour_yellow_b)\")"
-PS1="$PS1$colour_normal\\$ "
+  PS1="$PS1$colour_purple_b" || \
+  PS1="$PS1$colour_cyan_b"
+  PS1="$PS1\u"
+  [ -n "$ssh_hostname" ] && \
+    PS1="$PS1(\h)"
+      [ -n "$docker_hostname" ] && \
+        PS1="$PS1$colour_green_b[\h]"
+              PS1="$PS1$colour_white \$(shorten_path)"
+              [ -n "$git_prompt_support" ] && \
+                PS1="$PS1\$( __git_ps1 \" $colour_yellow_b(%s$colour_yellow_b)\")"
+                              PS1="$PS1$colour_normal\\$ "
 
-export PS1
+                              export PS1
 
 
 
@@ -176,33 +175,85 @@ sudo pacman -Rsu $(pacman -Qdtq)
 # =============================
 
 dc() {
-  if command -v devcontainer &>/dev/null
-  then
-    if test "$1" = "rebuild"
-    then
-      devcontainer build --workspace-folder .
-      return $?
+  local colour_green=$(tput setaf 10 2>/dev/null || echo '')
+  local colour_red=$(tput setaf 9 2>/dev/null || echo '')
+  local colour_normal=$(tput sgr0 2>/dev/null || echo '')
+
+  echogreen() { echo "${colour_green}$*${colour_normal}"; }
+  echored() { echo "${colour_red}$*${colour_normal}"; }
+  echoerr() { echo "$@" 1>&2; }
+
+  DC_SEARCH_FILE="devcontainer.json"
+
+  dc_devcontainer_dir="$(pwd)"
+  if git status &>/dev/null; then
+    dc_devcontainer_dir="$(git rev-parse --show-toplevel)"
+  fi
+
+  cd "$dc_devcontainer_dir" || { echoerr "Failed to change directory"; return 1; }
+
+  if ! [ -d "./.devcontainer" ]; then
+    echoerr ".devcontainer directory not found"
+    return 1
+  fi
+
+  dc_results=()
+  readarray -d '' dc_results < <(find ./.devcontainer -maxdepth 2 -name "$DC_SEARCH_FILE" -print0)
+  dc_results_count=${#dc_results[@]}
+
+  if [ "$dc_results_count" -lt 1 ]; then
+    echoerr "No $DC_SEARCH_FILE found"
+    return 1
+  fi
+
+  if [ "$dc_results_count" -gt 1 ]; then
+    echo "Found multiple devcontainers, select from below:"
+    dc_index=1
+    for f in "${dc_results[@]}"; do
+      echo -e "    $dc_index. $f"
+      ((dc_index++))
+    done
+
+    echo -n "Enter the file number to use: "
+    read dc_input
+    echo
+
+    if ! [[ "$dc_input" =~ ^[0-9]+$ ]]; then
+      echoerr "Not a valid number"
+      return 1
     fi
 
-    if ! devcontainer exec --workspace-folder . "/usr/bin/true" &>/dev/null
-    then
-      if devcontainer exec --workspace-folder . "/usr/bin/true" 2>&1 | grep -q "Dev container config (.*) not found."
-      then
-        echo -e "Dev container config not found"
+    if [ "$dc_input" -lt 1 ] || [ "$dc_input" -gt "$dc_results_count" ]; then
+      echoerr "Number is out of bounds"
+      return 1
+    fi
+    dc_selected_path="${dc_results[$((dc_input-1))]}"
+    echo "Selected: $dc_selected_path"
+  else
+    dc_selected_path="${dc_results[0]}"
+  fi
+
+  if command -v devcontainer &>/dev/null; then
+    if ! devcontainer exec --workspace-folder . --config "$dc_selected_path" "/usr/bin/true" &>/dev/null; then
+      if devcontainer exec --workspace-folder . --config "$dc_selected_path" "/usr/bin/true" 2>&1 | grep -q "Dev container config (.*) not found."; then
+        echo "Dev container config not found"
         return 1
       fi
 
-      echo -en "Building and starting dev container... "
-      if devcontainer up --workspace-folder . &>/tmp/devcontainerbuild.log
-      then
-        echo -e "$(tput setaf 10 2>/dev/null)Done$(tput sgr0 2>/dev/null)"
+      echo -n "Building and starting dev container... "
+      if devcontainer up --workspace-folder . --config "$dc_selected_path" &>/tmp/devcontainerbuild.log; then
+        echogreen "Done"
       else
-        echo -e "$(tput setaf 1 2>/dev/null)Failed$(tput sgr0 2>/dev/null)\nLog available at /tmp/devcontainerbuild.log"
+        echored "Failed"
+        echo "Log available at /tmp/devcontainerbuild.log"
+        return 1
       fi
     fi
-    devcontainer exec --workspace-folder . "/bin/bash" 2>/dev/null
+    devcontainer exec --workspace-folder . --config "$dc_selected_path" "/bin/bash" 1>/dev/null
   else
-    echo -e "devcontainer cli tool not installed, install with\nnpm install -g @devcontainers/cli"
+    echo "Devcontainer CLI tool not installed. Install with:"
+    echo "npm install -g @devcontainers/cli"
+    return 1
   fi
 }
 
@@ -237,31 +288,31 @@ export EDITOR="nvim"
 # =======================
 
 colour-table() {
-for x in {0..8}; do
-  for i in {30..37}; do
-    for a in {40..47}; do
-      echo -ne "\e[$x;$i;$a""m\\\e[$x;$i;$a""m\e[0;37;40m "
+  for x in {0..8}; do
+    for i in {30..37}; do
+      for a in {40..47}; do
+        echo -ne "\e[$x;$i;$a""m\\\e[$x;$i;$a""m\e[0;37;40m "
+      done
+      echo
     done
-    echo
   done
-done
-echo ""
+  echo ""
 }
 
 colour-gradient() {
-awk 'BEGIN{
-s="/\\/\\/\\/\\/\\"; s=s s s s s s s s s s s s s s s s s s s s s s s;
-for (colnum = 0; colnum<256; colnum++) {
-  r = 255-(colnum*255/255);
-  g = (colnum*510/255);
-  b = (colnum*255/255);
-  if (g>255) g = 510-g;
-    printf "\033[48;2;%d;%d;%dm", r,g,b;
-    printf "\033[38;2;%d;%d;%dm", 255-r,255-g,255-b;
-    printf "%s\033[0m", substr(s,colnum+1,1);
-  }
-  printf "\n";
-}'
+  awk 'BEGIN{
+  s="/\\/\\/\\/\\/\\"; s=s s s s s s s s s s s s s s s s s s s s s s s;
+  for (colnum = 0; colnum<256; colnum++) {
+    r = 255-(colnum*255/255);
+    g = (colnum*510/255);
+    b = (colnum*255/255);
+    if (g>255) g = 510-g;
+      printf "\033[48;2;%d;%d;%dm", r,g,b;
+      printf "\033[38;2;%d;%d;%dm", 255-r,255-g,255-b;
+      printf "%s\033[0m", substr(s,colnum+1,1);
+    }
+    printf "\n";
+  }'
 }
 
 
