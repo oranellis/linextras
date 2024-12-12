@@ -28,4 +28,5 @@ vim.o.background='dark'
 vim.cmd.colorscheme("gruvbox")
 
 -- Remove background
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
+vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#665c54", bg = "NONE" })
