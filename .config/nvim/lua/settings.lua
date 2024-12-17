@@ -8,8 +8,8 @@ vim.g.loaded_netrwPlugin = 1
 -- Enable colours
 vim.opt.termguicolors = true
 
--- Keep builtin highlighting on
-vim.cmd.syntax 'enable'
+-- Keep builtin highlighting off, rely on treesitter
+vim.cmd.syntax 'off'
 
 -- No Text Wrap
 vim.wo.wrap = false
@@ -28,6 +28,9 @@ vim.opt.undofile = true
 
 -- Persistent signcolumn
 vim.opt.signcolumn = 'yes:1'
+
+-- Relative line numbers
+vim.opt.relativenumber = true
 
 -- Mouse support
 vim.opt.mouse = 'a'
