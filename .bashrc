@@ -106,20 +106,15 @@ then
 fi
 
 PS1=""
-[ -n "$SSH_CLIENT" ] && \
-  PS1="$PS1$colour_purple_b" || \
-  PS1="$PS1$colour_cyan_b"
-  PS1="$PS1\u"
-  [ -n "$ssh_hostname" ] && \
-    PS1="$PS1(\h)"
-      [ -n "$docker_hostname" ] && \
-        PS1="$PS1$colour_green_b[\h]"
-              PS1="$PS1$colour_white \$(shorten_path)"
-              [ -n "$git_prompt_support" ] && \
-                PS1="$PS1\$( __git_ps1 \" $colour_yellow_b(%s$colour_yellow_b)\")"
-                              PS1="$PS1$colour_normal\\$ "
+[ -n "$SSH_CLIENT" ] && PS1="$PS1$colour_purple_b" || PS1="$PS1$colour_cyan_b"
+PS1="$PS1\u"
+[ -n "$ssh_hostname" ] && PS1="$PS1(\h)"
+[ -n "$docker_hostname" ] && PS1="$PS1$colour_green_b[\h]"
+PS1="$PS1$colour_white \$(shorten_path)"
+[ -n "$git_prompt_support" ] && PS1="$PS1\$( __git_ps1 \" $colour_yellow_b(%s$colour_yellow_b)\")"
+PS1="$PS1$colour_normal\\$ "
 
-                              export PS1
+export PS1
 
 
 
@@ -266,17 +261,23 @@ dc() {
 n() {
   if ! command -v yazi &>/dev/null
   then
-    wget -O/tmp/yazi.zip https://github.com/sxyazi/yazi/releases/download/v0.3.3/yazi-x86_64-unknown-linux-gnu.zip && \
-      unzip -o /tmp/yazi.zip -d /tmp/yazi/ && \
-      mkdir -p ~/.local/bin && \
-      cp /tmp/yazi/*/yazi ~/.local/bin
+    (
+    set -e
+    [ "$(uname -m)" != "x86_64" ] && return 1 # Platform guard clause
+    wget -O/tmp/yazi.zip https://github.com/sxyazi/yazi/releases/download/v0.3.3/yazi-x86_64-unknown-linux-gnu.zip
+    unzip -o /tmp/yazi.zip -d /tmp/yazi/
+    mkdir -p ~/.local/bin
+    cp /tmp/yazi/*/yazi ~/.local/bin
+    );
+  else
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]
+    then
+      cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
   fi
-  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-  yazi "$@" --cwd-file="$tmp"
-  if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-    cd -- "$cwd"
-  fi
-  rm -f -- "$tmp"
 }
 
 export EDITOR="nvim"
