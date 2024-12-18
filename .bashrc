@@ -211,7 +211,6 @@ dc() {
 
     echo -n "Enter the file number to use: "
     read dc_input
-    echo
 
     if ! [[ "$dc_input" =~ ^[0-9]+$ ]]; then
       echoerr "Not a valid number"
