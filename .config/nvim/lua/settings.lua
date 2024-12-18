@@ -1,8 +1,7 @@
 -- Remap leader
 vim.g.mapleader = ';'
 
--- Disable netrw
-vim.g.loaded_netrw = 1
+-- Disable netrw vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 -- Enable colours
@@ -54,7 +53,7 @@ local function TabStopGlobal(spaces)
   vim.opt.shiftwidth = spaces
   vim.opt.expandtab = true
 end
-TabStopGlobal(2)
+TabStopGlobal(4)
 
 -- Scrolloff
 vim.opt.scrolloff = 8
