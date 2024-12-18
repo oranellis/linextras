@@ -223,7 +223,6 @@ dc() {
       return 1
     fi
     dc_selected_path="${dc_results[$((dc_input-1))]}"
-    echo "Selected: $dc_selected_path"
   else
     dc_selected_path="${dc_results[0]}"
   fi
@@ -244,7 +243,7 @@ dc() {
         return 1
       fi
     fi
-    devcontainer exec --workspace-folder . --config "$dc_selected_path" "/bin/bash" 1>/dev/null
+    devcontainer exec --workspace-folder . --config "$dc_selected_path" "bash"
   else
     echo "Devcontainer CLI tool not installed. Install with:"
     echo "npm install -g @devcontainers/cli"
