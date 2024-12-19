@@ -300,6 +300,18 @@ export EDITOR="nvim"
 
 
 
+# ====================
+# === FZF Keybinds ===
+# ====================
+
+if command -v fzf &> /dev/null
+then
+    . /usr/share/fzf/key-bindings.bash
+    . /usr/share/fzf/completion.bash
+fi
+
+
+
 # =======================
 # === Display colours ===
 # =======================
