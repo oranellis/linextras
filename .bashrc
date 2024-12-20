@@ -165,6 +165,9 @@ sudo pacman -Rsu $(pacman -Qdtq)
 dockerclean() {
     docker rm -f $(docker ps -aq)
 }
+cdgit() {
+    cd "$(git rev-parse --show-toplevel)"
+}
 
 
 
