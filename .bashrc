@@ -165,6 +165,13 @@ sudo pacman -Rsu $(pacman -Qdtq)
 dockerclean() {
     docker rm -f $(docker ps -aq)
 }
+dockernuke() {
+    # I know there are some redundant commands here
+    dockerclean
+    docker rmi $(docker images -aq)
+    docker system prune -af
+    docker volume prune -af
+}
 cdgit() {
     cd "$(git rev-parse --show-toplevel)"
 }
