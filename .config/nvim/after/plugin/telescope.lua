@@ -1,13 +1,4 @@
-require('telescope').setup {
-    defaults = {
-        prompt_prefix = '> ',
-        selection_caret = '> ',
-        entry_prefix = '  ',
-        file_ignore_patterns = {
-            ".git"
-        }
-    },
-}
+require('telescope').setup {}
 
 local builtin = require('telescope.builtin')
 
