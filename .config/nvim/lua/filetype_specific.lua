@@ -26,3 +26,10 @@ vim.api.nvim_create_autocmd({"BufRead"}, {
         TabStop(4)
     end
 })
+
+vim.api.nvim_create_autocmd({"BufRead"}, {
+    pattern = {'*.xml'},
+    callback = function(_)
+        TabStop(2)
+    end
+})
