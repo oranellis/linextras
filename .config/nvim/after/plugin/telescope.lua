@@ -1,4 +1,10 @@
-require('telescope').setup {}
+require('telescope').setup {
+    defaults = {
+        file_ignore_patterns = { '.git' },
+        scroll_strategy = 'limit',
+        sorting_strategy = "ascending", -- Descending is bugged and some items are cut off while scrolling
+    },
+}
 
 local builtin = require('telescope.builtin')
 
