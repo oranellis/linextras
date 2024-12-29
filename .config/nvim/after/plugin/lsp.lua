@@ -116,6 +116,22 @@ rt.setup({
     },
 })
 
+local lsp_formatting = function(bufnr)
+    vim.lsp.buf.format({
+        filter = function(client)
+            return client.name == "rust_analyzer"
+        end,
+        bufnr = bufnr,
+    })
+end
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = {"*.rs"},
+    callback = function(args)
+        lsp_formatting(args.buf)
+    end,
+})
+
 require('lspconfig').bashls.setup {
     on_attach = on_attach,
     capabilities = capabilities,
