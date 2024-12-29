@@ -15,15 +15,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end,
 })
 
-vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = {"*.rs"},
-    callback = function()
-        if vim.fn.executable("rustfmt") == 1 then
-            vim.cmd("silent! %!rustfmt")
-        end
-    end,
-})
-
 vim.api.nvim_create_autocmd({"BufRead"}, {
     pattern = {'*.jsx'},
     callback = function(_)
