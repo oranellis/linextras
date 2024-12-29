@@ -29,3 +29,4 @@
 [alias]
 	graph = log --oneline --graph --decorate --branches
 	update = !$HOME/.config/git-update.sh
+	cleanup = !$HOME/.config/git-cleanup.sh
