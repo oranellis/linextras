@@ -43,6 +43,7 @@ require('packer').startup(function(use)
     use { 'hrsh7th/cmp-vsnip' }
     use { 'hrsh7th/vim-vsnip' }
     use { 'windwp/nvim-ts-autotag' }
+    use { 'danymat/neogen' }
 
     -- Language Servers
     use { 'neovim/nvim-lspconfig' }
