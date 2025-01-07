@@ -48,6 +48,22 @@ require('lspconfig').clangd.setup{
     capabilities = capabilities
 }
 
+local lsp_formatting_cpp = function(bufnr)
+    vim.lsp.buf.format({
+        filter = function(client)
+            return client.name == "clangd"
+        end,
+        bufnr = bufnr,
+    })
+end
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = {"*.cpp","*.cc","*.cxx","*.c","*.hpp","*.h"},
+    callback = function(args)
+        lsp_formatting_cpp(args.buf)
+    end,
+})
+
 require('lspconfig').zls.setup {
     on_attach = on_attach,
     capabilities = capabilities
@@ -116,7 +132,7 @@ rt.setup({
     },
 })
 
-local lsp_formatting = function(bufnr)
+local lsp_formatting_rust = function(bufnr)
     vim.lsp.buf.format({
         filter = function(client)
             return client.name == "rust_analyzer"
@@ -128,7 +144,7 @@ end
 vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = {"*.rs"},
     callback = function(args)
-        lsp_formatting(args.buf)
+        lsp_formatting_rust(args.buf)
     end,
 })
 
