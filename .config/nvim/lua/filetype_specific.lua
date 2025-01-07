@@ -6,15 +6,6 @@ function TabStop(spaces)
     vim.opt_local.expandtab = true
 end
 
-vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = {"*.cpp", "*.cc", "*.h", "*.c", "*.hpp"},
-    callback = function()
-        if vim.fn.executable("clang-format") == 1 then
-            vim.cmd("silent! %!clang-format")
-        end
-    end,
-})
-
 vim.api.nvim_create_autocmd({"BufRead"}, {
     pattern = {'*.jsx'},
     callback = function(_)
