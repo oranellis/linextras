@@ -16,7 +16,6 @@ require('packer').startup(function(use)
     -- Navigation
     use { 'nvim-telescope/telescope.nvim',
         requires = 'nvim-lua/plenary.nvim',
-        tag = "*"
     }
     use { 'nvim-tree/nvim-tree.lua' }
     use { 'famiu/bufdelete.nvim' }
