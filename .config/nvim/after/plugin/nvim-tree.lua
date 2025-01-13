@@ -9,7 +9,7 @@ local function on_attach(bufnr)
         local node = api.tree.get_node_under_cursor()
         if node.type == "directory" and not node.open then
             api.node.open.edit()
-            vim.cmd.normal('j')
+            vim.cmd('normal! j')
         else
             api.node.open.edit()
         end
@@ -21,7 +21,6 @@ local function on_attach(bufnr)
     -- custom mappings
     vim.keymap.set('n', 'h', api.node.navigate.parent_close, opts('Parent Directory'))
     vim.keymap.set('n', 'l', edit_or_enter, opts('Open'))
-    vim.keymap.set('n', 'q', vim.cmd('wincmd p'))
 end
 
 require("nvim-tree").setup({
