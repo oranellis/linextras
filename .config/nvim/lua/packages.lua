@@ -46,7 +46,6 @@ require('packer').startup(function(use)
 
     -- Language Servers
     use { 'neovim/nvim-lspconfig' }
-    use { 'simrat39/rust-tools.nvim' }
 
     -- Debugging
     use { 'rcarriga/nvim-dap-ui',
